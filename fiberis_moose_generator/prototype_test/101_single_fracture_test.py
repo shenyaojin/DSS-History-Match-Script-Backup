@@ -130,7 +130,7 @@ def run_single_fracture_analysis():
         PointValueSamplerConfig(name="vertical_strain_at_observation", variable="strain_yy", point=(hf_tip_x, 0, 0)))
 
     # --- 5. 求解器和输出 ---
-    builder.add_executioner_block(type="Transient", solve_type="Newton", end_time=3600, dt=100)
+    builder.add_executioner_block(type="Transient", solve_type="Newton", end_time=3600, dt=100, time_stepper_type='ConstantDT')
     builder.add_preconditioning_block(active_preconditioner='mumps')
     builder.add_outputs_block(exodus=True, csv=True)
 
@@ -141,7 +141,8 @@ def run_single_fracture_analysis():
     print("\n--- Starting MOOSE Simulation Runner ---")
     try:
         moose_executable = "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt"
-        runner = MooseRunner(moose_executable_path=moose_executable)
+        mpiexec_path = "/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
+        runner = MooseRunner(moose_executable_path=moose_executable, mpiexec_path=mpiexec_path)
         success, stdout, stderr = runner.run(
             input_file_path=input_file,
             output_directory=output_dir,

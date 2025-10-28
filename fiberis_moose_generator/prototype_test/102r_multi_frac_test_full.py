@@ -1,4 +1,4 @@
-# This script is working.
+# This script is working. -- Shenyao, 10/24/2025
 import os
 import numpy as np
 from fiberis.moose.model_builder import ModelBuilder
@@ -137,14 +137,14 @@ def run_full_multi_fracture_simulation():
     print(f"\nSuccessfully generated corrected MOOSE input file at: {input_file}")
 
     # --- 7. Run Simulation ---
+    builder.generate_input_file(input_file)
+    print(f"\nSuccessfully generated single fracture simulation file at: {input_file}")
+
     print("\n--- Starting MOOSE Simulation Runner ---")
     try:
         moose_executable = "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt"
-        if not os.path.exists(moose_executable):
-            print(f"ERROR: MOOSE executable not found at '{moose_executable}'. Please update the path.")
-            return
-
-        runner = MooseRunner(moose_executable_path=moose_executable)
+        mpiexec_path = "/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
+        runner = MooseRunner(moose_executable_path=moose_executable, mpiexec_path=mpiexec_path)
         success, stdout, stderr = runner.run(
             input_file_path=input_file,
             output_directory=output_dir,
@@ -153,9 +153,11 @@ def run_full_multi_fracture_simulation():
         )
         if success:
             print("\nSimulation completed successfully!")
+            print(
+                f"To see the signal at the observation well, check the file: {os.path.join(output_dir, 'single_frac_analysis_out.csv')}")
         else:
             print("\nSimulation failed.")
-            print("--- STDERR from MOOSE ---")
+            print("--- STDERR ---")
             print(stderr)
     except Exception as e:
         print(f"\nAn error occurred during the simulation run: {e}")
