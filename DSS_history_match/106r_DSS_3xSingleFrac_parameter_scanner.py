@@ -78,6 +78,10 @@ gauge_data_interference_copy = gauge_data_interference.copy()
 injection_gauge_pressure_copy.adaptive_downsample(300)
 gauge_data_interference_copy.adaptive_downsample(600)
 
+# Shift the interference gauge data to align with DSS data (one is wellhead, the other is downhole)
+difference_val = injection_gauge_pressure.data[-1] - gauge_data_interference.data[0]
+gauge_data_interference_copy.data += difference_val
+
 injection_gauge_pressure_copy.right_merge(gauge_data_interference_copy)
 injection_gauge_pressure_copy.rename("injection pressure full profile")
 
