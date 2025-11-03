@@ -90,6 +90,8 @@ gauge_data_interference_copy.data += difference_val
 injection_gauge_pressure_copy.right_merge(gauge_data_interference_copy)
 injection_gauge_pressure_copy.rename("injection pressure full profile")
 
+# Save the pressure profile to a npz file
+
 ## Plot for checking
 # fig, ax = plt.subplots(figsize=(8, 5))
 # injection_gauge_pressure_copy.plot(ax=ax, use_timestamp= True)
@@ -335,7 +337,7 @@ def model_builder_parameters_single_frac(**kwargs) -> List[Data1D_MOOSEps]:
     channel_result = []
     for i in range(3):
         ps_reader = MOOSEPointSamplerReader()
-        ps_reader.read(folder = moose_output_dir, variable_index = i + 1)
+        ps_reader.read(folder = model_output_dir, variable_index = i + 1)
 
         simulation_dataframe = Data1D_MOOSEps()
         simulation_dataframe = ps_reader.to_analyzer()
@@ -432,7 +434,7 @@ def calculate_misfit_single_frac(simulation_results: List[Data1D_MOOSEps],
 
 
 # %% 4. Bayesian Optimization
-frac_locs_all = np.array([14888, 14972, 14992])
+frac_locs_all = np.array([14887.66, 14972, 14992])
 dx_DSSdata = DSSdata.daxis[1] - DSSdata.daxis[0]
 
 dimensions = [
@@ -456,7 +458,11 @@ for frac_loc_center in frac_locs_all:
     @use_named_args(dimensions=dimensions)
     def objective(**params):
         if params['srv_height_ft'] >= params['srv_height_ft1']:
-            return 1e10
+            return 1e10 # Penalize invalid SRV height hierarchy
+
+        if (params['srv_perm'] <= 1e-18 or params['srv_perm2'] <= 1e-18
+                or params['fracture_perm'] <= params['srv_perm2'] or params['fracture_perm'] <= params['srv_perm']):
+            return 1e10 # Penalize invalid permeability hierarchy
 
         instance_id = f"{frac_loc_center}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}"
 
