@@ -30,7 +30,8 @@ ind = (mds > 7500) & (mds < 15000)
 drift_val = np.median(DSSdata.data[ind, :], axis=0)
 DSSdata.data -= drift_val.reshape((1, -1))
 DSSdata.select_time(0, 400000)
-DSSdata.select_depth(14820, 14920) # <- Select depth range of interest.
+# DSSdata.select_depth(14820, 14920) # <- Select depth range of interest.
+DSSdata.select_depth(14885, 14894)
 # Might need to change based on well location
 
 #%% Pre-process pressure gauge data
@@ -56,3 +57,25 @@ ax2.set_ylabel("Pressure (psi)")
 
 plt.tight_layout()
 plt.show()
+
+# # Plot the vertical slice
+# time_point_bg = 76000
+# time_point_ed = 330000
+#
+# bg_slice, _ = DSSdata.get_value_by_time(time_point_bg)
+# ed_slice, _ = DSSdata.get_value_by_time(time_point_ed)
+#
+# strain_change = ed_slice - bg_slice
+#
+# # Plot vertical slice
+# fig2, ax3 = plt.subplots(figsize=(4, 15))
+# im3 = ax3.plot(strain_change, DSSdata.daxis, color='blue')
+# ax3.set_xlabel("Strain Change")
+# ax3.set_ylabel("Depth (ft)")
+# ax3.set_title("Vertical Slice of Strain Change at POW-S")
+# ax3.axvline(x=0, color='black', linestyle='--')
+# plt.grid()
+# plt.savefig("output/1112_misfit_func/dss_slice.png", dpi=300)
+# plt.show()
+
+# Post-processing on the data, there are two channels are corrupted, so I will interpolate them.

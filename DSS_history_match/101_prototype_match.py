@@ -178,13 +178,21 @@ gauge_locs = gauge_mds - DSSdata_crop.daxis[0]
 print("Gauge locations in mesh (ft):", gauge_locs)
 
 #%% Load source gauge data: the injection well
-inj_gauge_pressure_path = "data/fiberis_format/prod/gauges/gauge4_data_prod.npz"
-from fiberis.analyzer.Data1D.core1D import Data1D
-injection_pressure_dataframe = Data1D()
-injection_pressure_dataframe.load_npz(inj_gauge_pressure_path)
-print(injection_pressure_dataframe)
+# Generate a custom pressure sequence based on user request
+time_points = np.array([0, 80, 81, 159, 160, 240, 241, 319, 320, 400])
+pressure_values = np.array([5e7, 5e7, 0, 0, 5e7, 5e7, 0, 0, 5e7, 5e7])
 
-injection_pressure_dataframe.remove_abnormal_data(threshold=300, method='mean')
+# Ensure the time points are unique and sorted for Data1D
+# This handles cases where time_points might have duplicates if not carefully constructed
+unique_time_points, unique_indices = np.unique(time_points, return_index=True)
+custom_pressure_data = Data1D()
+custom_pressure_data.taxis = unique_time_points
+custom_pressure_data.data = pressure_values[unique_indices]
+custom_pressure_data.start_time = 0 # Assuming start time is 0 for this custom sequence
+
+injection_pressure_dataframe = custom_pressure_data
+print("Custom injection pressure sequence generated:")
+print(injection_pressure_dataframe)
 
 #%% Plot the injection gauge data
 fig, ax = plt.subplots(figsize=(8,3))
