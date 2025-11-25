@@ -79,7 +79,7 @@ print(f"HF3 location in mesh: {hf_3_loc:.3f} ft")
 gauge_locs = (gauge_mds - DSSdata_crop.daxis[0])
 print("Gauge locations in mesh (ft):", gauge_locs)
 
-inj_gauge_pressure_path = "data/fiberis_format/prod/gauges/gauge4_data_prod.npz"
+inj_gauge_pressure_path = "data/fiberis_format/prod/gauges/gauge3_data_prod.npz"
 from fiberis.analyzer.Data1D.core1D import Data1D
 injection_pressure_dataframe = Data1D()
 injection_pressure_dataframe.load_npz(inj_gauge_pressure_path)
