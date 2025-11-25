@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 from fiberis.analyzer.Data1D.Data1D_Gauge import Data1DGauge
 from fiberis.analyzer.Data2D.Data2D_XT_DSS import DSS2D
 from fiberis.moose.model_builder import ModelBuilder
-from fiberis.moose.templates.baseline_model_generator import build_baseline_model, post_processor_info_extractor
+from fiberis.moose.templates.baseline_model_generator_fervo import build_baseline_model, post_processor_info_extractor
 from fiberis.moose.runner import MooseRunner
 import os
 

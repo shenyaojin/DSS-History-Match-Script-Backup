@@ -40,14 +40,12 @@ def main():
 
         # Convert to analyzer object
         analyzer = reader.to_analyzer()
+        analyzer.savez("data_fervo/fiberis_format/Gold_4_PB_Well_Geometry.npz")
 
         # Construct the output filename
         base_name = os.path.splitext(os.path.basename(input_file_path))[0]
         output_npz_path = os.path.join(output_path, f"{base_name}.npz")
 
-        # Save the data to .npz format
-        # Note: The writer uses 'ew', 'ns', 'tvd' for consistency.
-        reader.write(output_npz_path)
         print(f"Successfully converted and saved data to: {output_npz_path}")
 
     except Exception as e:
