@@ -13,6 +13,8 @@ from fiberis.moose.templates.baseline_model_generator import build_baseline_mode
 from fiberis.moose.runner import MooseRunner
 import os
 
+print("working directory:", os.getcwd())
+
 # In this case, let's just render this baseline model to see if it works
 project_name = "1124_misfit_func"
 builder = build_baseline_model(project_name=project_name,
@@ -94,3 +96,5 @@ plt.ylabel("Strain")
 plt.title("Simulated Strain at Center Depth")
 plt.legend()
 plt.show()
+
+# Next step, to test the misfit function, we need the ind number of fracture center in DSS data and simulated data
