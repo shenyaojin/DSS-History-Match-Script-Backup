@@ -208,7 +208,7 @@ result = gp_minimize(
     dimensions=dimensions,
     n_calls=50,  # Total number of evaluations
     n_initial_points=10, # Number of random points to explore before building model
-    random_state=1234
+    random_state=42
 )
 
 # --- 4. RESULTS ---
