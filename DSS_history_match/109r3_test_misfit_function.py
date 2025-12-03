@@ -52,7 +52,7 @@ upper_bound = 14886.5
 lower_bound = 14891.4
 center_frac = 14888.97
 
-im1 = DSSdata.plot(ax=ax1, use_timestamp=False, cmap='bwr', vmin=-1, vmax=1)
+im1 = DSSdata.plot(ax=ax1, use_timestamp=False, cmap='bwr', vmin=-1e-5, vmax=1e-5)
 line2 = ax1.axhline(y=center_frac, color='k', linestyle='--') # <- center line
 line1 = ax1.axhline(y=upper_bound, color='k', linestyle='-') # <- upper bound
 line3 = ax1.axhline(y=lower_bound, color='k', linestyle='-') # <- lower bound

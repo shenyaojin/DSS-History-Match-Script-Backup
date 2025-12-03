@@ -80,3 +80,4 @@ plt.show()
 
 # Fracture length
 fault_length_ft = np.array([3125, 2768, 2693, 3324, 3366, 3542, 3631])
+
