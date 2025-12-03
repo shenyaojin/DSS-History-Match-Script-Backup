@@ -18,7 +18,11 @@ print("working directory:", os.getcwd())
 # In this case, let's just render this baseline model to see if it works
 project_name = "1124_misfit_func"
 builder = build_baseline_model(project_name=project_name,
-                               )
+                               srv_perm=2.87e-16,
+                               fracture_perm=1.09e-15,
+                               ny_per_layer_half=100,
+                               bias_y=1.15
+                               ) # This parameter set is stable
 
 # Output the model
 output_dir = f"output/{project_name}"
