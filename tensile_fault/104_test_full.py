@@ -16,9 +16,11 @@ project_name = "1203_rotated_monitor_well"
 hf_length_ft = 250
 builder = build_baseline_model(project_name=project_name,
                                hf_length_ft= hf_length_ft,
-                               srv_height_ft=10,
+                               srv_height_ft=0.25,
                                shift_list_ft=np.array([0.8 * hf_length_ft/2, 0.9 * hf_length_ft/2, 1.1 * hf_length_ft/2, 1.3 * hf_length_ft/2]),
-                               angle=30
+                               angle=30,
+                               srv_perm=1e-15,
+                               fracture_perm=1e-13
                                )
 
 # Output the model

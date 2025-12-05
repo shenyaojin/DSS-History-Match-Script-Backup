@@ -16,7 +16,7 @@ import os
 print("working directory:", os.getcwd())
 
 # In this case, let's just render this baseline model to see if it works
-project_name = "1124_misfit_func"
+project_name = "1201_misfit_func"
 builder = build_baseline_model(project_name=project_name,
                                srv_perm=2.87e-17,
                                fracture_perm=1.09e-15,
@@ -31,6 +31,8 @@ os.makedirs(output_dir, exist_ok=True)
 input_file_path = os.path.join(output_dir, f"{project_name}_input.i")
 
 builder.generate_input_file(output_filepath=input_file_path)
+
+builder.plot_geometry()
 #
 # Run the model
 runner = MooseRunner(
@@ -80,11 +82,23 @@ if strain_dataframe.data.shape[0] > 0:
     print("Applied baseline correction to each channel in the strain data.")
     print(np.min(strain_dataframe.data), np.max(strain_dataframe.data))
 
-# Plot to verify
-fig, ax = plt.subplots()
-strain_dataframe.plot(ax=ax, use_timestamp=False, cmap="bwr", method='pcolormesh', clim=(-4e-5, 4e-5))
-# Add colorbar
-cbar = plt.colorbar(ax.collections[0], ax=ax)
+# Plot pressure data
+fig, ax = plt.subplots(figsize=(10, 6))
+pressure_dataframe.plot(ax=ax, use_timestamp=False, cmap="viridis", method='pcolormesh',
+                        colorbar=True, clabel="Pressure (Pa)")
+ax.set_title("Simulated Pressure")
+plt.show()
+
+# Plot to verify strain data
+fig, ax = plt.subplots(figsize=(10, 6))
+if strain_dataframe.data is not None and strain_dataframe.data.size > 0:
+    max_abs_strain = np.max(np.abs(strain_dataframe.data))
+    strain_dataframe.plot(ax=ax, use_timestamp=False, cmap="bwr", method='pcolormesh',
+                          vmin=-max_abs_strain, vmax=max_abs_strain, colorbar=True, clabel="Strain")
+else:
+    strain_dataframe.plot(ax=ax, use_timestamp=False, cmap="bwr", method='pcolormesh',
+                          colorbar=True, clabel="Strain")
+ax.set_title("Simulated Strain")
 plt.show()
 
 # Plot original DSS data
