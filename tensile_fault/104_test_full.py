@@ -11,6 +11,8 @@ from fiberis.moose.templates.baseline_model_generator_fervo import build_baselin
 from fiberis.moose.runner import MooseRunner
 import os
 
+print("Working on: ", os.getcwd())
+
 # In this case, let's just render this baseline model to see if it works
 project_name = "1203_rotated_monitor_well"
 hf_length_ft = 250
