@@ -36,13 +36,13 @@ runner = MooseRunner(
     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
 )
-success, stdout, stderr = runner.run(
-    input_file_path=input_file_path,
-    output_directory=output_dir,
-    num_processors=20,
-    log_file_name="simulation.log",
-    stream_output=True
-)
+# success, stdout, stderr = runner.run(
+#     input_file_path=input_file_path,
+#     output_directory=output_dir,
+#     num_processors=20,
+#     log_file_name="simulation.log",
+#     stream_output=True
+# )
 
 # 1. Post-process the simulation results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)
@@ -103,8 +103,8 @@ print(f"Calculated Misfit Value: {misfit_val}")
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
 
 # Plot simulated pressure
-pressure_dataframe.plot(ax=ax1, use_timestamp=False, cmap="viridis", method='pcolormesh',
-                        colorbar=True, clabel="Pressure (Pa)")
+pressure_dataframe.plot(ax=ax1, use_timestamp=False, cmap="bwr", method='pcolormesh',
+                        colorbar=True, clabel="Pressure (Pa)", vmin=1e6, vmax=5e7)
 ax1.set_title("Simulated Pressure Profile")
 ax1.set_ylabel("Depth (m)")
 
@@ -116,9 +116,9 @@ if strain_dataframe.data is not None and strain_dataframe.data.size > 0:
 else:
     strain_dataframe.plot(ax=ax2, use_timestamp=False, cmap="bwr", method='pcolormesh',
                           colorbar=True, clabel="Strain")
-ax2.set_title("Simulated Strain Profile (Corrected)")
+ax2.set_title("Simulated Strain Profile")
 ax2.set_xlabel("Time (s)")
-ax2.set_ylabel("Depth (m)")
+ax2.set_ylabel("Depth (ft)")
 
 plt.tight_layout()
 plt.suptitle("Comparison of Simulated Pressure and Strain", y=1.02)
@@ -136,6 +136,7 @@ ax_obs.axhline(y=lower_bound, color='k', linestyle='-', label=f'Lower Bound: {lo
 ax_obs.set_title("Observed DSS Data at POW-S with Fracture Bounds")
 ax_obs.set_ylabel("Depth (ft)")
 ax_obs.legend()
+plt.tight_layout()
 plt.show()
 
 # Plot 3: Get the simulated strain and compare with DSS data at center depth
@@ -150,4 +151,54 @@ plt.ylabel("Strain")
 plt.title("Simulated vs. Observed Strain at Fracture Center")
 plt.legend()
 plt.grid(True)
+plt.tight_layout()
+plt.show()
+
+
+# Plot 4 & 5: Combined Time Slices at time = 320000
+time_slice_strain, actual_time = strain_dataframe.get_value_by_time(320000)
+time_slice_pressure, actual_time_pressure = pressure_dataframe.get_value_by_time(320000)
+
+fig_ts, (ax_strain, ax_pressure) = plt.subplots(1, 2, figsize=(14, 8), sharey=True)
+
+ax_strain.plot(time_slice_strain, strain_dataframe.daxis, '-o', label='Strain')
+ax_strain.set_xlabel("Strain")
+ax_strain.set_ylabel("Depth (m)")
+ax_strain.set_title(f"Strain Profile at {actual_time:.0f} s")
+ax_strain.grid(True)
+ax_strain.legend()
+
+ax_pressure.plot(time_slice_pressure, pressure_dataframe.daxis * 3.28084, '-o', color='red', label='Pressure')
+ax_pressure.set_xlabel("Pressure (Pa)")
+ax_pressure.set_title(f"Pressure Profile at {actual_time_pressure:.0f} s")
+ax_pressure.grid(True)
+ax_pressure.legend()
+
+plt.suptitle(f"Simulated Profiles at Time = {actual_time:.0f} s", y=1.02)
+plt.tight_layout()
+plt.show()
+
+#%% 6. New plot using the co-plot function
+from fiberis.utils.viz_utils import plot_dss_and_gauge_co_plot
+from fiberis.analyzer.Data1D.core1D import Data1D
+
+# Extract center channel from the simulated pressure data to create a 1D object
+center_depth_sim = pressure_dataframe.daxis[len(pressure_dataframe.daxis) // 2]
+center_pressure_data = pressure_dataframe.get_value_by_depth(center_depth_sim)
+
+center_channel_pressure = Data1D(
+    data=center_pressure_data,
+    taxis=pressure_dataframe.taxis,
+    start_time=pressure_dataframe.start_time,
+    name=f"Pressure at Center Depth ({center_depth_sim:.2f} m)"
+)
+
+# Use the new plotting function
+plot_dss_and_gauge_co_plot(
+    data2d=pressure_dataframe,
+    data1d=center_channel_pressure,
+    d2_plot_args={'title': "Simulated Pressure with Center Channel Trace",
+                  'clabel': "Pressure (Pa)",
+                  'clim': (1.5e7, 1.8e7)}
+)
 plt.show()

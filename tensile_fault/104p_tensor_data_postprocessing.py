@@ -46,6 +46,18 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         # Convert to Tensor2D analyzer object
         tensor_data: Tensor2D = reader.to_analyzer()
 
+        # --- Debug Plotting before rotation ---
+        pre_rotation_yy = tensor_data.get_component('yy')
+        if pre_rotation_yy.data is not None and pre_rotation_yy.daxis is not None:
+            plt.figure()
+            plt.plot(pre_rotation_yy.daxis, pre_rotation_yy.data[:, -2])
+            plt.title("Strain YY Component Before Rotation (Second to Last Timestep)")
+            plt.xlabel("Position along well (m)")
+            plt.ylabel("Strain")
+            plt.grid(True)
+            plt.show()
+        # ------------------------------------
+
         # Rotate the tensor field by 30 degrees counter-clockwise
         tensor_data.rotate_tensor(30)
         print("Rotated tensor by 30 degrees.")
@@ -97,8 +109,9 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             # Ensure the time axis length matches the data's time dimension before differentiation
             time_axis_len = strain_yy_data.data.shape[1]
             taxis_matched = strain_yy_data.taxis[:time_axis_len]
-
+            print(taxis_matched)
             # Calculate strain rate using numpy.gradient for a more robust calculation
+            strain_yy_data.apply_lowpass_filter(0.00005)
             strain_rate_values = np.gradient(strain_yy_data.data, taxis_matched, axis=1)
 
             # The time axis for the gradient result is the same as the input
@@ -112,6 +125,22 @@ def process_tensor_data(output_dir: str, fig_dir: str):
                 start_time=strain_yy_data.start_time,
                 name=f"{sampler_name}_strain_rate"
             )
+
+            # Filter the strain rate data
+            strain_rate_data.apply_lowpass_filter(0.001)
+            # Plot strain data
+            from fiberis.utils.viz_utils import plot_dss_and_gauge_co_plot
+            chan_data = strain_yy_data.get_value_by_depth(strain_yy_data.daxis[-1] / 2)
+            chan_dataframe = Data1DGauge()
+            chan_dataframe.data = chan_data
+            chan_dataframe.taxis = strain_yy_data.taxis[1:]
+            chan_dataframe.start_time = strain_yy_data.start_time
+
+            print(len(strain_yy_data.data))
+            print(len(strain_yy_data.taxis))
+            fig, ax = plt.subplots()
+            chan_dataframe.plot(ax=ax, use_timestamp=True)
+            plt.show()
 
             # Plot Strain Rate
             fig2 = plt.figure(figsize=(10, 8))
@@ -150,6 +179,8 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             print("Skipping strain rate calculation due to insufficient data.")
 
 
+
+
 if __name__ == "__main__":
     # Define the output directory where MOOSE results are stored
     moose_output_directory = "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/output/1203_rotated_monitor_well"
@@ -159,3 +190,4 @@ if __name__ == "__main__":
     process_tensor_data(moose_output_directory, figures_directory)
 
     print("\n--- All processing complete. ---")
+
