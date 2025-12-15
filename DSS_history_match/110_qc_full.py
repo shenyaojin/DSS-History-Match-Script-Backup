@@ -19,13 +19,14 @@ print("working directory:", os.getcwd())
 
 project_name = "1206_qc_single_param_full"
 builder = build_baseline_model(project_name=project_name,
-                               srv_perm=2.87e-17,
+                               srv_perm=2.87e-18,
                                fracture_perm=1.09e-15,
-                               matrix_perm=1e-19,
+                               matrix_perm=1e-21,
                                ny_per_layer_half=100,
                                bias_y=1.15
                                ) # This parameter set is stable
 
+builder.plot_geometry()
 # Output the model
 output_dir = f"output/{project_name}"
 os.makedirs(output_dir, exist_ok=True)
@@ -36,23 +37,17 @@ runner = MooseRunner(
     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
 )
-# success, stdout, stderr = runner.run(
-#     input_file_path=input_file_path,
-#     output_directory=output_dir,
-#     num_processors=20,
-#     log_file_name="simulation.log",
-#     stream_output=True
-# )
+# #
+success, stdout, stderr = runner.run(
+    input_file_path=input_file_path,
+    output_directory=output_dir,
+    num_processors=20,
+    log_file_name="simulation.log",
+    stream_output=True
+)
 
 # 1. Post-process the simulation results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)
-pg_frame = Data1DGauge()
-pg_frame.load_npz("data/fiberis_format/post_processing/timestepper_profile.npz")
-
-start_time = pg_frame.start_time
-pressure_dataframe.start_time = start_time
-strain_dataframe.start_time = start_time
-
 
 # 2. Load and pre-process observed DSS data
 DSS_datapath = "data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz"
@@ -68,9 +63,17 @@ DSSdata.select_time(0, 400000)
 DSSdata.select_depth(14880, 14900) # <- Select depth range of interest.
 DSSdata.data = DSSdata.data * scale_factor / 1e6 # Convert to microstrain
 
+start_time = DSSdata.start_time
+pressure_dataframe.start_time = start_time
+strain_dataframe.start_time = start_time
+
 # 3. Synchronize simulated data with observed data time range
 pressure_dataframe.select_time(DSSdata.start_time, DSSdata.get_end_time())
 strain_dataframe.select_time(DSSdata.start_time, DSSdata.get_end_time())
+# strain_dataframe.data[:, 0] = 0  # <- Set first column to zero to avoid NaN issues
+strain_dataframe.data = strain_dataframe.data[:, 1:]
+strain_dataframe.taxis = strain_dataframe.taxis[1:] # <- Adjust time axis accordingly
+print(strain_dataframe)
 
 # Calibrate simulated strain data by removing the initial value for each channel
 if strain_dataframe.data.shape[0] > 0:
@@ -104,7 +107,7 @@ fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10), sharex=True)
 
 # Plot simulated pressure
 pressure_dataframe.plot(ax=ax1, use_timestamp=False, cmap="bwr", method='pcolormesh',
-                        colorbar=True, clabel="Pressure (Pa)", vmin=1e6, vmax=5e7)
+                        colorbar=True, clabel="Pressure (Pa)", vmin=1.25e7, vmax=1.29e7)
 ax1.set_title("Simulated Pressure Profile")
 ax1.set_ylabel("Depth (m)")
 
@@ -199,6 +202,6 @@ plot_dss_and_gauge_co_plot(
     data1d=center_channel_pressure,
     d2_plot_args={'title': "Simulated Pressure with Center Channel Trace",
                   'clabel': "Pressure (Pa)",
-                  'clim': (1.5e7, 1.8e7)}
+                  'clim': (1.25e7, 1.29e7)}
 )
 plt.show()

@@ -50,7 +50,7 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         pre_rotation_yy = tensor_data.get_component('yy')
         if pre_rotation_yy.data is not None and pre_rotation_yy.daxis is not None:
             plt.figure()
-            plt.plot(pre_rotation_yy.daxis, pre_rotation_yy.data[:, -2])
+            plt.plot(pre_rotation_yy.daxis, pre_rotation_yy.data[:, -1])
             plt.title("Strain YY Component Before Rotation (Second to Last Timestep)")
             plt.xlabel("Position along well (m)")
             plt.ylabel("Strain")
@@ -111,7 +111,7 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             taxis_matched = strain_yy_data.taxis[:time_axis_len]
             print(taxis_matched)
             # Calculate strain rate using numpy.gradient for a more robust calculation
-            strain_yy_data.apply_lowpass_filter(0.00005)
+            # strain_yy_data.apply_lowpass_filter(0.00005)
             strain_rate_values = np.gradient(strain_yy_data.data, taxis_matched, axis=1)
 
             # The time axis for the gradient result is the same as the input
@@ -127,7 +127,7 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             )
 
             # Filter the strain rate data
-            strain_rate_data.apply_lowpass_filter(0.001)
+            # strain_rate_data.apply_lowpass_filter(0.001)
             # Plot strain data
             from fiberis.utils.viz_utils import plot_dss_and_gauge_co_plot
             chan_data = strain_yy_data.get_value_by_depth(strain_yy_data.daxis[-1] / 2)
