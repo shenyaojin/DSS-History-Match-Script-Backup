@@ -24,17 +24,17 @@ input_file_path = os.path.join(output_dir, f"{project_name}_input.i")
 # builder.generate_input_file(output_filepath=input_file_path)
 #
 # Run the model
-# runner = MooseRunner(
-#     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
-#     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
-# )
-# success, stdout, stderr = runner.run(
-#     input_file_path=input_file_path,
-#     output_directory=output_dir,
-#     num_processors=20,
-#     log_file_name="simulation.log",
-#     stream_output=True
-# )
+runner = MooseRunner(
+    moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
+    mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
+)
+success, stdout, stderr = runner.run(
+    input_file_path=input_file_path,
+    output_directory=output_dir,
+    num_processors=20,
+    log_file_name="simulation.log",
+    stream_output=True
+)
 
 # Post-process the results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)

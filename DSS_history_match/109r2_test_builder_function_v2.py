@@ -39,27 +39,35 @@ runner = MooseRunner(
     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
 )
-success, stdout, stderr = runner.run(
-    input_file_path=input_file_path,
-    output_directory=output_dir,
-    num_processors=20,
-    log_file_name="simulation.log",
-    stream_output=True
-)
+# success, stdout, stderr = runner.run(
+#     input_file_path=input_file_path,
+#     output_directory=output_dir,
+#     num_processors=20,
+#     log_file_name="simulation.log",
+#     stream_output=True
+# )
 
 # Post-process the results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)
 pg_frame = Data1DGauge()
 pg_frame.load_npz("data/fiberis_format/post_processing/timestepper_profile.npz")
 
-start_time = pg_frame.start_time
-pressure_dataframe.start_time = start_time
-strain_dataframe.start_time = start_time
-
 # Crop the data
 DSS_datapath = "data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz"
 DSSdata = DSS2D()
 DSSdata.load_npz(DSS_datapath)
+
+start_time = DSSdata.start_time
+pressure_dataframe.start_time = start_time
+strain_dataframe.start_time = start_time
+
+# Post process the pressure & strain dataframe. I noticed the first value is nan.
+# remove the first value
+pressure_dataframe.data = pressure_dataframe.data[:, 1:]
+strain_dataframe.data = strain_dataframe.data[:, 1:]
+# Notice this version is a simplified processing technique by shifting the time axis
+pressure_dataframe.taxis = pressure_dataframe.taxis[1:] - pressure_dataframe.taxis[1]
+strain_dataframe.taxis = strain_dataframe.taxis[1:] - strain_dataframe.taxis[1]
 
 #%% Pre=process DSS data
 mds = DSSdata.daxis
