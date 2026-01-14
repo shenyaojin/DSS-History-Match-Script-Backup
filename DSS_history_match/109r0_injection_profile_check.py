@@ -36,16 +36,15 @@ if len(injection_gauge_pressure.data) > 0:
 injection_gauge_pressure_copy.select_time(datetime.datetime(2020, 4, 1, 0, 0, 0), injection_gauge_pressure_copy.get_end_time())
 injection_gauge_pressure_copy.right_merge(gauge_data_interference_copy)
 injection_gauge_pressure_copy.rename("injection pressure full profile")
+injection_gauge_pressure_copy.data = injection_gauge_pressure_copy.data * 6894.76  # Convert from psi to Pa
 # Save the data if not exists
 savepath = "data/fiberis_format/post_processing/history_matching_pressure_profile_full.npz"
 if not os.path.exists(savepath):
-    injection_gauge_pressure_copy.save_npz(savepath)
+    injection_gauge_pressure_copy.savez(savepath)
 
 # Use this processed data for the injection pressure function
 gauge_data_for_moose = injection_gauge_pressure_copy.copy()
 
-# Quick fix: remove abnormal high pressures
-gauge_data_for_moose.data = 6894.76 * gauge_data_for_moose.data  # Convert psi to Pa
 
 # The three Data1DGauge objects are now available as:
 # gauge_data_interference (original interference data)

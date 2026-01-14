@@ -1,38 +1,41 @@
-# This script will perform a full workflow for the degradation version of HMM modeling.
-# Including data loading, preprocessing, simulation and visualization.
-# Shenyao Jin, 2026-01
+# I'll test the baseline model builder function so that I can continue to
+# Design the misfit functions (v3), using new pressure curve to accelerate the simulation
+# Shenyao Jin, shenyaojin@mines.edu
+# This snapshot is WORKING. commit it to the repository.
+import datetime
 
 import numpy as np
 import matplotlib.pyplot as plt
 from fiberis.analyzer.Data1D.Data1D_Gauge import Data1DGauge
 from fiberis.analyzer.Data2D.Data2D_XT_DSS import DSS2D
 from fiberis.moose.model_builder import ModelBuilder
-from fiberis.moose.templates.baseline_model_generator import build_baseline_model, post_processor_info_extractor
+from fiberis.moose.templates.baseline_model_generator import build_baseline_model
+from fiberis.moose.templates.baseline_model_generator import post_processor_info_extractor
 from fiberis.moose.runner import MooseRunner
 import os
 
 print("working directory:", os.getcwd())
 
-project_name = "0113_test_degradation"
+# In this case, let's just render this baseline model to see if it works
+project_name = "1201_misfit_func"
 builder = build_baseline_model(project_name=project_name,
-                               srv_perm=2.87e-17,
-                               fracture_perm=1.09e-15,
-                               matrix_perm=1e-19,
+                               srv_perm=2.87e-16,
+                               fracture_perm=1.09e-13,
+                               matrix_perm=1e-20,
                                ny_per_layer_half=100,
-                               bias_y=1.15
+                               bias_y=1.08
                                ) # This parameter set is stable
-
 
 # Output the model
 output_dir = f"output/{project_name}"
 os.makedirs(output_dir, exist_ok=True)
-
-# Generate the model
 input_file_path = os.path.join(output_dir, f"{project_name}_input.i")
 
 builder.generate_input_file(output_filepath=input_file_path)
 
-# Run the simulation
+builder.plot_geometry()
+#
+# # Run the model
 # runner = MooseRunner(
 #     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
 #     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
@@ -59,6 +62,29 @@ start_time = DSSdata.start_time
 pressure_dataframe.start_time = start_time
 strain_dataframe.start_time = start_time
 
+# Post process the pressure & strain dataframe. I noticed the first value is nan.
+# remove the first value
+pressure_dataframe.data = pressure_dataframe.data[:, 1:]
+strain_dataframe.data = strain_dataframe.data[:, 1:]
+# Notice this version is a simplified processing technique by shifting the time axis
+pressure_dataframe.taxis = pressure_dataframe.taxis[1:] - pressure_dataframe.taxis[1]
+strain_dataframe.taxis = strain_dataframe.taxis[1:] - strain_dataframe.taxis[1]
+
+# Crop the time range to match DSS data
+DSS_data = DSS2D()
+DSS_data.load_npz("data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz")
+end_time = DSS_data.get_end_time()
+
+pressure_dataframe.select_time(DSS_data.start_time, end_time)
+strain_dataframe.select_time(DSS_data.start_time, end_time)
+
+# gauge_data = Data1DGauge()
+# gauge_data.load_npz("data/fiberis_format/post_processing/timestepper_profile.npz")
+# end_time = gauge_data.get_end_time(use_timestamp=True)
+#
+# pressure_dataframe.select_time(start_time, end_time)
+# strain_dataframe.select_time(start_time, end_time)
+
 #%% Pre=process DSS data
 mds = DSSdata.daxis
 ind = (mds > 7500) & (mds < 15000)
@@ -82,7 +108,7 @@ if strain_dataframe.data.shape[0] > 0:
 
 # Plot pressure data
 fig, ax = plt.subplots(figsize=(10, 6))
-pressure_dataframe.plot(ax=ax, use_timestamp=False, cmap="viridis", method='pcolormesh',
+pressure_dataframe.plot(ax=ax, use_timestamp=False, cmap="bwr", method='pcolormesh',
                         colorbar=True, clabel="Pressure (Pa)")
 ax.set_title("Simulated Pressure")
 plt.show()
@@ -110,27 +136,19 @@ plt.figure()
 plt.plot(strain_dataframe.taxis, chan_data, label="Simulated Strain")
 plt.xlabel("Time (s)")
 plt.ylabel("Strain")
-plt.title("Simulated Strain at Center")
+plt.title("Simulated Strain at Center Depth")
 plt.legend()
 plt.show()
 
-# Get the simulated pressure at the center location
-chan_data = pressure_dataframe.get_value_by_depth(0.5 * (pressure_dataframe.daxis[0] + pressure_dataframe.daxis[-1]))
-plt.figure()
-plt.plot(pressure_dataframe.taxis, chan_data, label="Simulated Pressure/Pa")
-plt.xlabel("Time (s)")
-plt.ylabel("Delta Pressure (Pa)")
-plt.title("Simulated Pressure at Center")
-plt.legend()
-plt.show()
+from fiberis.io.reader_moose_ps import MOOSEPointSamplerReader
+ps_filepath = "output/1201_misfit_func"
+ps_reader = MOOSEPointSamplerReader()
+ps_reader.read(ps_filepath, variable_index=4)
 
-# Get the slice along the depth
-slice_data, _ = strain_dataframe.get_value_by_time(320000)
-# Plot the slice
-plt.figure()
-plt.plot(strain_dataframe.daxis, slice_data, label="Simulated Strain Slice at 320000s")
-plt.xlabel("Depth (m)")
-plt.ylabel("Strain")
-plt.title("Simulated Strain Slice at 320000s")
-plt.legend()
+ps_data = ps_reader.to_analyzer()
+ps_data.start_time = DSSdata.start_time
+ps_data.select_time(DSSdata.start_time, DSSdata.get_end_time())
+
+fig, ax = plt.subplots()
+ps_data.plot(ax=ax, use_timestamp=False)
 plt.show()

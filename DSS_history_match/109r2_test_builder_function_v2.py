@@ -9,7 +9,8 @@ import matplotlib.pyplot as plt
 from fiberis.analyzer.Data1D.Data1D_Gauge import Data1DGauge
 from fiberis.analyzer.Data2D.Data2D_XT_DSS import DSS2D
 from fiberis.moose.model_builder import ModelBuilder
-from fiberis.moose.templates.baseline_model_generator import build_baseline_model, post_processor_info_extractor
+from fiberis.moose.templates.baseline_model_generator import build_baseline_model
+from fiberis.moose.templates.baseline_model_generator import post_processor_info_extractor
 from fiberis.moose.runner import MooseRunner
 import os
 
@@ -18,11 +19,11 @@ print("working directory:", os.getcwd())
 # In this case, let's just render this baseline model to see if it works
 project_name = "1201_misfit_func"
 builder = build_baseline_model(project_name=project_name,
-                               srv_perm=2.87e-17,
-                               fracture_perm=1.09e-15,
-                               matrix_perm=1e-19,
+                               srv_perm=2.87e-16,
+                               fracture_perm=1.09e-13,
+                               matrix_perm=1e-20,
                                ny_per_layer_half=100,
-                               bias_y=1.15
+                               bias_y=1.08
                                ) # This parameter set is stable
 
 # Output the model
@@ -34,18 +35,18 @@ builder.generate_input_file(output_filepath=input_file_path)
 
 builder.plot_geometry()
 #
-# Run the model
-runner = MooseRunner(
-    moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
-    mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
-)
-success, stdout, stderr = runner.run(
-    input_file_path=input_file_path,
-    output_directory=output_dir,
-    num_processors=20,
-    log_file_name="simulation.log",
-    stream_output=True
-)
+# # Run the model
+# runner = MooseRunner(
+#     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
+#     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
+# )
+# success, stdout, stderr = runner.run(
+#     input_file_path=input_file_path,
+#     output_directory=output_dir,
+#     num_processors=20,
+#     log_file_name="simulation.log",
+#     stream_output=True
+# )
 
 # Post-process the results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)
@@ -68,6 +69,21 @@ strain_dataframe.data = strain_dataframe.data[:, 1:]
 # Notice this version is a simplified processing technique by shifting the time axis
 pressure_dataframe.taxis = pressure_dataframe.taxis[1:] - pressure_dataframe.taxis[1]
 strain_dataframe.taxis = strain_dataframe.taxis[1:] - strain_dataframe.taxis[1]
+
+# # Crop the time range to match DSS data
+# DSS_data = DSS2D()
+# DSS_data.load_npz("data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz")
+# end_time = DSS_data.get_end_time()
+#
+# pressure_dataframe.select_time(DSS_data.start_time, end_time)
+# strain_dataframe.select_time(DSS_data.start_time, end_time)
+
+gauge_data = Data1DGauge()
+gauge_data.load_npz("data/fiberis_format/post_processing/timestepper_profile.npz")
+end_time = gauge_data.get_end_time(use_timestamp=True)
+
+pressure_dataframe.select_time(start_time, end_time)
+strain_dataframe.select_time(start_time, end_time)
 
 #%% Pre=process DSS data
 mds = DSSdata.daxis
@@ -124,4 +140,15 @@ plt.title("Simulated Strain at Center Depth")
 plt.legend()
 plt.show()
 
-# Next step, to test the misfit function, we need the ind number of fracture center in DSS data and simulated data
+from fiberis.io.reader_moose_ps import MOOSEPointSamplerReader
+ps_filepath = "output/1201_misfit_func"
+ps_reader = MOOSEPointSamplerReader()
+ps_reader.read(ps_filepath, variable_index=4)
+
+ps_data = ps_reader.to_analyzer()
+ps_data.start_time = gauge_data.start_time
+ps_data.select_time(DSSdata.start_time, DSSdata.get_end_time())
+
+fig, ax = plt.subplots()
+ps_data.plot(ax=ax, use_timestamp=False)
+plt.show()

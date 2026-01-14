@@ -75,6 +75,7 @@ gauge_data_interference.select_time(DSSdata.start_time, DSSdata.get_end_time())
 
 injection_gauge_pressure = Data1DGauge()
 injection_gauge_pressure.load_npz(injection_gauge_pressure_path)
+print(injection_gauge_pressure.start_time, DSSdata.start_time)
 injection_gauge_pressure.select_time(injection_gauge_pressure.start_time, DSSdata.start_time)
 injection_gauge_pressure.remove_abnormal_data(threshold=300, method='mean')
 
@@ -177,7 +178,7 @@ def model_builder_parameters_single_frac(**kwargs) -> List[Data1D_MOOSEps]:
     srv_length_ft2 = kwargs.get('srv_length_ft', 400)
     srv_height_ft2 = kwargs.get('srv_height_ft', 50)
     srv_length_ft1 = kwargs.get('srv_length_ft1', 250)
-    srv_height_ft1 = kwargs.get('srv_height_ft1', 150)
+    srv_height_ft1 = kwargs.get('srv_height_ft1', 150) # This parameter is too large based on literature.
     hf_length_ft = kwargs.get('hf_length_ft', 250)
     hf_height_ft = kwargs.get('hf_height_ft', 0.2)
 
@@ -223,7 +224,7 @@ def model_builder_parameters_single_frac(**kwargs) -> List[Data1D_MOOSEps]:
                                                              biot_coefficient=biot_coeff)
     builder.add_porous_flow_effective_stress_coupling_kernel(kernel_name="eff_stress_y", variable="disp_y", component=1,
                                                              biot_coefficient=biot_coeff)
-    builder.add_porous_flow_mass_volumetric_expansion_kernel(kernel_name="mass_exp", variable="pp")
+    # builder.add_porous_flow_mass_volumetric_expansion_kernel(kernel_name="mass_exp", variable="pp")
 
     fluid_property = SimpleFluidPropertiesConfig(name="water", bulk_modulus=2.2E9, viscosity=1.0E-3, density0=1000.0)
     builder.add_fluid_properties_config(fluid_property)
