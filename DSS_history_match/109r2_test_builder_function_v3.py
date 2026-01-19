@@ -35,18 +35,18 @@ builder.generate_input_file(output_filepath=input_file_path)
 
 builder.plot_geometry()
 #
-# # Run the model
-# runner = MooseRunner(
-#     moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
-#     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
-# )
-# success, stdout, stderr = runner.run(
-#     input_file_path=input_file_path,
-#     output_directory=output_dir,
-#     num_processors=20,
-#     log_file_name="simulation.log",
-#     stream_output=True
-# )
+# Run the model
+runner = MooseRunner(
+    moose_executable_path="/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
+    mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
+)
+success, stdout, stderr = runner.run(
+    input_file_path=input_file_path,
+    output_directory=output_dir,
+    num_processors=20,
+    log_file_name="simulation.log",
+    stream_output=True
+)
 
 # Post-process the results
 pressure_dataframe, strain_dataframe = post_processor_info_extractor(output_dir=output_dir)
@@ -151,4 +151,15 @@ ps_data.select_time(DSSdata.start_time, DSSdata.get_end_time())
 
 fig, ax = plt.subplots()
 ps_data.plot(ax=ax, use_timestamp=False)
+plt.show()
+
+# Get the value of strain dataframe at t=320000s
+slice_t, _ = strain_dataframe.get_value_by_time(320000)
+
+plt.figure()
+plt.plot(strain_dataframe.daxis, slice_t, label="Simulated Strain at t=320000s")
+plt.xlabel("Depth (m)")
+plt.ylabel("Strain")
+plt.title("Simulated Strain at t=320000s")
+plt.legend()
 plt.show()
