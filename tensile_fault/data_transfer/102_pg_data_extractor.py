@@ -2,7 +2,7 @@
 
 import os
 import matplotlib.pyplot as plt
-from fiberis.io import BearskinPP1D
+from fiberis.io.reader_bearskin_pp1d import BearskinPP1D
 from fiberis.analyzer.Data1D.Data1D_Gauge import Data1DGauge
 
 # --- Configuration ---
@@ -16,14 +16,11 @@ INPUT_FILES = [
 # Relative path to the output directory
 OUTPUT_DIR = "data_fervo/fiberis_format"
 
-# Stages to extract (inclusive)
-STAGES_TO_EXTRACT = range(22, 29)
-
 # --- Main Script ---
 
 def main():
     """
-    Main function to process the files, extract stages, and save them.
+    Main function to process the files and save them as .npz.
     """
     # Ensure the output directory exists
     output_path = os.path.abspath(OUTPUT_DIR)
@@ -37,7 +34,7 @@ def main():
     # Store the path of the last file created for QC
     last_file_saved = None
 
-    # Loop through each file and each stage
+    # Loop through each input file
     for relative_path in INPUT_FILES:
         file_path = os.path.abspath(relative_path)
         if not os.path.exists(file_path):
@@ -46,29 +43,25 @@ def main():
         
         print(f"\nProcessing file: {os.path.basename(file_path)}")
 
-        for stage in STAGES_TO_EXTRACT:
-            try:
-                # Read data for the specific stage
-                reader.read(file_path, stage_num=stage)
+        try:
+            # Read the entire data from the file (stage_num is ignored)
+            reader.read(file_path)
 
-                # Convert to analyzer object to get metadata
-                analyzer = reader.to_analyzer()
+            # Convert to analyzer object to get metadata
+            analyzer = reader.to_analyzer()
 
-                # Construct a descriptive filename
-                well_name = reader.well_name or "UnknownWell"
-                file_name = f"{well_name}_Stage_{stage}.npz"
-                full_output_path = os.path.join(output_path, file_name)
+            # Construct a descriptive filename from the input file
+            base_name = os.path.basename(file_path)
+            file_name = os.path.splitext(base_name)[0].replace(' ', '_') + ".npz"
+            full_output_path = os.path.join(output_path, file_name)
 
-                # Save the data using the analyzer's savez method
-                analyzer.savez(full_output_path)
-                print(f"  - Successfully extracted and saved Stage {stage} to {file_name}")
-                last_file_saved = full_output_path
+            # Save the data using the analyzer's savez method
+            analyzer.savez(full_output_path)
+            print(f"  - Successfully extracted and saved data to {file_name}")
+            last_file_saved = full_output_path
 
-            except ValueError as e:
-                # This is expected if a stage doesn't exist in a file
-                print(f"  - Info: Stage {stage} not found in {os.path.basename(file_path)}. Skipping.")
-            except Exception as e:
-                print(f"  - Error processing Stage {stage}: {e}")
+        except Exception as e:
+            print(f"  - Error processing file {os.path.basename(file_path)}: {e}")
 
     # --- Quality Control (QC) ---
     if last_file_saved:

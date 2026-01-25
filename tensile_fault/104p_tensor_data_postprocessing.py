@@ -18,12 +18,12 @@ def process_tensor_data(output_dir: str, fig_dir: str):
 
     # Load pressure gauge data
     pg_data_orig = Data1DGauge()
-    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/Bearskin3PA_Stage_28_timestep_profile.npz")
+    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/gauge_moose_source_avg_high_resolution.npz")
 
     # Load the real start time
     try:
         time_profile = Data1D()
-        time_profile.load_npz("data_fervo/fiberis_format/post_processing/Bearskin3PA_Stage_28_timestep_profile.npz")
+        time_profile.load_npz("data_fervo/fiberis_format/post_processing/gauge_moose_source_avg_high_resolution.npz")
         real_start_time = time_profile.start_time
         print(f"Successfully loaded real start time: {real_start_time}")
     except Exception as e:
@@ -177,7 +177,6 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             print(f"Saved strain rate plot to: {strain_rate_fig_path}")
         else:
             print("Skipping strain rate calculation due to insufficient data.")
-
 
 
 

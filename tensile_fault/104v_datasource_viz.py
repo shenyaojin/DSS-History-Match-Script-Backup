@@ -18,7 +18,7 @@ time_stepper_profile.adaptive_downsample(140)
 
 # Plot time stepper profile
 fig, ax = plt.subplots(figsize=(10, 6))
-time_stepper_profile.plot(ax=ax, use_timestamp=False)
+time_stepper_profile.plot(ax=ax, use_timestamp=True)
 ax.set_title("Time Stepper Profile for MOOSE Simulation")
 plt.show()
 
