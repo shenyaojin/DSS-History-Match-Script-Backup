@@ -33,9 +33,15 @@ DSSdata.select_time(0, 400000)
 # DSSdata.select_depth(14820, 14920) # <- Select depth range of interest.
 # DSSdata.select_depth(14980, 15010)
 
-DSSdata.select_depth(14880, 14900) # <- Select depth range of interest.
-
+DSSdata.select_depth(14865, 14880) # <- Select depth range of interest.
+frac_center = 14871
 # Might need to change based on well location
+
+slice_data = DSSdata.get_value_by_depth(frac_center)
+slice_dataframe = Data1DGauge()
+slice_dataframe.data = slice_data
+slice_dataframe.taxis = DSSdata.taxis
+slice_dataframe.start_time = DSSdata.start_time
 
 #%% Pre-process pressure gauge data
 pg_dataframe.select_time(DSSdata.start_time, DSSdata.get_end_time())
@@ -48,7 +54,7 @@ ax2 = plt.subplot2grid((5, 4), (4, 0), rowspan=1, colspan=4, sharex=ax1) # <- Pr
 
 # Plot DSS data
 im1 = DSSdata.plot(ax=ax1, use_timestamp=False, cmap='bwr', vmin=-1, vmax=1)
-ax1.axhline(y=14888, color='k', linestyle='--')
+ax1.axhline(y=frac_center, color='k', linestyle='--')
 ax1.set_title("DSS Data at POW-S")
 ax1.set_ylabel("Depth (ft)")
 clim = np.array([-1, 1])
@@ -56,7 +62,7 @@ clim = np.array([-1, 1])
 # Hide x-axis ticks
 ax1.tick_params(labelbottom=False)
 # Plot pressure gauge data
-im2 = pg_dataframe.plot(ax=ax2, use_timestamp=False)
+im2 = slice_dataframe.plot(ax=ax2, use_timestamp=False)
 ax2.set_ylabel("Pressure (psi)")
 
 plt.tight_layout()

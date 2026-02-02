@@ -23,7 +23,8 @@ builder = build_baseline_model(project_name=project_name,
                                end_offset_y=160
                                ) # This parameter set is stable
 
-output_dir = f"output/{project_name}"
+output_dir = f"output/113r1_optimizer_test/frac_14871/iter_6"
+
 fig_dir = f"figs/{project_name}"
 os.makedirs(output_dir, exist_ok=True)
 os.makedirs(fig_dir, exist_ok=True)
@@ -72,7 +73,8 @@ drift_val = np.median(DSSdata.data[ind, :], axis=0)
 DSSdata.data -= drift_val.reshape((1, -1))
 DSSdata.select_time(0, 400000)
 
-DSSdata.select_depth(14880, 14900)
+DSSdata.select_depth(14865, 14878)
+DSS_frac_center = 14871
 
 pressure_dataframe.select_time(DSSdata.start_time, DSSdata.get_end_time())
 strain_dataframe.select_time(DSSdata.start_time, DSSdata.get_end_time())
@@ -94,7 +96,7 @@ ind_misfit = (mds_misfit > 7500) & (mds_misfit < 15000)
 drift_val_misfit = np.median(DSSdata_for_misfit.data[ind_misfit, :], axis=0)
 DSSdata_for_misfit.data -= drift_val_misfit.reshape((1, -1))
 DSSdata_for_misfit.select_time(DSSdata.start_time, DSSdata.get_end_time())
-DSSdata_for_misfit.select_depth(14880, 14900)
+DSSdata_for_misfit.select_depth(14865, 14878)
 
 # Scale data: convert from microstrain to strain and apply coupling factor
 SCALE_FACTOR = 6.0
@@ -110,15 +112,15 @@ print(f"Observed fracture center depth for misfit: {CENTER_FRAC_DEPTH_OBS} ft (i
 # Find center of simulated data
 ind_sim = len(strain_dataframe.daxis) // 2
 
-misfit_val = misfit_calculator(
-    weight_matrix=WEIGHT_MATRIX,
-    sim_fracture_center_ind=ind_sim,
-    observed_data_fracture_center_ind=ind_obs,
-    simulated_data=strain_dataframe, # Using the raw strain data before it's scaled for plotting
-    observed_data=DSSdata_for_misfit,
-    save_path=fig_dir
-)
-print(f"--- Misfit Calculated: {misfit_val:.4e} ---")
+# misfit_val = misfit_calculator(
+#     weight_matrix=WEIGHT_MATRIX,
+#     sim_fracture_center_ind=ind_sim,
+#     observed_data_fracture_center_ind=ind_obs,
+#     simulated_data=strain_dataframe, # Using the raw strain data before it's scaled for plotting
+#     observed_data=DSSdata_for_misfit,
+#     save_path=fig_dir
+# )
+# print(f"--- Misfit Calculated: {misfit_val:.4e} ---")
 
 
 # Plot comparison
@@ -129,19 +131,19 @@ print(f"--- Misfit Calculated: {misfit_val:.4e} ---")
 strain_max = np.max(np.abs(strain_dataframe.data))
 center_depth_ind = len(strain_dataframe.daxis) // 2
 center_depth = strain_dataframe.daxis[center_depth_ind]
-example_data_upper_data = strain_dataframe.get_value_by_depth(center_depth - 1) # ~ 3ft above center
-example_data_upper2_data = strain_dataframe.get_value_by_depth(center_depth - 2) # ~ 6ft above center
+example_data_upper_data = strain_dataframe.get_value_by_depth(center_depth - 0.3) # ~ 3ft above center
+example_data_upper2_data = strain_dataframe.get_value_by_depth(center_depth - 0.6) # ~ 6ft above center
 
 example_data_upper = Data1D()
 example_data_upper.taxis = strain_dataframe.taxis
 example_data_upper.data = example_data_upper_data
-example_data_upper.name = f"Strain at {round(center_depth - 3)} ft"
+example_data_upper.name = f"Strain at {round(center_depth - 1)} ft"
 example_data_upper.start_time = strain_dataframe.start_time
 
 example_data_upper2 = Data1D()
 example_data_upper2.taxis = strain_dataframe.taxis
 example_data_upper2.data = example_data_upper2_data
-example_data_upper2.name = f"Strain at {round(center_depth - 6)} ft"
+example_data_upper2.name = f"Strain at {round(center_depth - 2)} ft"
 example_data_upper2.start_time = strain_dataframe.start_time
 
 example_data_center = Data1D()
@@ -173,13 +175,13 @@ ax2.set_ylabel("Pressure (psi)")
 # AX3: example traces
 ax3 = plt.subplot2grid((6,8), (0,5), colspan=3, rowspan=2)
 example_data_upper.plot(ax=ax3, use_timestamp=True)
-ax3.set_title(f"Example Strain Traces: Upper {round(center_depth - 3)} ft")
+ax3.set_title(f"Example Strain Traces: Upper {round(center_depth - 1)} ft")
 ax3.set_ylabel("Strain")
 ax3.tick_params(labelbottom=False)
 
 ax4 = plt.subplot2grid((6,8), (2,5), colspan=3, rowspan=2, sharex=ax3)
 example_data_upper2.plot(ax=ax4, use_timestamp=True)
-ax4.set_title(f"Example Strain Traces: Upper {round(center_depth - 6)} ft")
+ax4.set_title(f"Example Strain Traces: Upper {round(center_depth - 2)} ft")
 ax4.set_ylabel("Strain")
 ax4.tick_params(labelbottom=False)
 
@@ -203,13 +205,13 @@ example_pressure_center_data = pressure_dataframe.get_value_by_depth(center_dept
 example_pressure_upper = Data1D()
 example_pressure_upper.taxis = pressure_dataframe.taxis
 example_pressure_upper.data = example_pressure_upper_data
-example_pressure_upper.name = f"Pressure at {round(center_depth - 3)} ft"
+example_pressure_upper.name = f"Pressure at {round(center_depth - 1)} ft"
 example_pressure_upper.start_time = pressure_dataframe.start_time
 
 example_pressure_upper2 = Data1D()
 example_pressure_upper2.taxis = pressure_dataframe.taxis
 example_pressure_upper2.data = example_pressure_upper2_data
-example_pressure_upper2.name = f"Pressure at {round(center_depth - 6)} ft"
+example_pressure_upper2.name = f"Pressure at {round(center_depth - 2)} ft"
 example_pressure_upper2.start_time = pressure_dataframe.start_time
 
 example_pressure_center = Data1D()
@@ -235,13 +237,13 @@ ax2.set_ylabel("Pressure (psi)")
 # AX3: example traces
 ax3 = plt.subplot2grid((6,8), (0,5), colspan=3, rowspan=2)
 example_pressure_upper.plot(ax=ax3, use_timestamp=True)
-ax3.set_title(f"Example Pressure Traces: Upper {round(center_depth - 3)} ft")
+ax3.set_title(f"Example Pressure Traces: Upper {round(center_depth - 1)} ft")
 ax3.set_ylabel("Pressure")
 ax3.tick_params(labelbottom=False)
 
 ax4 = plt.subplot2grid((6,8), (2,5), colspan=3, rowspan=2, sharex=ax3)
 example_pressure_upper2.plot(ax=ax4, use_timestamp=True)
-ax4.set_title(f"Example Pressure Traces: Upper {round(center_depth - 6)} ft")
+ax4.set_title(f"Example Pressure Traces: Upper {round(center_depth - 2)} ft")
 ax4.set_ylabel("Pressure")
 ax4.tick_params(labelbottom=False)
 
@@ -262,7 +264,7 @@ print(f"Saved QC plot 1.5 to {qc1_5_path}")
 # Add a magnitude calibration factor to the DSS data
 DSSdata_calibrated = DSSdata.copy()
 DSSdata_calibrated.data = DSSdata.data * 6  # Calibration factor
-DSS_frac_center = 14888
+
 
 DSSdata_calibrated.select_depth(DSS_frac_center -10, DSS_frac_center +10)
 
@@ -305,14 +307,14 @@ example_DSS_center.name = f"DSS Strain at {DSS_frac_center} ft"
 example_DSS_center.start_time = DSSdata_calibrated.start_time
 
 # get upper value of DSS data, 3 ft above center
-DSS_upper_data = DSSdata_calibrated.get_value_by_depth(DSS_frac_center + 3)
+DSS_upper_data = DSSdata_calibrated.get_value_by_depth(DSS_frac_center + 1)
 example_DSS_upper = Data1D()
 example_DSS_upper.taxis = DSSdata_calibrated.taxis
 example_DSS_upper.data = DSS_upper_data
 example_DSS_upper.name = f"DSS Strain at {DSS_frac_center -3} ft"
 example_DSS_upper.start_time = DSSdata_calibrated.start_time
 # get upper2 value of DSS data, 6 ft above center
-DSS_upper2_data = DSSdata_calibrated.get_value_by_depth(DSS_frac_center + 6)
+DSS_upper2_data = DSSdata_calibrated.get_value_by_depth(DSS_frac_center + 2)
 example_DSS_upper2 = Data1D()
 example_DSS_upper2.taxis = DSSdata_calibrated.taxis
 example_DSS_upper2.data = DSS_upper2_data

@@ -17,3 +17,13 @@ gauge.select_time(start_hour * 3600, (start_hour + length_hours) * 3600)
 fig, ax = plt.subplots()
 gauge.plot(ax = ax, use_timestamp=True)
 plt.show()
+
+# Pack the data for further simulation.
+# Post-processing.
+import datetime
+
+gauge.start_time = datetime.datetime(2025, 2, 24, 15, 0, 0)
+gauge.name = "Pressure within the fault"
+gauge.savez("data_fervo/fiberis_format/post_processing/gauge_data_for_simulation_synthetic_fault_pressure.npz")
+
+print(gauge.get_end_time())

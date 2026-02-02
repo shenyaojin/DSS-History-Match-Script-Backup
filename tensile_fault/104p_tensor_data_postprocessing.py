@@ -18,12 +18,12 @@ def process_tensor_data(output_dir: str, fig_dir: str):
 
     # Load pressure gauge data
     pg_data_orig = Data1DGauge()
-    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/gauge_moose_source_avg_high_resolution.npz")
+    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/gauge_data_for_simulation_synthetic_fault_pressure.npz")
 
     # Load the real start time
     try:
         time_profile = Data1D()
-        time_profile.load_npz("data_fervo/fiberis_format/post_processing/gauge_moose_source_avg_high_resolution.npz")
+        time_profile.load_npz("data_fervo/fiberis_format/post_processing/gauge_data_for_simulation_synthetic_fault_pressure.npz")
         real_start_time = time_profile.start_time
         print(f"Successfully loaded real start time: {real_start_time}")
     except Exception as e:
@@ -59,8 +59,9 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         # ------------------------------------
 
         # Rotate the tensor field by 30 degrees counter-clockwise
-        tensor_data.rotate_tensor(30)
-        print("Rotated tensor by 30 degrees.")
+        rotate_degree = 30
+        tensor_data.rotate_tensor(rotate_degree)
+        print(f"Rotated tensor by {rotate_degree} degrees.")
 
         # Extract the yy-component (now aligned with the monitor well)
         strain_yy_data: Data2D = tensor_data.get_component('yy')
@@ -77,9 +78,21 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         ax1 = plt.subplot2grid((5, 4), (0, 0), rowspan=4, colspan=4)  # Strain plot
         ax2 = plt.subplot2grid((5, 4), (4, 0), rowspan=1, colspan=4, sharex=ax1)  # Pressure gauge plot
 
-        im1 = strain_yy_data.plot(ax=ax1, cmap='bwr', use_timestamp=True, colorbar=False, vmin=-1.1e-5, vmax=1.1e-5)
-        ax1.set_title(f'Strain Along Monitor Well\nSampler: {sampler_name}')
-        ax1.set_ylabel('Position along well (m)')
+        # If the tensor's name has string "strain_rate", use different vmin/vmax
+        if "strain_rate" in strain_yy_data.name.lower():
+            vmin, vmax = -2e-10, 2e-10
+            im1 = strain_yy_data.plot(ax=ax1, cmap='bwr', use_timestamp=True, colorbar=False, vmin=vmin, vmax=vmax,
+                                      method='pcolormesh')
+            ax1.set_title(f'Strain Rate Along Monitor Well\nSampler: {sampler_name}')
+            ax1.set_ylabel('Position along well (m)')
+
+        else:
+            vmin, vmax = -2e-6, 2e-6
+            im1 = strain_yy_data.plot(ax=ax1, cmap='bwr', use_timestamp=True, colorbar=False, vmin=vmin, vmax=vmax,
+                                      method='pcolormesh')
+            ax1.set_title(f'Strain Along Monitor Well\nSampler: {sampler_name}')
+            ax1.set_ylabel('Position along well (m)')
+
         ax1.tick_params(labelbottom=False)
 
         # Plot pressure gauge data
@@ -91,7 +104,10 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         divider = make_axes_locatable(ax1)
         cax = divider.append_axes("right", size="2%", pad=0.05)
         cbar = fig.colorbar(im1, cax=cax, orientation='vertical')
-        cbar.set_label("Strain")
+        if "strain_rate" in strain_yy_data.name.lower():
+            cbar.set_label("Strain Rate")
+        else:
+            cbar.set_label("Strain")
 
         # To align the plots, add a dummy axes for the pressure plot colorbar space
         divider2 = make_axes_locatable(ax2)
@@ -101,7 +117,7 @@ def process_tensor_data(output_dir: str, fig_dir: str):
         fig.tight_layout()
         strain_fig_path = os.path.join(fig_dir, f"{sampler_name}_strain_with_pressure.png")
         fig.savefig(strain_fig_path)
-        plt.close(fig)
+        plt.show()
         print(f"Saved strain plot to: {strain_fig_path}")
 
         # --- Calculate and Plot Strain Rate ---
@@ -127,27 +143,15 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             )
 
             # Filter the strain rate data
-            # strain_rate_data.apply_lowpass_filter(0.001)
-            # Plot strain data
-            from fiberis.utils.viz_utils import plot_dss_and_gauge_co_plot
-            chan_data = strain_yy_data.get_value_by_depth(strain_yy_data.daxis[-1] / 2)
-            chan_dataframe = Data1DGauge()
-            chan_dataframe.data = chan_data
-            chan_dataframe.taxis = strain_yy_data.taxis[1:]
-            chan_dataframe.start_time = strain_yy_data.start_time
-
-            print(len(strain_yy_data.data))
-            print(len(strain_yy_data.taxis))
-            fig, ax = plt.subplots()
-            chan_dataframe.plot(ax=ax, use_timestamp=True)
-            plt.show()
+            strain_rate_data.apply_lowpass_filter(0.00005)
 
             # Plot Strain Rate
             fig2 = plt.figure(figsize=(10, 8))
             ax1_rate = plt.subplot2grid((5, 4), (0, 0), rowspan=4, colspan=4)  # Strain rate plot
             ax2_rate = plt.subplot2grid((5, 4), (4, 0), rowspan=1, colspan=4, sharex=ax1_rate)  # Pressure gauge plot
 
-            im2 = strain_rate_data.plot(ax=ax1_rate, cmap='bwr', use_timestamp=True, colorbar=False, vmin=-1e-8, vmax=1e-8)
+            im2 = strain_rate_data.plot(ax=ax1_rate, cmap='bwr', use_timestamp=True, colorbar=False, vmin=-3e-11, vmax=3e-11,
+                                        method='pcolormesh')
             ax1_rate.set_title(f'Strain Rate Along Monitor Well\nSampler: {sampler_name}')
             ax1_rate.set_ylabel('Position along well (m)')
             ax1_rate.tick_params(labelbottom=False)
@@ -182,7 +186,7 @@ def process_tensor_data(output_dir: str, fig_dir: str):
 
 if __name__ == "__main__":
     # Define the output directory where MOOSE results are stored
-    moose_output_directory = "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/output/1203_rotated_monitor_well"
+    moose_output_directory = "scripts/tensile_fault/test_folder/strain_rate"
     figures_directory = "figs/12032025"
 
     # Run the processing function
