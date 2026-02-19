@@ -1,0 +1,11 @@
+
+[31m
+*** ERROR ***
+A 'OptimizationData' is not a registered object.
+
+If you are trying to find this object in a dynamically loaded library, make sure that
+the library can be found either in your "Problem/library_path" parameter or in the
+MOOSE_LIBRARY_PATH environment variable.[39m
+
+Abort(1) on node 16 (rank 16 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 1) - process 16
+terminate called without an active exception

@@ -337,7 +337,7 @@
 [VectorPostprocessors]
   [pressure_profile_true_val]
     type = LineValueSampler
-    variable = 'pp'
+    variable = 'disp_y'
     sort_by = 'y'
     start_point = '22.0 30 0'
     end_point = '22.0 70 0'

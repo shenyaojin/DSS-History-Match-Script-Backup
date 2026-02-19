@@ -1,0 +1,897 @@
+[DBG] Adding MultiApp 'forward' of type FullSolveMultiApp
+[36mCreating MultiApp forward of type OptimizationTestApp of level 1 and number 0 on processor 0 with full name forward0[39m
+[36mCloned parent app mesh will be used for MultiApp forward[39m
+[DBG] Adding MultiApp 'adjoint' of type FullSolveMultiApp
+[36mCreating MultiApp adjoint of type OptimizationTestApp of level 1 and number 0 on processor 0 with full name adjoint0[39m
+[36mCloned parent app mesh will be used for MultiApp adjoint[39m
+[DBG] Adding Transfer 'toForward' of type MultiAppReporterTransfer
+[DBG] Adding Transfer 'fromForward_mesh' of type MultiAppCopyTransfer
+[DBG] Adding Transfer 'fromForward' of type MultiAppReporterTransfer
+[DBG] Adding Transfer 'toAdjoint' of type MultiAppReporterTransfer
+[DBG] Adding Transfer 'fromAdjoint' of type MultiAppReporterTransfer
+[DBG] Adding Output 'console' of type Console
+[DBG] Adding Output 'csv' of type CSV
+[DBG] Adding Output 'solutioninvalidityoutput' of type SolutionInvalidityOutput
+[DBG] Adding Output 'checkpoint' of type Checkpoint
+[DBG] Adding UserObject 'main' of type OptimizationData
+[DBG] Adding UserObject 'OptimizationReporter' of type GeneralOptimization
+Framework Information:
+MOOSE Version:           git commit 6bd1acd8bb on 2026-02-06
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Wed Feb 11 14:05:14 2026
+Executable Timestamp:    Mon Feb  9 19:25:57 2026
+
+Input File(s):
+  /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/heat/main.i
+
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Disabled
+  # Checkpoints Kept:      2
+  Execute On:              TIMESTEP_END 
+
+Parallelism:
+  Num Processors:          20
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 121
+    Local:                 11
+    Min/Max/Avg:           0/11/6
+  Elems:                   
+    Total:                 100
+    Local:                 5
+    Min/Max/Avg:           5/5/5
+  Num Subdomains:          1
+  Num Partitions:          20
+  Partitioner:             metis
+
+Execution Information:
+  Executioner:             Optimize
+  Solver Mode:             Preconditioned JFNK 
+
+Reporter Values:
++----------------+--------------------------------------+
+| time           | OptimizationReporter/objective_value |
++----------------+--------------------------------------+
+|   0.000000e+00 |                         0.000000e+00 |
++----------------+--------------------------------------+
+
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Backing Up MultiApps on FORWARD[39m
+Backed up MultiApp ... forward
+[36mFinished Backing Up MultiApps on FORWARD
+[39m
+[36m
+Backing Up MultiApps on ADJOINT[39m
+Backed up MultiApp ... adjoint
+[36mFinished Backing Up MultiApps on ADJOINT
+[39m
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=0	f=681.796	gnorm=486.997	cnorm=0	xdiff=1
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=1	f=239.062	gnorm=390.139	cnorm=0	xdiff=0.350649
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=2	f=2.91209	gnorm=64.7331	cnorm=0	xdiff=0.280634
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=3	f=1.42986	gnorm=42.5757	cnorm=0	xdiff=1
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=4	f=0.00438247	gnorm=2.41649	cnorm=0	xdiff=1
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=5	f=7.13999e-06	gnorm=0.0976854	cnorm=0	xdiff=1
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=6	f=3.38125e-11	gnorm=0.000212566	cnorm=0	xdiff=1
+[36m
+Restoring MultiApps on FORWARD[39m
+Restoring MultiApp ... forward
+[36mFinished Restoring MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toForward | MultiAppReporterTransfer | Parent | forward |
+-----------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+[36m
+No Transfers on FORWARD Between MultiApps
+[39m
+[36m
+Executing MultiApps on FORWARD[39m
+[32mSubapp forward0 solve converged![39m
+[36mFinished Executing MultiApps on FORWARD
+[39m
+[36m
+Transfers on FORWARD From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromForward | MultiAppReporterTransfer | forward | Parent |
+-------------------------------------------------------------
+[36mTransfers on FORWARD Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+[36m
+Restoring MultiApps on ADJOINT[39m
+Restoring MultiApp ... adjoint
+[36mFinished Restoring MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT To MultiApps[39m:
+-----------------------------------------------------------
+|   Name    |           Type           |  From  |   To    |
+-----------------------------------------------------------
+| toAdjoint | MultiAppReporterTransfer | Parent | adjoint |
+-----------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Transfers on ADJOINT Between MultiApps[39m:
+---------------------------------------------------------------
+|       Name       |         Type         |  From   |   To    |
+---------------------------------------------------------------
+| fromForward_mesh | MultiAppCopyTransfer | forward | adjoint |
+---------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+[36m
+Executing MultiApps on ADJOINT[39m
+[32mSubapp adjoint0 solve converged![39m
+[36mFinished Executing MultiApps on ADJOINT
+[39m
+[36m
+Transfers on ADJOINT From MultiApps[39m:
+-------------------------------------------------------------
+|    Name     |           Type           |  From   |   To   |
+-------------------------------------------------------------
+| fromAdjoint | MultiAppReporterTransfer | adjoint | Parent |
+-------------------------------------------------------------
+[36mTransfers on ADJOINT Are Finished
+[39m
+default_nonlinear_convergencenl0: Converged due to residual norm 0 < 1e-50
+
+ 0 Nonlinear |R| = [32m0.000000e+00[39m
+[32m Solve Converged![39m
+TAO SOLVER: iteration=7	f=2.59921e-19	gnorm=0	cnorm=0	xdiff=1
+Tao Object: 1 MPI process
+  type: blmvm
+  Gradient steps: 0
+  Mat Object: (tao_blmvm_) 1 MPI process
+    type: lmvmbfgs
+    rows=1, cols=1
+      Max. storage: 5
+      Used storage: 5
+      Number of updates: 6
+      Number of rejects: 0
+      Number of resets: 1
+      J0:
+        Mat Object: (tao_blmvm_mat_lmvm_J0_) 1 MPI process
+          type: diagonal
+          rows=1, cols=1
+            Vec Object: 1 MPI process
+              type: seq
+      Rescale type: diagonal
+      Rescale history: 1
+      Rescale params: alpha=1., beta=0.5, rho=1.
+      Rescale convex factor: theta=0.125
+  TaoLineSearch Object: 1 MPI process
+    type: more-thuente
+    maximum function evaluations=30
+    tolerances: ftol=0.0001, rtol=1e-10, gtol=0.9
+    total number of function evaluations=0
+    total number of gradient evaluations=0
+    total number of function/gradient evaluations=1
+    using variable bounds
+    Termination reason: SUCCESS
+  Active Set subset type: subvec
+  convergence tolerances: gatol=0.0001,   grtol=1e-08,   steptol=0.,   gttol=0.
+  Residual in Function/Gradient:=0.
+  Objective value=2.59921e-19
+  total number of iterations=7,                          (max: 2000)
+  total number of function/gradient evaluations=10,      (max: 4000)
+  Solution converged:    ||g(X)|| <= gatol
+
+Reporter Values:
++----------------+--------------------------------------+
+| time           | OptimizationReporter/objective_value |
++----------------+--------------------------------------+
+|   0.000000e+00 |                         0.000000e+00 |
+|   1.000000e+00 |                         2.599205e-19 |
++----------------+--------------------------------------+
+
+WARNING! There are options you set that were not used!
+WARNING! could be spelling mistake, etc!
+There is one unused database option. It is:
+Option left: name:-TAO_GATOL value: 0.0001 source: code

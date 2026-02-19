@@ -1,0 +1,20 @@
+[
+  {
+    "name": "frac_14887",
+    "center_frac_depth_obs": 14887.64,
+    "selection_range_ft": 15,
+    "weight_matrix": [1, 2, 1]
+  },
+  {
+    "name": "frac_14845",
+    "center_frac_depth_obs": 14845.67,
+    "selection_range_ft": 10,
+    "weight_matrix": [1, 1, 1, 2, 1, 1, 1]
+  },
+  {
+    "name": "frac_14871",
+    "center_frac_depth_obs": 14871.00,
+    "selection_range_ft": 10,
+    "weight_matrix": [1, 1, 1, 2, 1, 1, 1]
+  }
+]

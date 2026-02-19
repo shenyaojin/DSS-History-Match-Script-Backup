@@ -78,16 +78,30 @@
 []
 
 [Materials]
-    [porosity_matrix]
+    [porosity_top]
         type = PorousFlowPorosityConst
         porosity = 0.01
-        block = 'matrix_top matrix_bottom'
+        block = 'matrix_top'
     []
 
-    [permeability_matrix]
-        type = PorousFlowPermeabilityConst
-        permeability = '1E-20 0 0  0 1E-20 0  0 0 1E-21'
-        block = 'matrix_top matrix_bottom'
+    [permeability_top]
+        type = ADGenericFunctionRankTwoTensor
+        tensor_name = 'permeability'
+        permeability = 'perm_up func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        block = 'matrix_top'
+    []
+
+    [porosity_bottom]
+        type = PorousFlowPorosityConst
+        porosity = 0.01
+        block = 'matrix_bottom'
+    []
+
+    [permeability_bottom]
+        type = ADGenericFunctionRankTwoTensor
+        tensor_name = 'permeability'
+        permeability = 'perm_down func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        block = 'matrix_bottom'
     []
 
     [porosity_srv]
@@ -97,8 +111,9 @@
     []
 
     [permeability_srv]
-        type = PorousFlowPermeabilityConst
-        permeability = '1E-12 0 0  0 1E-12 0  0 0 1E-13'
+        type = ADGenericFunctionRankTwoTensor
+        tensor_name = 'permeability'
+        permeability = 'perm_center func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
         block = 'srv'
     []
 
@@ -153,6 +168,37 @@
         type = PiecewiseConstant
         x = '0.0 7200.0 10800.0 14400.0 18000.0 21600.0 25200.0 28800.0'
         y = '0.0 1380000.0 1380000.0 1380000.0 690000.0 345000.0 345000.0 345000.0'
+    []
+
+    [perm_up]
+        type = ParsedOptimizationFunction
+        expression = 'alpha'
+        param_symbol_names = 'alpha'
+        params_vector_name = 'params/perm_1'
+    []
+
+    [perm_center]
+        type = ParsedOptimizationFunction
+        expression = 'alpha'
+        param_symbol_names = 'alpha'
+        params_vector_name = 'params/perm_2'
+    []
+
+    [perm_down]
+        type = ParsedOptimizationFunction
+        expression = 'alpha'
+        param_symbol_names = 'alpha'
+        params_vector_name = 'params/perm_3'
+    []
+
+    [func_kyy]
+        type = ParsedFunction
+        expression = '1E-20'
+    []
+
+    [func_zero]
+        type = ParsedFunction
+        expression = '0'
     []
 []
 
@@ -312,4 +358,21 @@
 [Outputs]
   console = false
   file_base = 'forward'
+[]
+
+[Problem]
+    library_path = '/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/optimization/lib'
+[]
+
+[Reporters]
+  [measure_data]
+    type = OptimizationData
+    objective_name = objective_value
+    variable = disp_y
+  []
+  [params]
+    type = ConstantReporter
+    real_vector_names = 'perm_1 perm_2 perm_3'
+    real_vector_values = '1E-20 1E-20 1E-21' # dummy value
+  []
 []

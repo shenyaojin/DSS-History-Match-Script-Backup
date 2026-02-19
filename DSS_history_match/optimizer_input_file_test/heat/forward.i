@@ -69,7 +69,7 @@
   nl_abs_tol = 1e-8
   nl_rel_tol = 1e-8
   petsc_options_iname = '-ksp_type -pc_type -pc_factor_mat_solver_package'
-  petsc_options_value = 'preonly lu       superlu_dist'
+  petsc_options_value = 'preonly lu       superlu_diss'
 []
 
 [Reporters]
