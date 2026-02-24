@@ -1,6 +1,3 @@
-# Ground truth model for forward model testing
-# Shenyao Jin, 02092026
-
 [Mesh]
 []
 
@@ -292,33 +289,33 @@
     variable = perm_xx_top
     function = perm_up
     block = 'matrix_top'
-    execute_on = 'INITIAL TIMESTEP_END'
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
   []
   [perm_xx_center_aux]
     type = FunctionAux
     variable = perm_xx_center
     function = perm_center
     block = 'srv'
-    execute_on = 'INITIAL TIMESTEP_END'
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
   []
   [perm_xx_down_aux]
     type = FunctionAux
     variable = perm_xx_down
     function = perm_down
     block = 'matrix_bottom'
-    execute_on = 'INITIAL TIMESTEP_END'
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
   []
   [perm_yy_aux]
     type = FunctionAux
     variable = perm_yy_var
     function = func_kyy
-    execute_on = 'INITIAL TIMESTEP_END'
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
   []
   [perm_zz_aux]
     type = FunctionAux
     variable = perm_zz_var
     function = func_zero
-    execute_on = 'INITIAL TIMESTEP_END'
+    execute_on = 'INITIAL TIMESTEP_BEGIN TIMESTEP_END'
   []
   [stress_xx]
     type = RankTwoAux
@@ -418,10 +415,6 @@
 [Outputs]
   console = false
   file_base = 'forward'
-[]
-
-[Problem]
-    library_path = '/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/optimization/lib'
 []
 
 [Reporters]
