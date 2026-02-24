@@ -59,6 +59,18 @@
     [disp_y]
         initial_condition = 0.0
     []
+    [pp_adjoint]
+        solver_sys = adjoint
+        initial_condition = 0
+    []
+    [disp_x_adjoint]
+        solver_sys = adjoint
+        initial_condition = 0
+    []
+    [disp_y_adjoint]
+        solver_sys = adjoint
+        initial_condition = 0
+    []
 []
 
 
@@ -431,7 +443,6 @@
   forward_system = nl0
   adjoint_system = adjoint
 
-  solve_type = 'NEWTON'
   end_time = 28800
   verbose = true
   l_tol = 0.001
@@ -449,6 +460,68 @@
 [Problem]
   nl_sys_names = 'nl0 adjoint'
   kernel_coverage_check = false
+[]
+
+[Reporters]
+  [data]
+    type = OptimizationData
+    objective_name = objective_value
+    variable = disp_y
+    outputs = none
+  []
+  [params]
+    type = ConstantReporter
+    real_vector_names = 'perm_1 perm_2 perm_3'
+    real_vector_values = '1E-15; 1E-15; 1E-15'
+    outputs = none
+  []
+[]
+
+[DiracKernels]
+  [misfit]
+    type = ReporterTimePointSource
+    variable = disp_y_adjoint
+    value_name = data/misfit_values
+    x_coord_name = data/measurement_xcoord
+    y_coord_name = data/measurement_ycoord
+    z_coord_name = data/measurement_zcoord
+    time_name = data/measurement_time
+  []
+[]
+
+[VectorPostprocessors]
+  [grad_perm_up]
+    type = ElementOptimizationDiffusionCoefFunctionInnerProduct
+    variable = pp_adjoint
+    forward_variable = pp
+    function = perm_up
+    block = matrix_top
+    execute_on = ADJOINT_TIMESTEP_END
+    outputs = none
+  []
+  [grad_perm_center]
+    type = ElementOptimizationDiffusionCoefFunctionInnerProduct
+    variable = pp_adjoint
+    forward_variable = pp
+    function = perm_center
+    block = srv
+    execute_on = ADJOINT_TIMESTEP_END
+    outputs = none
+  []
+  [grad_perm_down]
+    type = ElementOptimizationDiffusionCoefFunctionInnerProduct
+    variable = pp_adjoint
+    forward_variable = pp
+    function = perm_down
+    block = matrix_bottom
+    execute_on = ADJOINT_TIMESTEP_END
+    outputs = none
+  []
+[]
+
+[Outputs]
+  exodus = true
+  console = true
 []
 
 

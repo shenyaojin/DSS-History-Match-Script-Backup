@@ -1,0 +1,79 @@
+[Optimization]
+[]
+
+[OptimizationReporter]
+  type = GeneralOptimization
+  objective_name = objective_value
+  parameter_names = 'perm_1 perm_2 perm_3'
+  num_values = '1 1 1'
+  initial_condition = '1E-15; 1E-15; 1E-15'
+  upper_bounds = '1E-10; 1E-10; 1E-10'
+  lower_bounds = '1E-25; 1E-25; 1E-25'
+[]
+
+[Reporters]
+  [main]
+    type = OptimizationData
+    measurement_file = 'measurement_data.csv'
+    file_xcoord = measurement_xcoord
+    file_ycoord = measurement_ycoord
+    file_zcoord = measurement_zcoord
+    file_time = measurement_time
+    file_value = measurement_values
+  []
+[]
+
+[MultiApps]
+  [forward]
+    type = FullSolveMultiApp
+    input_files = forward_and_adjoint.i
+    execute_on = FORWARD
+  []
+[]
+
+[Transfers]
+  [to_forward]
+    type = MultiAppReporterTransfer
+    to_multi_app = forward
+    from_reporters = 'main/measurement_xcoord
+                      main/measurement_ycoord
+                      main/measurement_zcoord
+                      main/measurement_time
+                      main/measurement_values
+                      OptimizationReporter/perm_1
+                      OptimizationReporter/perm_2
+                      OptimizationReporter/perm_3'
+    to_reporters = 'data/measurement_xcoord
+                    data/measurement_ycoord
+                    data/measurement_zcoord
+                    data/measurement_time
+                    data/measurement_values
+                    params/perm_1
+                    params/perm_2
+                    params/perm_3'
+  []
+  [from_forward]
+    type = MultiAppReporterTransfer
+    from_multi_app = forward
+    from_reporters = 'data/objective_value
+                      grad_perm_up/inner_product
+                      grad_perm_center/inner_product
+                      grad_perm_down/inner_product'
+    to_reporters = 'OptimizationReporter/objective_value
+                    OptimizationReporter/grad_perm_1
+                    OptimizationReporter/grad_perm_2
+                    OptimizationReporter/grad_perm_3'
+  []
+[]
+
+[Executioner]
+  type = Optimize
+  tao_solver = taobqnls
+  petsc_options_iname = '-tao_gatol'
+  petsc_options_value = '1e-4'
+[]
+
+[Outputs]
+  csv = true
+  console = true
+[]
