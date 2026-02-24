@@ -5,8 +5,15 @@
 []
 
 [Variables]
-  [adjointVar]
-  []
+    [pp]
+        initial_condition = 0.0
+    []
+    [disp_x]
+        initial_condition = 0.0
+    []
+    [disp_y]
+        initial_condition = 0.0
+    []
 []
 
 [UserObjects]
@@ -20,7 +27,6 @@
 
 [GlobalParams]
     PorousFlowDictator = 'dictator'
-    displacements = 'disp_x disp_y'
 []
 
 [Kernels]
@@ -37,23 +43,39 @@
     type = StressDivergenceTensors
     variable = 'disp_x'
     component = 0
+    displacements = 'disp_x disp_y'
   []
   [grad_stress_y]
     type = StressDivergenceTensors
     variable = 'disp_y'
     component = 1
+    displacements = 'disp_x disp_y'
   []
   [eff_stress_x]
     type = PorousFlowEffectiveStressCoupling
     variable = 'disp_x'
     component = 0
     biot_coefficient = 0.7
+    displacements = 'disp_x disp_y'
   []
   [eff_stress_y]
     type = PorousFlowEffectiveStressCoupling
     variable = 'disp_y'
     component = 1
     biot_coefficient = 0.7
+    displacements = 'disp_x disp_y'
+  []
+  [adjoint_coupling_x]
+    type = PoroMechanicsCoupling
+    variable = 'pp'
+    porepressure = 'disp_x'
+    component = 0
+  []
+  [adjoint_coupling_y]
+    type = PoroMechanicsCoupling
+    variable = 'pp'
+    porepressure = 'disp_y'
+    component = 1
   []
 []
 
@@ -71,6 +93,11 @@
 []
 
 [Materials]
+    [biot_coef_mat]
+        type = GenericConstantMaterial
+        prop_names = 'biot_coefficient'
+        prop_values = '0.7'
+    []
     [porosity_top]
         type = PorousFlowPorosityConst
         porosity = 0.01
@@ -78,9 +105,10 @@
     []
 
     [permeability_top]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_up func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_top
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'matrix_top'
     []
 
@@ -91,9 +119,10 @@
     []
 
     [permeability_bottom]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_down func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_down
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'matrix_bottom'
     []
 
@@ -104,9 +133,10 @@
     []
 
     [permeability_srv]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_center func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_center
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'srv'
     []
 
@@ -153,6 +183,7 @@
     []
     [vol_strain]
         type = PorousFlowVolumetricStrain
+        displacements = 'disp_x disp_y'
     []
 []
 
@@ -172,6 +203,30 @@
 []
 
 [AuxVariables]
+  [pp_forward]
+  []
+  [disp_y_forward]
+  []
+  [perm_xx_top]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_xx_center]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_xx_down]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_yy_var]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_zz_var]
+    order = CONSTANT
+    family = MONOMIAL
+  []
   [stress_xx]
     order = 'CONSTANT'
     family = 'MONOMIAL'
@@ -208,6 +263,39 @@
 
 
 [AuxKernels]
+  [perm_xx_top_aux]
+    type = FunctionAux
+    variable = perm_xx_top
+    function = perm_up
+    block = 'matrix_top'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_xx_center_aux]
+    type = FunctionAux
+    variable = perm_xx_center
+    function = perm_center
+    block = 'srv'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_xx_down_aux]
+    type = FunctionAux
+    variable = perm_xx_down
+    function = perm_down
+    block = 'matrix_bottom'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_yy_aux]
+    type = FunctionAux
+    variable = perm_yy_var
+    function = func_kyy
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_zz_aux]
+    type = FunctionAux
+    variable = perm_zz_var
+    function = func_zero
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
   [stress_xx]
     type = RankTwoAux
     rank_two_tensor = 'stress'
@@ -277,21 +365,21 @@
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_1'
+        param_vector_name = 'params/perm_1'
     []
 
     [perm_center]
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_2'
+        param_vector_name = 'params/perm_2'
     []
 
     [perm_down]
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_3'
+        param_vector_name = 'params/perm_3'
     []
 
     [func_kyy]
@@ -343,15 +431,50 @@
 []
 
 [VectorPostprocessors]
-  [adjoint_grad]
+  [adjoint_grad_top]
     type = ElementOptimizationDiffusionCoefFunctionInnerProduct
-    variable = adjointVar
-    forward_variable = disp_y_forward
-    function = thermo_conduct
+    variable = pp
+    forward_variable = pp_forward
+    function = perm_up
+    block = 'matrix_top'
+    execute_on = 'ADJOINT_TIMESTEP_END'
+  []
+  [adjoint_grad_center]
+    type = ElementOptimizationDiffusionCoefFunctionInnerProduct
+    variable = pp
+    forward_variable = pp_forward
+    function = perm_center
+    block = 'srv'
+    execute_on = 'ADJOINT_TIMESTEP_END'
+  []
+  [adjoint_grad_bottom]
+    type = ElementOptimizationDiffusionCoefFunctionInnerProduct
+    variable = pp
+    forward_variable = pp_forward
+    function = perm_down
+    block = 'matrix_bottom'
+    execute_on = 'ADJOINT_TIMESTEP_END'
+  []
+[]
+
+[DiracKernels]
+  [misfit_source]
+    type = ReporterTimePointSource
+    variable = disp_y
+    x_coord_name = misfit/measurement_xcoord
+    y_coord_name = misfit/measurement_ycoord
+    z_coord_name = misfit/measurement_zcoord
+    time_name = misfit/measurement_time
+    value_name = misfit/misfit_values
   []
 []
 
 [Reporters]
+  [misfit]
+    type = ConstantReporter
+    real_vector_names = 'measurement_xcoord measurement_ycoord measurement_zcoord measurement_time misfit_values'
+    real_vector_values = '0; 0; 0; 0; 0'
+  []
   [measure_data]
     type = OptimizationData
     objective_name = objective_value
@@ -360,7 +483,30 @@
   [params]
     type = ConstantReporter
     real_vector_names = 'perm_1 perm_2 perm_3'
-    real_vector_values = '1E-20 1E-20 1E-21' # dummy value
+    real_vector_values = '1E-20; 1E-20; 1E-21' # dummy value
+  []
+[]
+
+[Postprocessors]
+  [pp_max]
+    type = NodalExtremeValue
+    variable = pp
+    value_type = max
+  []
+  [disp_y_max]
+    type = NodalExtremeValue
+    variable = disp_y
+    value_type = max
+  []
+  [pp_min]
+    type = NodalExtremeValue
+    variable = pp
+    value_type = min
+  []
+  [disp_y_min]
+    type = NodalExtremeValue
+    variable = disp_y
+    value_type = min
   []
 []
 
@@ -371,4 +517,5 @@
 [Outputs]
   console = false
   file_base = 'adjoint'
+  csv = true
 []

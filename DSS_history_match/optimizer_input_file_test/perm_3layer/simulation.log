@@ -1,11 +1,887 @@
+[DBG] Adding TimeIntegrator 'ImplicitEuler' of type ImplicitEuler
+[DBG] Adding UserObject 'oil' of type SimpleFluidProperties
+[DBG] Adding AuxVariable 'stress_xx' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'stress_xy' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'stress_yx' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'stress_yy' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'strain_xx' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'strain_xy' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'strain_yx' of type MooseVariableConstMonomial
+[DBG] Adding AuxVariable 'strain_yy' of type MooseVariableConstMonomial
+[DBG] Adding Variable 'pp' of type MooseVariable
+[DBG] Adding Variable 'disp_x' of type MooseVariable
+[DBG] Adding Variable 'disp_y' of type MooseVariable
+[DBG] Adding UserObject 'dictator' of type PorousFlowDictator
+[DBG] Adding IC 'pp_moose' of type ConstantIC
+[DBG] Adding IC 'disp_x_moose' of type ConstantIC
+[DBG] Adding IC 'disp_y_moose' of type ConstantIC
+[DBG] Adding TimeStepper 'ConstantDT' of type ConstantDT
+[DBG] Adding Material 'porosity_matrix' of type PorousFlowPorosityConst
+[DBG] Adding Material 'permeability_matrix' of type PorousFlowPermeabilityConst
+[DBG] Adding Material 'porosity_srv' of type PorousFlowPorosityConst
+[DBG] Adding Material 'permeability_srv' of type PorousFlowPermeabilityConst
+[DBG] Adding Material 'temperature' of type PorousFlowTemperature
+[DBG] Adding Material 'biot_modulus' of type PorousFlowConstantBiotModulus
+[DBG] Adding Material 'massfrac' of type PorousFlowMassFraction
+[DBG] Adding Material 'simple_fluid' of type PorousFlowSingleComponentFluid
+[DBG] Adding Material 'PS' of type PorousFlow1PhaseFullySaturated
+[DBG] Adding Material 'relp' of type PorousFlowRelativePermeabilityConst
+[DBG] Adding Material 'eff_fluid_pressure_qp' of type PorousFlowEffectiveFluidPressure
+[DBG] Adding Material 'elasticity_tensor_matrix' of type ComputeIsotropicElasticityTensor
+[DBG] Adding Material 'strain' of type ComputeSmallStrain
+[DBG] Adding Material 'stress' of type ComputeLinearElasticStress
+[DBG] Adding Material 'vol_strain' of type PorousFlowVolumetricStrain
+[DBG] Adding Material 'PorousFlow_density_qp_all' of type PorousFlowJoiner
+[DBG] Adding Material 'PorousFlow_viscosity_qp_all' of type PorousFlowJoiner
+[DBG] Adding Material 'PorousFlow_enthalpy_qp_all' of type PorousFlowJoiner
+[DBG] Adding Material 'PorousFlow_internal_energy_qp_all' of type PorousFlowJoiner
+[DBG] Adding Material 'PorousFlow_relative_permeability_qp_all' of type PorousFlowJoiner
+[DBG] Adding Output 'csv' of type CSV
+[DBG] Adding Output 'console' of type Console
+[DBG] Adding Output 'solutioninvalidityoutput' of type SolutionInvalidityOutput
+[DBG] Adding Output 'checkpoint' of type Checkpoint
+[DBG] Adding UserObject 'pressure_profile_true_val' of type LineValueSampler
+[DBG] Adding AuxKernel 'stress_xx' of type RankTwoAux
+[DBG] Adding AuxKernel 'stress_xy' of type RankTwoAux
+[DBG] Adding AuxKernel 'stress_yx' of type RankTwoAux
+[DBG] Adding AuxKernel 'stress_yy' of type RankTwoAux
+[DBG] Adding AuxKernel 'strain_xx' of type RankTwoAux
+[DBG] Adding AuxKernel 'strain_xy' of type RankTwoAux
+[DBG] Adding AuxKernel 'strain_yx' of type RankTwoAux
+[DBG] Adding AuxKernel 'strain_yy' of type RankTwoAux
+[DBG] Adding BoundaryCondition 'injection_pressure' of type FunctionDirichletBC
+[DBG] Adding BoundaryCondition 'confinex' of type DirichletBC
+[DBG] Adding BoundaryCondition 'confiney' of type DirichletBC
+[DBG] Adding Kernel 'dot_pp' of type TimeDerivative
+[DBG] Adding Kernel 'flux' of type PorousFlowFullySaturatedDarcyBase
+[DBG] Adding Kernel 'grad_stress_x' of type StressDivergenceTensors
+[DBG] Adding Kernel 'grad_stress_y' of type StressDivergenceTensors
+[DBG] Adding Kernel 'eff_stress_x' of type PorousFlowEffectiveStressCoupling
+[DBG] Adding Kernel 'eff_stress_y' of type PorousFlowEffectiveStressCoupling
+Finished Setting Up                                                                      [[33m  2.55 s[39m] [[33m  232 MB[39m]
+Framework Information:
+MOOSE Version:           git commit 6bd1acd8bb on 2026-02-06
+LibMesh Version:         
+PETSc Version:           3.24.3
+SLEPc Version:           3.24.0
+Current Time:            Mon Feb 23 20:57:13 2026
+Executable Timestamp:    Mon Feb  9 19:20:57 2026
 
-[31m
-*** ERROR ***
-A 'OptimizationData' is not a registered object.
+Input File(s):
+  /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer/forward_gt.i
 
-If you are trying to find this object in a dynamically loaded library, make sure that
-the library can be found either in your "Problem/library_path" parameter or in the
-MOOSE_LIBRARY_PATH environment variable.[39m
+Checkpoint:
+  Wall Time Interval:      Every 3600 s
+  User Checkpoint:         Disabled
+  # Checkpoints Kept:      2
+  Execute On:              TIMESTEP_END 
 
-Abort(1) on node 16 (rank 16 in comm 0): application called MPI_Abort(MPI_COMM_WORLD, 1) - process 16
-terminate called without an active exception
+Parallelism:
+  Num Processors:          20
+  Num Threads:             1
+
+Mesh: 
+  Parallel Type:           replicated
+  Mesh Dimension:          2
+  Spatial Dimension:       2
+  Nodes:                   
+    Total:                 40401
+    Local:                 2092
+    Min/Max/Avg:           1907/2102/2020
+  Elems:                   
+    Total:                 40000
+    Local:                 1991
+    Min/Max/Avg:           1991/2014/2000
+  Num Subdomains:          3
+  Num Partitions:          20
+  Partitioner:             metis
+
+Nonlinear System:
+  Num DOFs:                121203
+  Num Local DOFs:          6276
+  Variables:               { "pp" "disp_x" "disp_y" } 
+  Finite Element Types:    "LAGRANGE" 
+  Approximation Orders:    "FIRST" 
+
+Auxiliary System:
+  Num DOFs:                320000
+  Num Local DOFs:          15928
+  Variables:               { "stress_xx" "stress_xy" "stress_yx" "stress_yy" "strain_xx" "strain_xy" 
+                             "strain_yx" "strain_yy" } 
+  Finite Element Types:    "MONOMIAL" 
+  Approximation Orders:    "CONSTANT" 
+
+Execution Information:
+  Executioner:             Transient
+  TimeStepper:             ConstantDT
+  TimeIntegrator(s):       ImplicitEuler
+  Solver Mode:             NEWTON 
+  MOOSE Preconditioner:    SMP 
+
+Time Step 0, time = 0
+
+Time Step 1, time = 9600
+         old time = 0
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.965543e+06[39m
+      0 Linear |R| = [32m2.898505e+04[39m
+      1 Linear |R| = [32m7.898586e-12[39m
+      Line search: Using full step: fnorm 4.965542857775e+06 gnorm 8.904496641831e-03
+default_nonlinear_convergencenl0: Converged due to relative/normalized residual norm 1.79326e-09 < relative tolerance (0.001)
+
+ 1 Nonlinear |R| = [32m8.904497e-03[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m8.904497e-03[39m
+
+Time Step 2, time = 19200
+         old time = 9600
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.148892e+03[39m
+      0 Linear |R| = [32m3.484023e+03[39m
+      1 Linear |R| = [32m2.708884e-12[39m
+      Line search: Using full step: fnorm 1.148892376756e+03 gnorm 2.104679600916e-04
+default_nonlinear_convergencenl0: Converged due to residual norm 0.000210468 < 0.001
+
+ 1 Nonlinear |R| = [32m2.104680e-04[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.104680e-04[39m
+
+Time Step 3, time = 28800
+         old time = 19200
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.224992e+03[39m
+      0 Linear |R| = [32m3.144053e+03[39m
+      1 Linear |R| = [32m3.781287e-12[39m
+      Line search: Using full step: fnorm 3.224991950732e+03 gnorm 1.718943043187e-04
+default_nonlinear_convergencenl0: Converged due to residual norm 0.000171894 < 0.001
+
+ 1 Nonlinear |R| = [32m1.718943e-04[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.718943e-04[39m
+
+Time Step 4, time = 38400
+         old time = 28800
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m7.596046e+03[39m
+      0 Linear |R| = [32m2.920389e+03[39m
+      1 Linear |R| = [32m1.882293e-12[39m
+      Line search: Using full step: fnorm 7.596045982730e+03 gnorm 1.452939674400e-04
+default_nonlinear_convergencenl0: Converged due to residual norm 0.000145294 < 0.001
+
+ 1 Nonlinear |R| = [32m1.452940e-04[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.452940e-04[39m
+
+Time Step 5, time = 48000
+         old time = 38400
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.766314e+03[39m
+      0 Linear |R| = [32m2.667369e+03[39m
+      1 Linear |R| = [32m2.426583e-12[39m
+      Line search: Using full step: fnorm 4.766313667081e+03 gnorm 1.189667125501e-04
+default_nonlinear_convergencenl0: Converged due to residual norm 0.000118967 < 0.001
+
+ 1 Nonlinear |R| = [32m1.189667e-04[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.189667e-04[39m
+
+Time Step 6, time = 57600
+         old time = 48000
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m2.600544e+03[39m
+      0 Linear |R| = [32m2.455188e+03[39m
+      1 Linear |R| = [32m4.145992e-13[39m
+      Line search: Using full step: fnorm 2.600543645246e+03 gnorm 9.794831418851e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 9.79483e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m9.794831e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m9.794831e-05[39m
+
+Time Step 7, time = 67200
+         old time = 57600
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.532353e+02[39m
+      0 Linear |R| = [32m2.270618e+03[39m
+      1 Linear |R| = [32m1.955244e-12[39m
+      Line search: Using full step: fnorm 1.532353006794e+02 gnorm 8.078675398551e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 8.07868e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m8.078675e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m8.078675e-05[39m
+
+Time Step 8, time = 76800
+         old time = 67200
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.697923e+05[39m
+      0 Linear |R| = [32m1.371006e+03[39m
+      1 Linear |R| = [32m9.227317e-13[39m
+      Line search: Using full step: fnorm 1.697923047290e+05 gnorm 3.317883549592e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 3.31788e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m3.317884e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.317884e-05[39m
+
+Time Step 9, time = 86400
+         old time = 76800
+               dt = 9600
+           old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.625467e+05[39m
+      0 Linear |R| = [32m1.378560e+03[39m
+      1 Linear |R| = [32m2.400693e-12[39m
+      Line search: Using full step: fnorm 1.625466919131e+05 gnorm 3.241063870265e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 3.24106e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m3.241064e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.241064e-05[39m
+
+Time Step 10, time = 96000
+          old time = 86400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.919901e+04[39m
+      0 Linear |R| = [32m1.854164e+03[39m
+      1 Linear |R| = [32m6.096535e-13[39m
+      Line search: Using full step: fnorm 4.919900720162e+04 gnorm 5.147175226219e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 5.14718e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m5.147175e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m5.147175e-05[39m
+
+Time Step 11, time = 105600
+          old time = 96000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m7.155237e+04[39m
+      0 Linear |R| = [32m1.665514e+03[39m
+      1 Linear |R| = [32m1.387065e-12[39m
+      Line search: Using full step: fnorm 7.155237372598e+04 gnorm 4.040633796135e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 4.04063e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m4.040634e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m4.040634e-05[39m
+
+Time Step 12, time = 115200
+          old time = 105600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.657847e+04[39m
+      0 Linear |R| = [32m1.775245e+03[39m
+      1 Linear |R| = [32m3.751047e-13[39m
+      Line search: Using full step: fnorm 3.657847354870e+04 gnorm 4.187446755438e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 4.18745e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m4.187447e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m4.187447e-05[39m
+
+Time Step 13, time = 124800
+          old time = 115200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.236548e+04[39m
+      0 Linear |R| = [32m1.724651e+03[39m
+      1 Linear |R| = [32m9.478436e-13[39m
+      Line search: Using full step: fnorm 3.236548205469e+04 gnorm 3.698746986478e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 3.69875e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m3.698747e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.698747e-05[39m
+
+Time Step 14, time = 134400
+          old time = 124800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.711545e+04[39m
+      0 Linear |R| = [32m1.734944e+03[39m
+      1 Linear |R| = [32m9.779873e-13[39m
+      Line search: Using full step: fnorm 1.711544989891e+04 gnorm 3.458677191498e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 3.45868e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m3.458677e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.458677e-05[39m
+
+Time Step 15, time = 144000
+          old time = 134400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.389101e+04[39m
+      0 Linear |R| = [32m1.585650e+03[39m
+      1 Linear |R| = [32m2.196604e-12[39m
+      Line search: Using full step: fnorm 3.389101288311e+04 gnorm 2.724991958425e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 2.72499e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m2.724992e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.724992e-05[39m
+
+Time Step 16, time = 153600
+          old time = 144000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.684459e+04[39m
+      0 Linear |R| = [32m1.521897e+03[39m
+      1 Linear |R| = [32m2.178079e-13[39m
+      Line search: Using full step: fnorm 3.684458525063e+04 gnorm 2.352711507167e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 2.35271e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m2.352712e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.352712e-05[39m
+
+Time Step 17, time = 163200
+          old time = 153600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m8.299484e+00[39m
+      0 Linear |R| = [32m1.661141e+03[39m
+      1 Linear |R| = [32m5.293557e-13[39m
+      Line search: Using full step: fnorm 8.299483624085e+00 gnorm 2.594478378030e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 2.59448e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m2.594478e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.594478e-05[39m
+
+Time Step 18, time = 172800
+          old time = 163200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m8.002705e+00[39m
+      0 Linear |R| = [32m1.601739e+03[39m
+      1 Linear |R| = [32m7.119310e-13[39m
+      Line search: Using full step: fnorm 8.002705329646e+00 gnorm 2.225317252482e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 2.22532e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m2.225317e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.225317e-05[39m
+
+Time Step 19, time = 182400
+          old time = 172800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.880906e+04[39m
+      0 Linear |R| = [32m1.312734e+03[39m
+      1 Linear |R| = [32m3.778114e-13[39m
+      Line search: Using full step: fnorm 4.880906189967e+04 gnorm 1.347789571826e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.34779e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.347790e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.347790e-05[39m
+
+Time Step 20, time = 192000
+          old time = 182400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m7.621407e+00[39m
+      0 Linear |R| = [32m1.525420e+03[39m
+      1 Linear |R| = [32m6.539140e-13[39m
+      Line search: Using full step: fnorm 7.621407288818e+00 gnorm 1.792241982868e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.79224e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.792242e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.792242e-05[39m
+
+Time Step 21, time = 201600
+          old time = 192000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.062811e+04[39m
+      0 Linear |R| = [32m1.283787e+03[39m
+      1 Linear |R| = [32m4.177558e-13[39m
+      Line search: Using full step: fnorm 4.062811134000e+04 gnorm 1.120136033290e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.12014e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.120136e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.120136e-05[39m
+
+Time Step 22, time = 211200
+          old time = 201600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m7.281512e+00[39m
+      0 Linear |R| = [32m1.457388e+03[39m
+      1 Linear |R| = [32m6.562513e-13[39m
+      Line search: Using full step: fnorm 7.281511816024e+00 gnorm 1.451135250000e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.45114e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.451135e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.451135e-05[39m
+
+Time Step 23, time = 220800
+          old time = 211200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m7.078279e+00[39m
+      0 Linear |R| = [32m1.416711e+03[39m
+      1 Linear |R| = [32m1.321370e-12[39m
+      Line search: Using full step: fnorm 7.078278950450e+00 gnorm 1.262141487719e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.26214e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.262141e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.262141e-05[39m
+
+Time Step 24, time = 230400
+          old time = 220800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m5.199713e+04[39m
+      0 Linear |R| = [32m1.137963e+03[39m
+      1 Linear |R| = [32m1.222258e-12[39m
+      Line search: Using full step: fnorm 5.199713108851e+04 gnorm 6.650814524432e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 6.65081e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m6.650815e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m6.650814e-06[39m
+
+Time Step 25, time = 240000
+          old time = 230400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.846395e+00[39m
+      0 Linear |R| = [32m1.370298e+03[39m
+      1 Linear |R| = [32m1.242102e-12[39m
+      Line search: Using full step: fnorm 6.846395266497e+00 gnorm 1.082602105680e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.0826e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.082602e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.082602e-05[39m
+
+Time Step 26, time = 249600
+          old time = 240000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.677065e+00[39m
+      0 Linear |R| = [32m1.336406e+03[39m
+      1 Linear |R| = [32m1.248994e-12[39m
+      Line search: Using full step: fnorm 6.677065178915e+00 gnorm 9.483720060350e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 9.48372e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m9.483720e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m9.483720e-06[39m
+
+Time Step 27, time = 259200
+          old time = 249600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.519777e+00[39m
+      0 Linear |R| = [32m1.304924e+03[39m
+      1 Linear |R| = [32m7.464229e-13[39m
+      Line search: Using full step: fnorm 6.519776877841e+00 gnorm 8.344217565504e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 8.34422e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m8.344218e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m8.344217e-06[39m
+
+Time Step 28, time = 268800
+          old time = 259200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.373106e+00[39m
+      0 Linear |R| = [32m1.275568e+03[39m
+      1 Linear |R| = [32m1.234236e-12[39m
+      Line search: Using full step: fnorm 6.373106318509e+00 gnorm 7.373901142232e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 7.3739e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m7.373901e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m7.373901e-06[39m
+
+Time Step 29, time = 278400
+          old time = 268800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.969749e+04[39m
+      0 Linear |R| = [32m9.481371e+02[39m
+      1 Linear |R| = [32m9.919782e-13[39m
+      Line search: Using full step: fnorm 6.969749459926e+04 gnorm 3.218523296353e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 3.21852e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m3.218523e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.218522e-06[39m
+
+Time Step 30, time = 288000
+          old time = 278400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.266806e+00[39m
+      0 Linear |R| = [32m1.254288e+03[39m
+      1 Linear |R| = [32m4.886187e-13[39m
+      Line search: Using full step: fnorm 6.266805584813e+00 gnorm 7.083065680825e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 7.08307e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m7.083066e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m7.083065e-06[39m
+
+Time Step 31, time = 297600
+          old time = 288000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.136058e+00[39m
+      0 Linear |R| = [32m1.228119e+03[39m
+      1 Linear |R| = [32m7.218269e-13[39m
+      Line search: Using full step: fnorm 6.136057805192e+00 gnorm 6.266809654876e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 6.26681e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m6.266810e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m6.266809e-06[39m
+
+Time Step 32, time = 307200
+          old time = 297600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.013330e+00[39m
+      0 Linear |R| = [32m1.203554e+03[39m
+      1 Linear |R| = [32m1.426344e-12[39m
+      Line search: Using full step: fnorm 6.013329550508e+00 gnorm 5.570962912922e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 5.57096e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m5.570963e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m5.570962e-06[39m
+
+Time Step 33, time = 316800
+          old time = 307200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.479895e+04[39m
+      0 Linear |R| = [32m9.845612e+02[39m
+      1 Linear |R| = [32m2.458775e-13[39m
+      Line search: Using full step: fnorm 4.479894909233e+04 gnorm 2.909275314380e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 2.90928e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m2.909275e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.909274e-06[39m
+
+Time Step 34, time = 326400
+          old time = 316800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m9.403484e+03[39m
+      0 Linear |R| = [32m1.134735e+03[39m
+      1 Linear |R| = [32m1.223316e-12[39m
+      Line search: Using full step: fnorm 9.403484313283e+03 gnorm 4.520455383701e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 4.52046e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m4.520455e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m4.520455e-06[39m
+
+Time Step 35, time = 336000
+          old time = 326400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m5.798060e+00[39m
+      0 Linear |R| = [32m1.160465e+03[39m
+      1 Linear |R| = [32m4.170510e-13[39m
+      Line search: Using full step: fnorm 5.798059947976e+00 gnorm 4.745531385254e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 4.74553e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m4.745531e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m4.745531e-06[39m
+
+Time Step 36, time = 345600
+          old time = 336000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.616693e+04[39m
+      0 Linear |R| = [32m1.215460e+03[39m
+      1 Linear |R| = [32m3.622439e-13[39m
+      Line search: Using full step: fnorm 1.616693130499e+04 gnorm 5.438046560619e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 5.43805e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m5.438047e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m5.438046e-06[39m
+
+Time Step 37, time = 355200
+          old time = 345600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m1.332955e+05[39m
+      0 Linear |R| = [32m1.787221e+03[39m
+      1 Linear |R| = [32m1.396911e-12[39m
+      Line search: Using full step: fnorm 1.332955090193e+05 gnorm 1.944149915302e-05
+default_nonlinear_convergencenl0: Converged due to residual norm 1.94415e-05 < 0.001
+
+ 1 Nonlinear |R| = [32m1.944150e-05[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.944150e-05[39m
+
+Time Step 38, time = 364800
+          old time = 355200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.717920e+04[39m
+      0 Linear |R| = [32m1.212730e+03[39m
+      1 Linear |R| = [32m1.081813e-12[39m
+      Line search: Using full step: fnorm 3.717919921325e+04 gnorm 4.239147573637e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 4.23915e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m4.239148e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m4.239147e-06[39m
+
+Time Step 39, time = 374400
+          old time = 364800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m3.358011e+04[39m
+      0 Linear |R| = [32m1.164879e+03[39m
+      1 Linear |R| = [32m6.209813e-13[39m
+      Line search: Using full step: fnorm 3.358010824617e+04 gnorm 3.455864872618e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 3.45586e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m3.455865e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m3.455864e-06[39m
+
+Time Step 40, time = 384000
+          old time = 374400
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m4.938759e+00[39m
+      0 Linear |R| = [32m9.884870e+02[39m
+      1 Linear |R| = [32m2.149261e-13[39m
+      Line search: Using full step: fnorm 4.938758657797e+00 gnorm 1.754474956065e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 1.75447e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m1.754475e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.754473e-06[39m
+
+Time Step 41, time = 393600
+          old time = 384000
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m6.946300e+04[39m
+      0 Linear |R| = [32m1.296077e+03[39m
+      1 Linear |R| = [32m1.578051e-12[39m
+      Line search: Using full step: fnorm 6.946300332632e+04 gnorm 6.330399852210e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 6.3304e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m6.330400e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m6.330399e-06[39m
+
+Time Step 42, time = 403200
+          old time = 393600
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m2.410285e+04[39m
+      0 Linear |R| = [32m1.041433e+03[39m
+      1 Linear |R| = [32m1.334315e-12[39m
+      Line search: Using full step: fnorm 2.410285154329e+04 gnorm 2.057865511120e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 2.05787e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m2.057866e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.057864e-06[39m
+
+Time Step 43, time = 412800
+          old time = 403200
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m5.501395e+03[39m
+      0 Linear |R| = [32m9.419782e+02[39m
+      1 Linear |R| = [32m2.358717e-13[39m
+      Line search: Using full step: fnorm 5.501394568933e+03 gnorm 1.574558686404e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 1.57456e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m1.574559e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m1.574557e-06[39m
+
+Time Step 44, time = 422400
+          old time = 412800
+                dt = 9600
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m2.868735e+04[39m
+      0 Linear |R| = [32m1.027695e+03[39m
+      1 Linear |R| = [32m1.201327e-12[39m
+      Line search: Using full step: fnorm 2.868734703635e+04 gnorm 2.109127113120e-06
+default_nonlinear_convergencenl0: Converged due to residual norm 2.10913e-06 < 0.001
+
+ 1 Nonlinear |R| = [32m2.109127e-06[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m2.109125e-06[39m
+
+Time Step 45, time = 428430
+          old time = 422400
+                dt = 6030
+            old dt = 9600
+
+ 0 Nonlinear |R| = [32m2.205305e+03[39m
+      0 Linear |R| = [32m7.238981e+02[39m
+      1 Linear |R| = [32m1.205259e-13[39m
+      Line search: Using full step: fnorm 2.205305242802e+03 gnorm 5.796408093085e-07
+default_nonlinear_convergencenl0: Converged due to residual norm 5.79641e-07 < 0.001
+
+ 1 Nonlinear |R| = [32m5.796408e-07[39m
+[32m Solve Converged![39m
+
+Outlier Variable Residual Norms:
+  pp: [31m5.796348e-07[39m
+Finished Executing                                                                       [[33m 48.99 s[39m] [[33m  288 MB[39m]

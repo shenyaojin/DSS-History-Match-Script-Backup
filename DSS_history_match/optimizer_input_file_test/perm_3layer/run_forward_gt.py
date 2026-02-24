@@ -17,16 +17,12 @@ success, stdout, stderr = runner.run(
     clean_output_dir=False
 )
 
-from fiberis.io.reader_moose_vpp import MOOSEVectorPostProcessorReader
-
-reader = MOOSEVectorPostProcessorReader()
-reader.read(directory=output_dir)
-
-pressure_dataframe = reader.to_analyzer()
-
-pressure_dataframe.daxis += 30
-pressure_dataframe.data[:, 0] = 0
-
-print(pressure_dataframe.to_moose_reporter_str(coord_x=22, coord_z=0, precision=2))
-
-import matplotlib.pyplot as plt
+# from fiberis.io.reader_moose_vpp import MOOSEVectorPostProcessorReader
+#
+# reader = MOOSEVectorPostProcessorReader()
+# reader.read(directory=output_dir, variable_index=0)
+#
+# pressure_dataframe = reader.to_analyzer()
+#
+# pressure_dataframe.daxis += 30
+# pressure_dataframe.data[:, 0] = pressure_dataframe.data[:, 1] # padding

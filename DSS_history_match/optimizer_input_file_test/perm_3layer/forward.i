@@ -27,7 +27,6 @@
 
 [GlobalParams]
     PorousFlowDictator = 'dictator'
-    displacements = 'disp_x disp_y'
 []
 
 [Kernels]
@@ -44,23 +43,27 @@
     type = StressDivergenceTensors
     variable = 'disp_x'
     component = 0
+    displacements = 'disp_x disp_y'
   []
   [grad_stress_y]
     type = StressDivergenceTensors
     variable = 'disp_y'
     component = 1
+    displacements = 'disp_x disp_y'
   []
   [eff_stress_x]
     type = PorousFlowEffectiveStressCoupling
     variable = 'disp_x'
     component = 0
     biot_coefficient = 0.7
+    displacements = 'disp_x disp_y'
   []
   [eff_stress_y]
     type = PorousFlowEffectiveStressCoupling
     variable = 'disp_y'
     component = 1
     biot_coefficient = 0.7
+    displacements = 'disp_x disp_y'
   []
 []
 
@@ -85,9 +88,10 @@
     []
 
     [permeability_top]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_up func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_top
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'matrix_top'
     []
 
@@ -98,9 +102,10 @@
     []
 
     [permeability_bottom]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_down func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_down
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'matrix_bottom'
     []
 
@@ -111,9 +116,10 @@
     []
 
     [permeability_srv]
-        type = ADGenericFunctionRankTwoTensor
-        tensor_name = 'permeability'
-        permeability = 'perm_center func_zero func_zero  func_zero func_kyy func_zero  func_zero func_zero func_zero'
+        type = PorousFlowPermeabilityConstFromVar
+        perm_xx = perm_xx_center
+        perm_yy = perm_yy_var
+        perm_zz = perm_zz_var
         block = 'srv'
     []
 
@@ -160,6 +166,7 @@
     []
     [vol_strain]
         type = PorousFlowVolumetricStrain
+        displacements = 'disp_x disp_y'
     []
 []
 
@@ -174,21 +181,21 @@
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_1'
+        param_vector_name = 'params/perm_1'
     []
 
     [perm_center]
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_2'
+        param_vector_name = 'params/perm_2'
     []
 
     [perm_down]
         type = ParsedOptimizationFunction
         expression = 'alpha'
         param_symbol_names = 'alpha'
-        params_vector_name = 'params/perm_3'
+        param_vector_name = 'params/perm_3'
     []
 
     [func_kyy]
@@ -224,6 +231,26 @@
 []
 
 [AuxVariables]
+  [perm_xx_top]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_xx_center]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_xx_down]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_yy_var]
+    order = CONSTANT
+    family = MONOMIAL
+  []
+  [perm_zz_var]
+    order = CONSTANT
+    family = MONOMIAL
+  []
   [stress_xx]
     order = 'CONSTANT'
     family = 'MONOMIAL'
@@ -260,6 +287,39 @@
 
 
 [AuxKernels]
+  [perm_xx_top_aux]
+    type = FunctionAux
+    variable = perm_xx_top
+    function = perm_up
+    block = 'matrix_top'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_xx_center_aux]
+    type = FunctionAux
+    variable = perm_xx_center
+    function = perm_center
+    block = 'srv'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_xx_down_aux]
+    type = FunctionAux
+    variable = perm_xx_down
+    function = perm_down
+    block = 'matrix_bottom'
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_yy_aux]
+    type = FunctionAux
+    variable = perm_yy_var
+    function = func_kyy
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
+  [perm_zz_aux]
+    type = FunctionAux
+    variable = perm_zz_var
+    function = func_zero
+    execute_on = 'INITIAL TIMESTEP_END'
+  []
   [stress_xx]
     type = RankTwoAux
     rank_two_tensor = 'stress'
@@ -373,6 +433,6 @@
   [params]
     type = ConstantReporter
     real_vector_names = 'perm_1 perm_2 perm_3'
-    real_vector_values = '1E-20 1E-20 1E-21' # dummy value
+    real_vector_values = '1E-20; 1E-20; 1E-21' # dummy value
   []
 []
