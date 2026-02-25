@@ -6,9 +6,9 @@
   objective_name = objective_value
   parameter_names = 'perm_1 perm_2 perm_3'
   num_values = '1 1 1'
-  initial_condition = '1E-15; 1E-15; 1E-15'
-  upper_bounds = '1E-10; 1E-10; 1E-10'
-  lower_bounds = '1E-25; 1E-25; 1E-25'
+  initial_condition = '-15; -15; -15'
+  upper_bounds = '-10; -10; -10'
+  lower_bounds = '-25; -25; -25'
 []
 
 [Reporters]
@@ -69,8 +69,8 @@
 [Executioner]
   type = Optimize
   tao_solver = taobqnls
-  petsc_options_iname = '-tao_gatol'
-  petsc_options_value = '1e-4'
+  petsc_options_iname = '-tao_gatol -tao_grtol -tao_gttol'
+  petsc_options_value = '0 0 0'
 []
 
 [Outputs]

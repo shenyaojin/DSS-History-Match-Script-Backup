@@ -238,21 +238,21 @@
 
     [perm_up]
         type = ParsedOptimizationFunction
-        expression = 'alpha'
+        expression = '10^alpha'
         param_symbol_names = 'alpha'
         param_vector_name = 'params/perm_1'
     []
 
     [perm_center]
         type = ParsedOptimizationFunction
-        expression = 'alpha'
+        expression = '10^alpha'
         param_symbol_names = 'alpha'
         param_vector_name = 'params/perm_2'
     []
 
     [perm_down]
         type = ParsedOptimizationFunction
-        expression = 'alpha'
+        expression = '10^alpha'
         param_symbol_names = 'alpha'
         param_vector_name = 'params/perm_3'
     []
