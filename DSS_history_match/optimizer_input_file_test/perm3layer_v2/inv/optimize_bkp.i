@@ -6,7 +6,7 @@
   objective_name = objective_value
   parameter_names = 'perm_1 perm_2 perm_3'
   num_values = '1 1 1'
-  initial_condition = '-25; -8; -25'
+  initial_condition = '-20; -12; -20'
   upper_bounds = '-10; -10; -10'
   lower_bounds = '-25; -25; -25'
 []
@@ -55,10 +55,10 @@
   [from_forward]
     type = MultiAppReporterTransfer
     from_multi_app = forward
-    from_reporters = 'data/objective_value
-                      grad_perm_up/inner_product
-                      grad_perm_center/inner_product
-                      grad_perm_down/inner_product'
+    from_reporters = 'scaled_objective/value
+                      scaled_grad_perm_1/inner
+                      scaled_grad_perm_2/inner
+                      scaled_grad_perm_3/inner'
     to_reporters = 'OptimizationReporter/objective_value
                     OptimizationReporter/grad_perm_1
                     OptimizationReporter/grad_perm_2
@@ -69,8 +69,8 @@
 [Executioner]
   type = Optimize
   tao_solver = taobqnls
-  petsc_options_iname = '-tao_gatol -tao_grtol -tao_gttol'
-  petsc_options_value = '0 0 0'
+  petsc_options_iname = '-tao_gatol'
+  petsc_options_value = '1e-5'
 []
 
 [Outputs]

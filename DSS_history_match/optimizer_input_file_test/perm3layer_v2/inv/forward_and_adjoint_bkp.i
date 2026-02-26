@@ -475,6 +475,38 @@
     real_vector_values = '1E-15; 1E-15; 1E-15'
     outputs = none
   []
+  [scaled_objective]
+    type = ParsedScalarReporter
+    name = value
+    scalar_reporter_names = 'data/objective_value'
+    scalar_reporter_symbols = 'obj'
+    expression = 'obj * 1e16'
+    execute_on = ADJOINT_TIMESTEP_END
+  []
+  [scaled_grad_perm_1]
+    type = ParsedVectorReporter
+    name = inner
+    vector_reporter_names = 'grad_perm_up/inner_product'
+    vector_reporter_symbols = 'grad'
+    expression = 'grad * 1e16'
+    execute_on = ADJOINT_TIMESTEP_END
+  []
+  [scaled_grad_perm_2]
+    type = ParsedVectorReporter
+    name = inner
+    vector_reporter_names = 'grad_perm_center/inner_product'
+    vector_reporter_symbols = 'grad'
+    expression = 'grad * 1e16'
+    execute_on = ADJOINT_TIMESTEP_END
+  []
+  [scaled_grad_perm_3]
+    type = ParsedVectorReporter
+    name = inner
+    vector_reporter_names = 'grad_perm_down/inner_product'
+    vector_reporter_symbols = 'grad'
+    expression = 'grad * 1e16'
+    execute_on = ADJOINT_TIMESTEP_END
+  []
 []
 
 [DiracKernels]
@@ -520,6 +552,15 @@
 []
 
 [Outputs]
-  exodus = true
-  console = true
+  [forward]
+    type = CSV
+  []
+  [adjoint]
+    type = CSV
+    execute_on = 'INITIAL ADJOINT_TIMESTEP_END'
+  []
+  [console]
+    type = Console
+    execute_postprocessors_on = 'INITIAL TIMESTEP_END ADJOINT_TIMESTEP_END'
+  []
 []
