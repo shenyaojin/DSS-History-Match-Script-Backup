@@ -55,11 +55,11 @@ from mpl_toolkits.mplot3d import Axes3D
 fig = plt.figure()  # Increase the width
 ax = fig.add_subplot(111, projection='3d')
 ax.plot(s_well_dataframe.xaxis, s_well_dataframe.yaxis, s_well_dataframe.zaxis
-        , linewidth = 2, label = 'S Well', color = s_well_color)
+        , linewidth = 2, label = 'Monitor Well S', color = s_well_color)
 ax.plot(h_well_dataframe.xaxis, h_well_dataframe.yaxis, h_well_dataframe.zaxis,
-        linewidth = 2, label = 'H Well', color = h_well_color)
+        linewidth = 2, label = 'Monitor Well H', color = h_well_color)
 ax.plot(prod_dataframe.xaxis, prod_dataframe.yaxis, prod_dataframe.zaxis
-        , linewidth = 2, label = 'Producer', color = prod_color)
+        , linewidth = 2, label = 'Injector', color = prod_color)
 
 ax.scatter(s_well_gauge_x, s_well_gauge_y, s_well_gauge_z, color='cyan', label='Pressure Gauge', marker='^')
 ax.scatter(h_well_gauge_x, h_well_gauge_y, h_well_gauge_z, color='cyan', marker='^')

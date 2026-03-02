@@ -84,6 +84,8 @@ ind = np.array(np.where(np.logical_and(
     pg_md_dataframe.data > depth_range_min, pg_md_dataframe.data < depth_range_max
 ))).flatten()
 
+print("Gauge ind:" , ind)
+
 gauge_dataframe_all = []
 for gauge_iter in tqdm(ind):
     datapath = f'data/fiberis_format/s_well/gauges/gauge{gauge_iter+1}_data_swell.npz'
@@ -120,14 +122,14 @@ ax1.plot(scalar_taxis, scalar_tmp_value, color='cyan', linewidth=5)
 ax1.text(scalar_taxis[0] + datetime.timedelta(minutes=8), scalar_tmp_value[0] - scalar_value/20,
          f"{scalar_value} psi", fontsize=12, color='black')
 
-img1 = DASdata.plot(ax=ax1, useTimeStamp=True, cmap='bwr', aspect='auto')
+img1 = DASdata.plot(ax=ax1, use_timestamp=True, cmap='bwr', aspect='auto')
 img1.set_clim(cx * 3e2)
 
 ax2 = plt.subplot2grid((6, 4), (4, 0), colspan=4, rowspan=2, sharex = ax1)
 
 color = 'blue'
 pc_stg7_prop.rename("Prop. Conc.")
-pc_stg7_prop.plot(ax=ax2, useTimeStamp=True, title=None, color=color)
+pc_stg7_prop.plot(ax=ax2, use_timestamp=True, title=None, color=color)
 ax2.set_ylabel(fr"Prop. Conc./lb$\cdot$gal$^{-1}$", color=color)
 ax2.tick_params(axis='y', labelcolor=color)
 # set xlim
@@ -135,17 +137,17 @@ ax2.set_xlim(stg7_bgtime, stg8_edtime)
 
 ax21 = ax2.twinx()
 color = 'green'
-pc_stg7_slurry_rate.plot(ax=ax21, useTimeStamp=True, title=None, color=color)
+pc_stg7_slurry_rate.plot(ax=ax21, use_timestamp=True, title=None, color=color)
 ax21.tick_params(axis='y', labelcolor=color)
 
 ax22 = ax2.twinx()
 color = 'red'
 pc_stg7_pressure.rename("Treating Pressure")
-pc_stg7_pressure.plot(ax=ax22, useTimeStamp=True, title=None, color=color)
+pc_stg7_pressure.plot(ax=ax22, use_timestamp=True, title=None, color=color)
 ax22.tick_params(axis='y', labelcolor=color)
 
 ax23 = ax2.twinx()
-pc_stg8_pressure.plot(ax=ax23, useTimeStamp=True, title=None, color=color)
+pc_stg8_pressure.plot(ax=ax23, use_timestamp=True, title=None, color=color)
 # Remove yaxis
 ax23.yaxis.set_visible(False)
 
