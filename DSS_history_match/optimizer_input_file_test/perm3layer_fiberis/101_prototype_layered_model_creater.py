@@ -112,7 +112,7 @@ def create_and_run_optimization_model():
         output_filepath=master_full_path,
         forward_input_file=forward_input_file,
         measurement_csv="measurement_data.csv",
-        initial_conds=[-25, -8, -25],
+        initial_conds=[-25, -10, -25],
         lower_bounds=[-25, -25, -25],
         upper_bounds=[-10, -10, -10]
     )

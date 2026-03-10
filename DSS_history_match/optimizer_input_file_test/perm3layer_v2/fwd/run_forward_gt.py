@@ -5,8 +5,8 @@ runner = MooseRunner(
     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec"
 )
 
-input_file_path = "scripts/DSS_history_match/optimizer_input_file_test/perm3layer_v2/forward_gt.i"
-output_dir="scripts/DSS_history_match/optimizer_input_file_test/perm3layer_v2"
+input_file_path = "scripts/DSS_history_match/optimizer_input_file_test/perm3layer_v2/fwd/forward_gt.i"
+output_dir="scripts/DSS_history_match/optimizer_input_file_test/perm3layer_v2/fwd"
 
 success, stdout, stderr = runner.run(
     input_file_path=input_file_path,

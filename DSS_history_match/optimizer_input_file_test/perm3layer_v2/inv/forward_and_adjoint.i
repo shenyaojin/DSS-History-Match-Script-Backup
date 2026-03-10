@@ -453,7 +453,7 @@
 
   [TimeStepper]
     type = ConstantDT
-    dt = 600
+    dt = 2400
   []
 []
 

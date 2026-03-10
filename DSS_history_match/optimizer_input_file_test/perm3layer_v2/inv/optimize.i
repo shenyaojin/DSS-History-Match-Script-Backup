@@ -7,7 +7,7 @@
   parameter_names = 'perm_1 perm_2 perm_3'
   num_values = '1 1 1'
   initial_condition = '-25; -8; -25'
-  upper_bounds = '-10; -10; -10'
+  upper_bounds = '-5; -5; -5'
   lower_bounds = '-25; -25; -25'
 []
 

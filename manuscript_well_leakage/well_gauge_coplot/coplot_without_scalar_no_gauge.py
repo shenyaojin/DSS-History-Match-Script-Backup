@@ -1,8 +1,7 @@
 #%% Import fiberis
 import numpy as np
 import matplotlib.pyplot as plt
-from tqdm import tqdm
-from fiberis.analyzer.Data1D import Data1D_PumpingCurve, Data1D_Gauge
+from fiberis.analyzer.Data1D import Data1D_PumpingCurve
 from fiberis.analyzer.Data2D import Data2D_XT_DSS
 from fiberis.analyzer.Geometry3D import DataG3D_md
 import datetime
@@ -18,7 +17,7 @@ stage2 = stage1 + 1
 coeff = 0.14 # The amplitude of the PG response
 
 #%% Load data
-# 1. DAS, 2. PG, 3. pumping curve
+# 1. DAS, 2. pumping curve
 datapath = "data/fiberis_format/"
 
 pc_data_folder_stg7 = datapath + f"prod/pumping_data/stage{stage1}/"
@@ -72,91 +71,33 @@ frachit_stg8_dataframe = DataG3D_md.G3DMeasuredDepth()
 frachit_stg7_dataframe.load_npz(frac_hit_datapath_stg7)
 frachit_stg8_dataframe.load_npz(frac_hit_datapath_stg8)
 
-#%% Load pressure gauge data
-pg_md_dataframe = DataG3D_md.G3DMeasuredDepth()
-pg_md_dataframe.load_npz("data/fiberis_format/s_well/geometry/gauge_md_swell.npz")
-
 #%% Filter out those gauges that are in my interested areas
 depth_range_min = np.min(frachit_stg8_dataframe.data) - 500
 depth_range_max = np.max(frachit_stg7_dataframe.data) + 700
 
-ind = np.array(np.where(np.logical_and(
-    pg_md_dataframe.data > depth_range_min, pg_md_dataframe.data < depth_range_max
-))).flatten()
-
-gauge_dataframe_all = []
-for gauge_iter in tqdm(ind):
-    datapath = f'data/fiberis_format/s_well/gauges/gauge{gauge_iter+1}_data_swell.npz'
-    gauge_dataframe = Data1D_Gauge.Data1DGauge()
-    gauge_dataframe.load_npz(datapath)
-    gauge_dataframe.crop(stg7_bgtime, stg8_edtime)
-    gauge_dataframe_all.append(gauge_dataframe)
-
-
 cx = np.array([-1, 1])
-scalar_taxis = np.repeat(stg7_bgtime + datetime.timedelta(minutes=30), 2)
-scalar_value = 800
-scalar_tmp_value = np.array([+ pg_md_dataframe.data[ind][0] - 50, (scalar_value) * - coeff + pg_md_dataframe.data[ind][0] - 50])
 
 DASdata.select_depth(depth_range_min, depth_range_max)
 
 # Filter the DASdata
 DASdata.apply_lowpass_filter(0.01)
 
-#%% Concatenate the data (pumping)；
-# From the suggestion of Sinopec, no need to concatenate the proppant concentration and slurry rate
-# pc_stg7_prop.right_merge(pc_stg8_prop)
-# pc_stg7_prop.rename("Proppant Concentration")
-#
-# pc_stg7_slurry_rate.right_merge(pc_stg8_slurry_rate)
-# pc_stg7_slurry_rate.rename("Slurry Rate")
-
 #%% Plot the data
 plt.figure(figsize = (7, 5))
 
 ax1 = plt.subplot2grid((6, 4), (0, 0), colspan=4, rowspan=4)
-flag =  0
-for i in range(len(pg_md_dataframe.data[ind])):
-    ax1.axhline(y=pg_md_dataframe.data[ind][i], color='black', linestyle='--')
-    datetime_taxis = gauge_dataframe_all[i].calculate_time()
-    # if i==3 or i==4:
-    #     ax1.plot(datetime_taxis, (gauge_dataframe_all[i].data - gauge_dataframe_all[i].data[0]) * - coeff
-    #              + pg_md_dataframe.data[ind][i], color='black', linewidth=2)
-    #
-    # else:
-    #     if flag == 0:
-    #         ax1.plot(datetime_taxis, (gauge_dataframe_all[i].data - gauge_dataframe_all[i].data[0]) * - coeff
-    #              + pg_md_dataframe.data[ind][i], color='cyan', linewidth=2, label='Pressure gauge')
-    #     else:
-    #         ax1.plot(datetime_taxis, (gauge_dataframe_all[i].data - gauge_dataframe_all[i].data[0]) * - coeff
-    #                  + pg_md_dataframe.data[ind][i], color='cyan', linewidth=2)
-    #     flag = 1
-
-    # Since I changed the source of figure 3. No need to distinguish the color of the gauge response
-    if flag == 0:
-        ax1.plot(datetime_taxis, (gauge_dataframe_all[i].data - gauge_dataframe_all[i].data[0]) * - coeff
-                 + pg_md_dataframe.data[ind][i], color='cyan', linewidth=2, label='Pressure gauge')
-    else:
-        ax1.plot(datetime_taxis, (gauge_dataframe_all[i].data - gauge_dataframe_all[i].data[0]) * - coeff
-                 + pg_md_dataframe.data[ind][i], color='cyan', linewidth=2) # Don't label the gauge again
-    flag = 1
-
-ax1.plot(scalar_taxis, scalar_tmp_value, color='cyan', linewidth=5)
-# ax1.text(scalar_taxis[0] + datetime.timedelta(minutes=8), scalar_tmp_value[0] - scalar_value/20,
-#          f"{scalar_value} psi", fontsize=12, color='black') # Add text to indicate the scalar value
 
 img1 = DASdata.plot(ax=ax1, use_timestamp=True, cmap='bwr', aspect='auto')
 img1.set_clim(cx * 3e2)
 
 # Add frac hit location, using scatter plot
-contrast_color = (0.07, 0.07, 0.07)
 frac_hit_stg7_taxis = np.repeat(stg7_bgtime + datetime.timedelta(minutes=30), len(frachit_stg7_dataframe.data))
 ax1.scatter(frac_hit_stg7_taxis, frachit_stg7_dataframe.data, color='lightgray', marker='x', s=40, label='Frac Hit')
 
 frac_hit_stg8_taxis = np.repeat(stg8_bgtime + datetime.timedelta(minutes=30), len(frachit_stg8_dataframe.data))
 ax1.scatter(frac_hit_stg8_taxis, frachit_stg8_dataframe.data, color='lightgray', marker='x', s=40)
 
-ax1.legend(loc='lower right')
+# Removed gauge plots and ax1 legend as requested
 
 ax2 = plt.subplot2grid((6, 4), (4, 0), colspan=4, rowspan=2, sharex = ax1)
 
@@ -225,5 +166,5 @@ ax23.set_yticks([])
 
 # plt.suptitle(f"LF-DAS data with gauge in S well/stage {stage1} and {stage2}")
 plt.tight_layout()
-plt.savefig("figs/manuscript/DAS_gauge_coplot/Swell_no_scalar.png")
+plt.savefig("figs/manuscript/DAS_gauge_coplot/Swell_no_gauge.png")
 plt.show()
