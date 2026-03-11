@@ -1,0 +1,34 @@
+Staged input file 'main.i' in working directory '/rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer'
+Executing MOOSE command: /rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec -n 18 /rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/combined/combined-opt -i main.i
+Working directory: /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer
+Streaming MOOSE output in real-time...
+[DBG] Adding MultiApp 'forward' of type FullSolveMultiApp
+[36mCreating MultiApp forward of type CombinedTestApp of level 1 and number 0 on processor 0 with full name forward0[39m
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 2774207 RUNNING AT lakota.mines.edu
+=   EXIT CODE: 11
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+STDOUT successfully written to log file: /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer/simulation.log
+MOOSE simulation failed for original input /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer/main.i (ran as main.i in /rcp4/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm_3layer) with return code 11.
+--- STDOUT ---
+[DBG] Adding MultiApp 'forward' of type FullSolveMultiApp
+[36mCreating MultiApp forward of type CombinedTestApp of level 1 and number 0 on processor 0 with full name forward0[39m
+
+===================================================================================
+=   BAD TERMINATION OF ONE OF YOUR APPLICATION PROCESSES
+=   PID 2774207 RUNNING AT lakota.mines.edu
+=   EXIT CODE: 11
+=   CLEANING UP REMAINING PROCESSES
+=   YOU CAN IGNORE THE BELOW CLEANUP MESSAGES
+===================================================================================
+YOUR APPLICATION TERMINATED WITH THE EXIT STRING: Segmentation fault (signal 11)
+This typically refers to a problem with your application.
+Please see the FAQ page for debugging suggestions
+

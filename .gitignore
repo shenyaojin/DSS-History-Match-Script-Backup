@@ -6,3 +6,5 @@
 *.e
 
 .DS_Store
+
+*.log
