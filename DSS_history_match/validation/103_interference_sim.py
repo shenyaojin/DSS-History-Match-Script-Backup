@@ -24,13 +24,12 @@ from fiberis.moose.config import (
 conversion_factor = 0.3048
 
 # Output and Project
-output_dir = "output/0313_validation/full_run"
-project_name = "0313_full_run"
+output_dir = "output/0313_validation/interf_run"
+project_name = "0313_interf_run"
 input_file_name = os.path.join(output_dir, f"{project_name}.i")
 
-# Domain and Mesh
 fracture_coords = 0
-domain_bounds_ft = (-400, 600) 
+domain_bounds_ft = (-400, 600)
 domain_length_ft = 600
 nx = 200
 ny_per_layer_half = 140
@@ -64,8 +63,8 @@ viscosity = 1.0E-3
 density0 = 1000.0
 
 # Data Processing
-gauge_data_path = "scripts/DSS_history_match/validation/data/full.npz"
-time_stepper_path = "scripts/DSS_history_match/validation/data/timestepper_profile_full.npz"
+gauge_data_path = "scripts/DSS_history_match/validation/data/interference.npz"
+time_stepper_path = "scripts/DSS_history_match/validation/data/interference.npz"
 downsample_points = 400
 
 # Post-processing / Wellbore Sampler
@@ -136,11 +135,6 @@ builder.add_nodeset_by_coord(nodeset_op_name="injection", new_boundary_name="inj
 gauge_data = Data1DGauge()
 gauge_data.load_npz(gauge_data_path)
 
-gauge_data.data *= 6894.76
-gauge_data.adaptive_downsample(downsample_points)
-# Maybe it should work
-gauge_data.data -= gauge_data.data[0]
-
 builder.add_variables([
     {"name": "pp", "params": {"initial_condition": gauge_data.data[0]}},
     {"name": "disp_x", "params": {"initial_condition": 0}},
@@ -168,6 +162,9 @@ builder.add_poromechanics_materials(
     biot_coefficient=biot_coeff,
     solid_bulk_compliance=solid_bulk_compliance
 )
+
+gauge_data.data *= 6894.76
+gauge_data.adaptive_downsample(downsample_points)
 
 builder.add_piecewise_function_from_data1d(name="injection_pressure_func", source_data1d=gauge_data)
 
@@ -199,6 +196,7 @@ builder.add_postprocessor(
 
 stepper_data = Data1DGauge()
 stepper_data.load_npz(time_stepper_path)
+stepper_data.adaptive_downsample(140)
 
 print("Total time step = ", len(stepper_data.taxis))
 
