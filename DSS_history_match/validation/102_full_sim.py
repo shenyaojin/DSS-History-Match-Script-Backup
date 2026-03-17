@@ -30,27 +30,24 @@ input_file_name = os.path.join(output_dir, f"{project_name}.i")
 
 # Domain and Mesh
 fracture_coords = 0
-domain_bounds_ft = (-400, 600) 
-domain_length_ft = 600
+domain_bounds_ft = (-200, 200)
+domain_length_ft = 800
 nx = 200
-ny_per_layer_half = 140
-bias_y = 1.06
+ny_per_layer_half = 150
+bias_y = 1.03
 
 # Hydraulic Properties
-matrix_perm = 1e-22
-srv_perm = 1e-15
-srv_perm2 = srv_perm / 5
-fracture_perm = 1e-12
+matrix_perm = 1e-20
+srv_perm = 1e-16
+fracture_perm = 1e-13
 
-porosity_matrix = 0.01
-porosity_srv = 0.1
-porosity_hf = 0.14
+porosity_matrix = 0.03
+porosity_srv = 0.032
+porosity_hf = 0.16
 
 # SRV and Fracture Geometry (in feet)
-srv_length_ft1 = 250
-srv_height_ft1 = 25
-srv_length_ft2 = 400
-srv_height_ft2 = 5
+srv_length_ft = 400
+srv_height_ft = 5
 hf_length_ft = 250
 hf_height_ft = 0.2
 
@@ -98,22 +95,21 @@ builder.build_stitched_mesh_for_fractures(
 )
 
 # Material Property strings
-matrix_perm_str = f"'{matrix_perm} 0 0  0 {matrix_perm} 0  0 0 {matrix_perm}'"
-srv_perm_str = f"'{srv_perm} 0 0  0 {srv_perm} 0  0 0 {srv_perm}'"
-srv_perm_str2 = f"'{srv_perm2} 0 0  0 {srv_perm2} 0  0 0 {srv_perm2}'"
-fracture_perm_str = f"'{fracture_perm} 0 0  0 {fracture_perm} 0  0 0 {fracture_perm}'"
+matrix_perm_str = f"{matrix_perm} 0 0 0 {matrix_perm} 0 0 0 {matrix_perm}"
+srv_perm_str = f"{srv_perm} 0 0 0 {srv_perm} 0 0 0 {srv_perm}"
+# Material Property strings
+matrix_perm_str = f"{matrix_perm} 0 0 0 {matrix_perm} 0 0 0 {matrix_perm}"
+srv_perm_str = f"{srv_perm} 0 0 0 {srv_perm} 0 0 0 {srv_perm}"
+fracture_perm_str = f"{fracture_perm} 0 0 0 {fracture_perm} 0 0 0 {fracture_perm}"
 
 matrix_mats = ZoneMaterialProperties(porosity=porosity_matrix, permeability=matrix_perm_str)
 srv_mats = ZoneMaterialProperties(porosity=porosity_srv, permeability=srv_perm_str)
-srv_mats2 = ZoneMaterialProperties(porosity=porosity_srv, permeability=srv_perm_str2)
 fracture_mats = ZoneMaterialProperties(porosity=porosity_hf, permeability=fracture_perm_str)
 
 builder.set_matrix_config(MatrixConfig(name="matrix", materials=matrix_mats))
 
 geometries = [
-    SRVConfig(name="srv_tall", length=srv_length_ft1 * conversion_factor, height=srv_height_ft1 * conversion_factor,
-              center_x=center_x_val, center_y=fracture_y_coords, materials=srv_mats2),
-    SRVConfig(name="srv_wide", length=srv_length_ft2 * conversion_factor, height=srv_height_ft2 * conversion_factor,
+    SRVConfig(name="srv", length=srv_length_ft * conversion_factor, height=srv_height_ft * conversion_factor,
               center_x=center_x_val, center_y=fracture_y_coords, materials=srv_mats),
     HydraulicFractureConfig(name="hf", length=hf_length_ft * conversion_factor, height=hf_height_ft * conversion_factor,
                             center_x=center_x_val, center_y=fracture_y_coords, materials=fracture_mats)
@@ -181,8 +177,8 @@ builder.set_hydraulic_fracturing_bcs(
 builder.add_standard_tensor_aux_vars_and_kernels({"stress": "stress",
                                                   "total_strain": "strain"})
 
-y_min_mesh = fracture_y_coords - mesh_y_span_ft
-y_max_mesh = fracture_y_coords + mesh_y_span_ft
+y_min_mesh = domain_bounds_ft[0] + 20
+y_max_mesh = domain_bounds_ft[1] - 20
 
 builder.add_postprocessor(PointValueSamplerConfig(name="pp_inj", variable="pp", point=(center_x_val, fracture_y_coords, 0)))
 
@@ -190,8 +186,8 @@ builder.add_postprocessor(
     LineValueSamplerConfig(
         name="strain_yy_wellbore",
         variable="strain_yy",
-        start_point=(center_x_val + well_spacing_ft * conversion_factor, y_min_mesh, 0),
-        end_point=(center_x_val + well_spacing_ft * conversion_factor, y_max_mesh, 0),
+        start_point=(center_x_val + well_spacing_ft * conversion_factor, y_min_mesh * conversion_factor, 0),
+        end_point=(center_x_val + well_spacing_ft * conversion_factor, y_max_mesh * conversion_factor, 0),
         num_points=sampler_num_points,
         other_params={'sort_by': 'y'}
     )
@@ -217,6 +213,8 @@ builder.add_preconditioning_block(active_preconditioner='mumps')
 builder.add_outputs_block(exodus=True, csv=True)
 
 builder.generate_input_file(input_file_name)
+
+builder.plot_geometry()
 
 # Run the simulation
 runner = MooseRunner(moose_executable_path=moose_executable, mpiexec_path=mpiexec_path)

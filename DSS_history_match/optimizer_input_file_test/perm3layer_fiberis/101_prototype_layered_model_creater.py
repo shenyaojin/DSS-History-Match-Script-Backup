@@ -21,7 +21,7 @@ def create_and_run_optimization_model():
     # 2. Define materials for the 3 layers
     # Note: Permeability here is a placeholder. The optimization process overrides it using parsed functions.
     bottom_mats = ZoneMaterialProperties(porosity=0.01, permeability=1e-15, youngs_modulus=50e9, poissons_ratio=0.2)
-    center_mats = ZoneMaterialProperties(porosity=0.14, permeability=1e-15, youngs_modulus=50e9, poissons_ratio=0.2)
+    center_mats = ZoneMaterialProperties(porosity=0.01, permeability=1e-15, youngs_modulus=50e9, poissons_ratio=0.2)
     top_mats = ZoneMaterialProperties(porosity=0.01, permeability=1e-15, youngs_modulus=50e9, poissons_ratio=0.2)
     
     # 3. Setup casing config

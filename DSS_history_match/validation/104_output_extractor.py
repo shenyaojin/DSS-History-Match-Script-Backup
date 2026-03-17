@@ -53,20 +53,23 @@ for iter_t in range(len(full_dataframe.taxis)):
 print(full_dataframe_calibrated.start_time)
 print(interf_dataframe.start_time)
 
+full_dataframe_calibrated.select_depth(40, 80)
+interf_dataframe.select_depth(40, 80)
+
 #%% Plot the strain
 
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
 
-# Plot Real DSS Data
-interf_dataframe.plot(ax=ax1, use_timestamp=False, cmap='bwr', vmin=-1e-5, vmax=1e-5, method='pcolormesh')
+# Plot interference result
+im1 = interf_dataframe.plot(ax=ax1, use_timestamp=True, cmap='bwr', vmin=-1e-5, vmax=1e-5, method='pcolormesh')
+fig.colorbar(im1, ax=ax1, label='Strain')
 ax1.set_title("Simulated Strain (INTERF)")
 ax1.set_ylabel("Relative Distance (m)")
 ax1.set_xlabel("Time (s)")
 
-# Plot Simulated Data
-# Note: The simulation output is strain, while DSS is microstrain.
-# We will plot them on different color scales for now, but a scaling factor might be needed for direct misfit calculation.
-full_dataframe_calibrated.plot(ax=ax2, use_timestamp=False, cmap='bwr', vmin=-1e-5, vmax=1e-5, method='pcolormesh')
+# Plot FULL Simulated Data
+im2 = full_dataframe_calibrated.plot(ax=ax2, use_timestamp=True, cmap='bwr', vmin=-1e-5, vmax=1e-5, method='pcolormesh')
+fig.colorbar(im2, ax=ax2, label='Strain')
 ax2.set_title("Simulated Strain (FULL)")
 ax2.set_ylabel("Relative Distance (m)")
 ax2.set_xlabel("Time (s)")
@@ -75,16 +78,52 @@ plt.tight_layout()
 plt.show()
 
 #%% Diagnose:
-center_chan_calibrated = full_dataframe_calibrated.get_value_by_depth(
-    full_dataframe_calibrated.daxis[len(full_dataframe_calibrated.daxis)//2]
-)
-center_chan_interf = interf_dataframe.get_value_by_depth(
-    interf_dataframe.daxis[len(interf_dataframe.daxis)//2]
-)
+chan_55_full = full_dataframe_calibrated.get_value_by_depth(55) * 1e6
+chan_56_full = full_dataframe_calibrated.get_value_by_depth(56) * 1e6
+
+chan_55_interf = interf_dataframe.get_value_by_depth(55) * 1e6
+chan_56_interf = interf_dataframe.get_value_by_depth(56) * 1e6
 
 # Plot
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
-ax1.plot(full_dataframe_calibrated.taxis, center_chan_calibrated)
-ax2.plot(interf_dataframe.taxis, center_chan_interf)
+ax1.plot(full_dataframe_calibrated.taxis, chan_55_full, label='Depth 55m')
+ax1.plot(full_dataframe_calibrated.taxis, chan_56_full, label='Depth 56m')
+ax1.set_title("Simulated Strain (FULL)")
+ax1.set_ylabel(r"Microstrain ($\mu\epsilon$)")
+ax1.grid(True)
+ax1.legend()
 
+ax2.plot(interf_dataframe.taxis, chan_55_interf, label='Depth 55m')
+ax2.plot(interf_dataframe.taxis, chan_56_interf, label='Depth 56m')
+ax2.set_title("Simulated Strain (INTERF)")
+ax2.set_ylabel(r"Microstrain ($\mu\epsilon$)")
+ax2.set_xlabel("Time (s)")
+ax2.grid(True)
+ax2.legend()
+
+plt.tight_layout()
+plt.show()
+
+# Slice along time axis at 24 hours after start
+slice_time = full_dataframe_calibrated.start_time + datetime.timedelta(hours=72)
+
+time_slice_full, _ = full_dataframe_calibrated.get_value_by_time(slice_time)
+time_slice_interf, _ = interf_dataframe.get_value_by_time(slice_time)
+
+# Scaling to microstrain
+time_slice_full *= 1e6
+time_slice_interf *= 1e6
+
+# Plot the depth slices
+fig, ax = plt.subplots(figsize=(10, 6))
+ax.plot(full_dataframe_calibrated.daxis, time_slice_full, label='FULL (72h)')
+ax.plot(interf_dataframe.daxis, time_slice_interf, label='INTERF (72h)', linestyle='--')
+
+ax.set_title(f"Strain vs Depth at {slice_time}")
+ax.set_xlabel("Depth / Relative Distance (m)")
+ax.set_ylabel(r"Microstrain ($\mu\epsilon$)")
+ax.grid(True)
+ax.legend()
+
+plt.tight_layout()
 plt.show()

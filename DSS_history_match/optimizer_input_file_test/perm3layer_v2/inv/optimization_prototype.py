@@ -11,6 +11,9 @@ INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = WORKDIR
 SCALE_FACTOR = 1e20  # Scale factor to make tiny misfit values order ~1
 
+# Optional: Set a baseline to subtract from the objective to help L-BFGS-B's relative reduction check
+BASELINE_OBJ = 3.9e-13  # Adjust this closer to your actual raw objective values
+
 print(f"Working Directory: {WORKDIR}")
 # Initialize the MooseRunner
 runner = MooseRunner(
@@ -22,26 +25,34 @@ runner = MooseRunner(
 with open(INPUT_FILE, "r") as f:
     base_moose_content = f.read()
 
+
 def objective_and_gradient(x):
     print(f"\n--- Evaluating parameters: {x} ---")
-    
-    # Format current parameter values
-    param_str = f"{x[0]:.6f}; {x[1]:.6f}; {x[2]:.6f}"
-    
+
+    # FIX 1: Use high precision format so SciPy's line search isn't truncated
+    param_str = f"{x[0]:.15e}; {x[1]:.15e}; {x[2]:.15e}"
+
     # Create new MOOSE content replacing initial_condition
-    # We replace the specific string in OptimizationReporter block
     new_moose_content = re.sub(
         r"initial_condition\s*=\s*'[^']*'",
         f"initial_condition = '{param_str}'",
         base_moose_content
     )
-    
+
     # Save to a temporary input file
     temp_input_path = os.path.join(WORKDIR, "optimize_temp.i")
     with open(temp_input_path, "w") as f:
         f.write(new_moose_content)
-    
-    # Run MOOSE with stream_output=False to keep stdout clean
+
+    # FIX 2: Manually delete previous CSV outputs to guarantee we don't read stale appended data
+    obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out.csv")
+    grad_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out_OptimizationReporter_0001.csv")
+    if os.path.exists(obj_csv):
+        os.remove(obj_csv)
+    if os.path.exists(grad_csv):
+        os.remove(grad_csv)
+
+    # Run MOOSE
     success, stdout, stderr = runner.run(
         input_file_path=temp_input_path,
         output_directory=OUTPUT_DIR,
@@ -50,65 +61,67 @@ def objective_and_gradient(x):
         stream_output=False,
         clean_output_dir=False
     )
-    
+
     if not success:
         print("MOOSE run failed! Penalizing this step.")
+        # Return a large scalar and zero gradient to steer optimizer away
         return 1e10, np.zeros(3)
-        
-    # The outputs are prefixed with "optimize_temp_out"
-    obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out.csv")
-    grad_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out_OptimizationReporter_0001.csv")
-    
+
     try:
+        # Read Objective
         obj_df = pd.read_csv(obj_csv)
         obj_val = obj_df["OptimizationReporter/objective_value"].iloc[-1]
-        
+
+        # FIX 3: Read Gradient using .iloc[-1] to ensure we get the final state of the run
         grad_df = pd.read_csv(grad_csv)
-        g1 = grad_df["grad_perm_1"].iloc[0]
-        g2 = grad_df["grad_perm_2"].iloc[0]
-        g3 = grad_df["grad_perm_3"].iloc[0]
-        
+        g1 = grad_df["grad_perm_1"].iloc[-1]
+        g2 = grad_df["grad_perm_2"].iloc[-1]
+        g3 = grad_df["grad_perm_3"].iloc[-1]
+
         grad_array = np.array([g1, g2, g3])
-        
-        scaled_obj = float(obj_val) * SCALE_FACTOR
+
+        # FIX 4: Subtract a baseline to keep scaled objective relatively close to 0
+        scaled_obj = (float(obj_val) - BASELINE_OBJ) * SCALE_FACTOR
         scaled_grad = grad_array * SCALE_FACTOR
-        
-        print(f"Objective (Scaled): {scaled_obj}")
+
+        print(f"Objective (Scaled/Shifted): {scaled_obj}")
         print(f"Gradient (Scaled):  {scaled_grad}")
-        
+
         return scaled_obj, scaled_grad
-        
+
     except Exception as e:
         print(f"Error reading MOOSE output: {e}")
         return 1e10, np.zeros(3)
 
+
 if __name__ == '__main__':
-    # Starting with a value fully inside the bounds to avoid edge effects at iteration 0
+    # Starting with a value fully inside the bounds to avoid edge effects
     x0 = np.array([-15.0, -15.0, -15.0])
-    
+
     # Define bounds as indicated in the file
     bounds = [(-25.0, -10.0), (-25.0, -10.0), (-25.0, -10.0)]
-    
-    # Run optimization using L-BFGS-B
+
     print(f"Starting optimization loop (Scale Factor: {SCALE_FACTOR})...")
+
+    # FIX 5: Use factr=10.0 (high accuracy) instead of ftol
     res = minimize(
-        objective_and_gradient, 
-        x0, 
-        method='L-BFGS-B', 
-        jac=True, 
+        objective_and_gradient,
+        x0,
+        method='L-BFGS-B',
+        jac=True,
         bounds=bounds,
         options={
-            'maxiter': 10, 
-            'gtol': 1e-30, 
-            'ftol': 1e-30
+            'maxiter': 50,  # Increased to give it room to run
+            'factr': 10.0,  # factr is the correct tolerance parameter for L-BFGS-B
+            'pgtol': 1e-8,  # Gradient tolerance
         }
     )
-    
-    print("\n" + "="*50)
+
+    print("\n" + "=" * 50)
     print("Optimization Result:")
-    print("="*50)
+    print("=" * 50)
     print(res)
-    
+
     # Clean up temp file
     if os.path.exists(os.path.join(WORKDIR, "optimize_temp.i")):
         os.remove(os.path.join(WORKDIR, "optimize_temp.i"))

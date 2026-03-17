@@ -55,6 +55,6 @@ df = pd.DataFrame({
     'simulation_values': values
 })
 
-output_csv = "scripts/DSS_history_match/optimizer_input_file_test/perm3layer_v2/inv/measurement_data.csv"
+output_csv = "scripts/DSS_history_match/optimizer_input_file_test/perm3layerv3/inv/measurement_data.csv"
 df.to_csv(output_csv, index=False)
 print(f"Inversion CSV saved to: {output_csv}")

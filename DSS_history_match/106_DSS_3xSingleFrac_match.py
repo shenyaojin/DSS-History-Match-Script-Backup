@@ -81,6 +81,8 @@ gauge_data_interference_copy.adaptive_downsample(600)
 injection_gauge_pressure_copy.right_merge(gauge_data_interference_copy)
 injection_gauge_pressure_copy.rename("injection pressure full profile")
 
+injection_gauge_pressure_copy.savez("scripts/DSS_history_match/validation/data/full.npz")
+
 #%% 3. Build the model using fiberis
 conversion_factor = 0.3048 # 1 ft = 0.3048 m
 
