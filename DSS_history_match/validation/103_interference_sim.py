@@ -209,12 +209,14 @@ builder.add_outputs_block(exodus=True, csv=True)
 
 builder.generate_input_file(input_file_name)
 
-# Run the simulation
-runner = MooseRunner(moose_executable_path=moose_executable, mpiexec_path=mpiexec_path)
-success, stdout, stderr = runner.run(
-    input_file_path=input_file_name,
-    output_directory=output_dir,
-    num_processors=20,
-    log_file_name="simulation.log",
-    stream_output=True
-)
+builder.plot_geometry()
+
+# # Run the simulation
+# runner = MooseRunner(moose_executable_path=moose_executable, mpiexec_path=mpiexec_path)
+# success, stdout, stderr = runner.run(
+#     input_file_path=input_file_name,
+#     output_directory=output_dir,
+#     num_processors=20,
+#     log_file_name="simulation.log",
+#     stream_output=True
+# )
