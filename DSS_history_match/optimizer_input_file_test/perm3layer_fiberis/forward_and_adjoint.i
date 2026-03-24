@@ -57,10 +57,11 @@
     top_right = '200.0 50.0 0'
   []
   [injection_well_nodes]
-    type = ExtraNodesetGenerator
+    type = BoundingBoxNodeSetGenerator
     input = 'matrix_top_bbox'
     new_boundary = 'injection_well'
-    coord = '20.0 0 0'
+    bottom_left = '19.999999 -50.0 0'
+    top_right = '20.000001 50.0 0'
   []
   [final_block_rename]
     type = RenameBlockGenerator
@@ -372,7 +373,7 @@
   []
   [porosity_srv]
     type = PorousFlowPorosityConst
-    porosity = 0.14
+    porosity = 0.01
     block = 'srv'
   []
   [permeability_srv]
@@ -446,7 +447,6 @@
   []
   [vol_strain]
     type = PorousFlowVolumetricStrain
-    displacements = 'disp_x disp_y'
   []
 []
 

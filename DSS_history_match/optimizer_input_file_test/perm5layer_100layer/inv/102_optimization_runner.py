@@ -9,9 +9,12 @@ from fiberis.moose.runner import MooseRunner
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = WORKDIR
-SCALE_FACTOR = 1e20  # Scale factor for displacement misfit
+SCALE_FACTOR = 1e9  # Scale factor for displacement misfit
 BETA_SMOOTH = 1.0e-3 # Smoothing regularization (Tikhonov)
-BASELINE_OBJ = 0.0   
+
+# We set a baseline close to the initial raw objective to prevent 
+# floating point precision loss when multiplied by the SCALE_FACTOR.
+BASELINE_OBJ = 26901900.0   
 
 print(f"Working Directory: {WORKDIR}")
 
@@ -28,12 +31,22 @@ with open(INPUT_FILE, "r") as f:
 # Number of layers in our model (200 layers at 0.5m each)
 TOTAL_LAYERS = 200
 
+# History file to store parameters
+HISTORY_FILE = os.path.join(WORKDIR, "parameter_history.csv")
+if os.path.exists(HISTORY_FILE):
+    os.remove(HISTORY_FILE)
+
+iteration_count = 0
+
 def objective_and_gradient(x):
-    """
-    Function for SciPy's minimize to call. 
-    It updates the MOOSE input file, runs the simulation, and extracts the objective and gradient.
-    """
-    print(f"\n--- Evaluating parameters for {len(x)} layers ---")
+    global iteration_count
+    iteration_count += 1
+    
+    print(f"\n--- Evaluating parameters for {len(x)} layers (Iter: {iteration_count}) ---")
+
+    # Save current parameters to history file
+    with open(HISTORY_FILE, "a") as f:
+        f.write(",".join([f"{val:.10e}" for val in x]) + "\n")
 
     # Format parameters for MOOSE (semicolon separated for OptimizationReporter)
     param_str = "; ".join([f"{val:.15e}" for val in x])
@@ -62,9 +75,9 @@ def objective_and_gradient(x):
     success, stdout, stderr = runner.run(
         input_file_path=temp_input_path,
         output_directory=OUTPUT_DIR,
-        num_processors=18,
+        num_processors=20,
         log_file_name="simulation_opt.log",
-        stream_output=True,
+        stream_output=False,
         clean_output_dir=False
     )
 
@@ -139,7 +152,7 @@ if __name__ == '__main__':
         bounds=bounds,
         options={
             'maxiter': 100,    # Maximum iterations
-            'ftol': 1e-14,     # High precision
+            'ftol': 1e-10,     # High precision
             'gtol': 1e-8,
         }
     )
