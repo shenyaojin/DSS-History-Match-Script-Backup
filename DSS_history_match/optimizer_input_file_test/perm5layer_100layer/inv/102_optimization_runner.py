@@ -14,7 +14,7 @@ BETA_SMOOTH = 1.0e-3 # Smoothing regularization (Tikhonov)
 
 # We set a baseline close to the initial raw objective to prevent 
 # floating point precision loss when multiplied by the SCALE_FACTOR.
-BASELINE_OBJ = 26901900.0   
+BASELINE_OBJ = 0.0   
 
 print(f"Working Directory: {WORKDIR}")
 
@@ -126,8 +126,8 @@ def objective_and_gradient(x):
 
 
 if __name__ == '__main__':
-    # 1. Set Initial Guess (Alpha = -18 corresponds to 1e-18 m^2)
-    x0 = np.full(TOTAL_LAYERS, -18.0)
+    # 1. Set Initial Guess (Alpha = -15 corresponds to 1e-15 m^2)
+    x0 = np.full(TOTAL_LAYERS, -15.0)
 
     # 2. Define Bounds (Fixing layers outside center 50m)
     bounds = []
