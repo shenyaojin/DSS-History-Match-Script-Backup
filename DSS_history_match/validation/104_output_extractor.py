@@ -84,18 +84,21 @@ chan_56_full = full_dataframe_calibrated.get_value_by_depth(56) * 1e6
 chan_55_interf = interf_dataframe.get_value_by_depth(55) * 1e6
 chan_56_interf = interf_dataframe.get_value_by_depth(56) * 1e6
 
-# Plot
+# Plot comparison per depth
 fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 8), sharex=True)
-ax1.plot(full_dataframe_calibrated.taxis, chan_55_full, label='Depth 55m')
-ax1.plot(full_dataframe_calibrated.taxis, chan_56_full, label='Depth 56m')
-ax1.set_title("Simulated Strain (FULL)")
+
+# Depth 55m Comparison
+ax1.plot(full_dataframe_calibrated.taxis, chan_55_full, label='FULL (55m)')
+ax1.plot(interf_dataframe.taxis, chan_55_interf, label='INTERF (55m)', linestyle='--')
+ax1.set_title("Comparison at Depth 55m")
 ax1.set_ylabel(r"Microstrain ($\mu\epsilon$)")
 ax1.grid(True)
 ax1.legend()
 
-ax2.plot(interf_dataframe.taxis, chan_55_interf, label='Depth 55m')
-ax2.plot(interf_dataframe.taxis, chan_56_interf, label='Depth 56m')
-ax2.set_title("Simulated Strain (INTERF)")
+# Depth 56m Comparison
+ax2.plot(full_dataframe_calibrated.taxis, chan_56_full, label='FULL (56m)')
+ax2.plot(interf_dataframe.taxis, chan_56_interf, label='INTERF (56m)', linestyle='--')
+ax2.set_title("Comparison at Depth 56m")
 ax2.set_ylabel(r"Microstrain ($\mu\epsilon$)")
 ax2.set_xlabel("Time (s)")
 ax2.grid(True)

@@ -4,7 +4,10 @@
 *.jpeg
 *.png
 *.e
+*.i
 
 .DS_Store
 
 *.log
+
+*.rds

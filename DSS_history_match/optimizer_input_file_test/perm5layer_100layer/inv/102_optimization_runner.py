@@ -5,6 +5,7 @@ import pandas as pd
 from scipy.optimize import minimize
 from fiberis.moose.runner import MooseRunner
 
+
 # Configuration
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")

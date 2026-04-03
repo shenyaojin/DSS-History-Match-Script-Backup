@@ -69,6 +69,9 @@ frac_hit_stg8 = frac_hit_dataframe_stage8['data']
 
 DASdata.select_depth(np.min(frac_hit_stg8) - 500, np.max(frac_hit_stg7) + 500)
 
+# Print LF-DAS data
+print("Channel spacing", DASdata.taxis[1] - DASdata.taxis[0])
+
 gauge_md_datapath = f"data/legacy/h_well/geometry/gauge_md_hwell.npz"
 gauge_md_datapath = f"data/legacy/h_well/geometry/gauge_md_hwell.npz"
 gauge_md = np.load(gauge_md_datapath)
@@ -165,3 +168,4 @@ plt.suptitle(f"LF-DAS data with gauge in H well/stage {stage1} and {stage2}")
 plt.tight_layout()
 # plt.savefig("figs/02112025/well_coplot_figure/Hwell.png")
 plt.show()
+
