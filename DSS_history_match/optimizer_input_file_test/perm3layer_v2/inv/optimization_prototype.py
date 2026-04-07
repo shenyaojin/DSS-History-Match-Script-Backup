@@ -58,7 +58,7 @@ def objective_and_gradient(x):
         output_directory=OUTPUT_DIR,
         num_processors=18,
         log_file_name="simulation_opt.log",
-        stream_output=False,
+        stream_output=True,
         clean_output_dir=False
     )
 

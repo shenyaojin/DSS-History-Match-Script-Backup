@@ -159,6 +159,7 @@ def optimization_model_creater():
     )
 
     builder.add_outputs_block(exodus=True, console=True)
+    builder.add_preconditioning_block()
 
     # 16. Generate Forward/Adjoint Input File
     builder.generate_input_file(forward_full_path)
@@ -174,15 +175,9 @@ def optimization_model_creater():
     for i in range(total_layers):
         y_center = -50.0 + (i + 0.5) * layer_height
         initial_alphas.append(-18.0)
-        
-        if -25.0 <= y_center <= 25.0:
-            # Inversion region
-            lower_bounds.append(-25.0)
-            upper_bounds.append(-10.0)
-        else:
-            # Fixed matrix region outside observation
-            lower_bounds.append(-18.0)
-            upper_bounds.append(-18.0)
+
+        lower_bounds.append(-25.0)
+        upper_bounds.append(-10.0)
 
     builder.generate_optimization_master_file(
         output_filepath=master_full_path,

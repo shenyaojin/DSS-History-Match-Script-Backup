@@ -11,7 +11,7 @@ WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = WORKDIR
 SCALE_FACTOR = 1e9  # Scale factor for displacement misfit
-BETA_SMOOTH = 1.0e-3 # Smoothing regularization (Tikhonov)
+BETA_SMOOTH = 0.0    # No regularization needed for identical-twin test
 
 # We set a baseline close to the initial raw objective to prevent 
 # floating point precision loss when multiplied by the SCALE_FACTOR.
@@ -36,6 +36,11 @@ TOTAL_LAYERS = 200
 HISTORY_FILE = os.path.join(WORKDIR, "parameter_history.csv")
 if os.path.exists(HISTORY_FILE):
     os.remove(HISTORY_FILE)
+
+# History file to store gradients
+GRADIENT_HISTORY_FILE = os.path.join(WORKDIR, "gradient_history.csv")
+if os.path.exists(GRADIENT_HISTORY_FILE):
+    os.remove(GRADIENT_HISTORY_FILE)
 
 iteration_count = 0
 
@@ -78,7 +83,7 @@ def objective_and_gradient(x):
         output_directory=OUTPUT_DIR,
         num_processors=20,
         log_file_name="simulation_opt.log",
-        stream_output=False,
+        stream_output=True,
         clean_output_dir=False
     )
 
@@ -119,6 +124,10 @@ def objective_and_gradient(x):
         print(f"Objective (Scaled): {scaled_obj:.4f}")
         print(f"Gradient Norm (Raw): {np.linalg.norm(total_grad):.4e} | (Scaled): {np.linalg.norm(scaled_grad):.4e}")
 
+        # Save per-parameter gradient to history file
+        with open(GRADIENT_HISTORY_FILE, "a") as f:
+            f.write(",".join([f"{val:.10e}" for val in scaled_grad]) + "\n")
+
         return scaled_obj, scaled_grad
 
     except Exception as e:
@@ -127,8 +136,10 @@ def objective_and_gradient(x):
 
 
 if __name__ == '__main__':
-    # 1. Set Initial Guess (Alpha = -15 corresponds to 1e-15 m^2)
-    x0 = np.full(TOTAL_LAYERS, -15.0)
+    # 1. Set Initial Guess (Alpha = -18 matches the dominant caprock background)
+    # Ground truth: caprock=1e-18 (90% of domain), two thin SRV zones at 1e-15 and 3e-15.
+    # Starting from the background value avoids over-permeating the whole domain.
+    x0 = np.full(TOTAL_LAYERS, -18.0)
 
     # 2. Define Bounds (Fixing layers outside center 50m)
     bounds = []
