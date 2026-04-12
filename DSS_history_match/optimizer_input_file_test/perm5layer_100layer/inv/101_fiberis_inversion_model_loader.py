@@ -34,15 +34,15 @@ def optimization_model_creater():
 
     caprock_mats = ZoneMaterialProperties(
         porosity=0.01, permeability=perm_str,
-        youngs_modulus=4e10, poissons_ratio=0.3
+        youngs_modulus=3.5e10, poissons_ratio=0.25
     )
     sandstone_mats = ZoneMaterialProperties(
-        porosity=0.15, permeability=perm_str,
-        youngs_modulus=2.5e10, poissons_ratio=0.25
+        porosity=0.01, permeability=perm_str,
+        youngs_modulus=3.5e10, poissons_ratio=0.25
     )
     shale_mats = ZoneMaterialProperties(
-        porosity=0.03, permeability=perm_str,
-        youngs_modulus=3.5e10, poissons_ratio=0.28
+        porosity=0.01, permeability=perm_str,
+        youngs_modulus=3.5e10, poissons_ratio=0.25
     )
 
     # 4. Define 200 layers of 0.5m height each (Total height 100m)

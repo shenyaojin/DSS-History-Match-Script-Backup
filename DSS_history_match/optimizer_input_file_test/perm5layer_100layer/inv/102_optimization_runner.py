@@ -10,12 +10,16 @@ from fiberis.moose.runner import MooseRunner
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = WORKDIR
-SCALE_FACTOR = 1e9  # Scale factor for displacement misfit
+SCALE_FACTOR = 1e6  # Scale obj/grad so gradient is O(1) for L-BFGS-B
 BETA_SMOOTH = 0.0    # No regularization needed for identical-twin test
+BASELINE_OBJ = 0.0
 
-# We set a baseline close to the initial raw objective to prevent 
-# floating point precision loss when multiplied by the SCALE_FACTOR.
-BASELINE_OBJ = 0.0   
+# The MOOSE VPP (ElementOptimizationDiffusionCoefFunctionInnerProduct) computes
+# ∫ f'(α)·∇p·∇p† dΩ, but PorousFlow Darcy uses (ρ/μ)·K·∇p.
+# The VPP is missing the ρ₀/μ factor. Multiply gradient by ρ₀/μ to correct.
+FLUID_DENSITY = 1000.0   # kg/m³ (SimpleFluid density0)
+FLUID_VISCOSITY = 1.0e-3 # Pa·s  (SimpleFluid viscosity)
+GRAD_CORRECTION = FLUID_DENSITY / FLUID_VISCOSITY  # = 1e6
 
 print(f"Working Directory: {WORKDIR}")
 
@@ -112,6 +116,9 @@ def objective_and_gradient(x):
         reg_grad[1:] += 2 * BETA_SMOOTH * diffs
         reg_grad[:-1] -= 2 * BETA_SMOOTH * diffs
 
+        # Apply ρ/μ correction to adjoint gradient (see GRAD_CORRECTION above)
+        grad_array *= GRAD_CORRECTION
+
         # Combine Raw Objective/Gradient with Regularization
         total_obj = (float(obj_val) + reg_obj)
         total_grad = grad_array + reg_grad
@@ -163,9 +170,10 @@ if __name__ == '__main__':
         jac=True,
         bounds=bounds,
         options={
-            'maxiter': 100,    # Maximum iterations
-            'ftol': 1e-10,     # High precision
-            'gtol': 1e-8,
+            'maxiter': 300,    # More iterations for 200 parameters
+            'ftol': 1e-12,     # High precision
+            'gtol': 1e-10,
+            'disp': True,      # Print convergence info
         }
     )
 

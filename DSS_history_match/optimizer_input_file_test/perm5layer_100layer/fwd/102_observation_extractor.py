@@ -3,7 +3,7 @@ import numpy as np
 from fiberis.io.reader_moose_vpp import MOOSEVectorPostProcessorReader
 
 reader = MOOSEVectorPostProcessorReader()
-reader.read("scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100layer/fwd/output_gt")
+reader.read("scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100layer/fwd/output_gt", variable_index=0)
 
 disp_y_dataframe = reader.to_analyzer()
 
@@ -24,7 +24,7 @@ times = np.repeat(disp_y_dataframe.taxis, n_depth)
 # Tile depth (y-coord) for each time step
 y_coords = np.tile(disp_y_dataframe.daxis, n_time)
 # Fixed coordinates
-x_coords = np.full_like(times, 22.0)
+x_coords = np.full_like(times, 60.0)
 z_coords = np.zeros_like(times)
 
 # Flatten data in column-major (Fortran) order to align with repeated/tiled axes

@@ -45,16 +45,17 @@ def build_casing_model_for_test():
     sandstone_perm = 3e-15
     shale_perm = 1e-15
 
+    matrix_perm = 1e-18
     caprock_mats = ZoneMaterialProperties(
-        porosity=0.01, permeability=f"{caprock_perm} 0 0 0 {caprock_perm} 0 0 0 {caprock_perm}",
+        porosity=0.01, permeability=f"{caprock_perm} 0 0 0 {matrix_perm} 0 0 0 {matrix_perm}",
         youngs_modulus=3.5e10, poissons_ratio=0.25
     )
     sandstone_mats = ZoneMaterialProperties(
-        porosity=0.01, permeability=f"{sandstone_perm} 0 0 0 {sandstone_perm} 0 0 0 {sandstone_perm}",
+        porosity=0.01, permeability=f"{sandstone_perm} 0 0 0 {matrix_perm} 0 0 0 {matrix_perm}",
         youngs_modulus=3.5e10, poissons_ratio=0.25
     )
     shale_mats = ZoneMaterialProperties(
-        porosity=0.01, permeability=f"{shale_perm} 0 0 0 {shale_perm} 0 0 0 {shale_perm}",
+        porosity=0.01, permeability=f"{shale_perm} 0 0 0 {matrix_perm} 0 0 0 {matrix_perm}",
         youngs_modulus=3.5e10, poissons_ratio=0.25
     )
 
