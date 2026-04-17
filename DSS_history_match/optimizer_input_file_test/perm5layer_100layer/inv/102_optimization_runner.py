@@ -11,8 +11,14 @@ WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = WORKDIR
 SCALE_FACTOR = 1e6  # Scale obj/grad so gradient is O(1) for L-BFGS-B
-BETA_SMOOTH = 0.0    # No regularization needed for identical-twin test
 BASELINE_OBJ = 0.0
+
+# --- Regularization (combats ill-posedness: caprock layers being pulled up) ---
+# Smoothness (Tikhonov on first differences): penalizes non-smooth alpha
+BETA_SMOOTH = 1e-3
+# Prior anchoring: penalizes deviation from background caprock value (-18)
+ALPHA_PRIOR = -18.0
+BETA_PRIOR = 1e-3
 
 # The MOOSE VPP (ElementOptimizationDiffusionCoefFunctionInnerProduct) computes
 # ∫ f'(α)·∇p·∇p† dΩ, but PorousFlow Darcy uses (ρ/μ)·K·∇p.
@@ -74,10 +80,11 @@ def objective_and_gradient(x):
     with open(temp_input_path, "w") as f:
         f.write(new_moose_content)
 
-    # Clean up previous CSV outputs to ensure fresh data
+    # Clean up previous outputs to ensure fresh data
+    log_path = os.path.join(WORKDIR, "simulation_opt.log")
     obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out.csv")
     grad_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out_OptimizationReporter_0001.csv")
-    for f_path in [obj_csv, grad_csv]:
+    for f_path in [log_path, obj_csv, grad_csv]:
         if os.path.exists(f_path):
             os.remove(f_path)
 
@@ -96,25 +103,45 @@ def objective_and_gradient(x):
         return 1e10, np.zeros_like(x)
 
     try:
-        # Read Objective Value
-        obj_df = pd.read_csv(obj_csv)
-        obj_val = obj_df["OptimizationReporter/objective_value"].iloc[-1]
+        # Read Objective Value — try CSV first, fall back to log parsing
+        obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_out.csv")
+        obj_val = None
+        if os.path.exists(obj_csv):
+            obj_df = pd.read_csv(obj_csv)
+            if len(obj_df) > 1:
+                obj_val = float(obj_df["OptimizationReporter/objective_value"].iloc[-1])
+        if obj_val is None or obj_val == 0.0:
+            with open(log_path, "r") as lf:
+                for line in lf:
+                    m = re.search(r"Objective value\s*=\s*([0-9eE.+\-]+)", line)
+                    if m:
+                        obj_val = float(m.group(1))
+        if obj_val is None:
+            raise RuntimeError("Could not parse objective value from MOOSE output")
 
-        # Read Gradients from the reporter-specific CSV
+        # Read Gradients from the reporter CSV
+        # _0001 = after forward+adjoint solve at optimization step 1
         grad_df = pd.read_csv(grad_csv)
-        
+
         # Extract all gradient columns
         grad_cols = [f"grad_perm_{i+1}" for i in range(TOTAL_LAYERS)]
-        grad_array = grad_df[grad_cols].iloc[-1].values
+        grad_array = grad_df[grad_cols].iloc[-1].values.copy()
 
-        # --- Regularization (Tikhonov/Smoothing) ---
-        # Objective penalty: Beta * sum( (alpha_i - alpha_{i-1})^2 )
+        # --- Regularization ---
+        # (1) Smoothness: Beta_smooth * sum( (alpha_i - alpha_{i-1})^2 )
         diffs = np.diff(x)
-        reg_obj = BETA_SMOOTH * np.sum(diffs**2)
-        
+        reg_obj_smooth = BETA_SMOOTH * np.sum(diffs**2)
+
         reg_grad = np.zeros_like(x)
         reg_grad[1:] += 2 * BETA_SMOOTH * diffs
         reg_grad[:-1] -= 2 * BETA_SMOOTH * diffs
+
+        # (2) Prior anchor: Beta_prior * sum( (alpha_i - alpha_prior)^2 )
+        deviation = x - ALPHA_PRIOR
+        reg_obj_prior = BETA_PRIOR * np.sum(deviation**2)
+        reg_grad += 2 * BETA_PRIOR * deviation
+
+        reg_obj = reg_obj_smooth + reg_obj_prior
 
         # Apply ρ/μ correction to adjoint gradient (see GRAD_CORRECTION above)
         grad_array *= GRAD_CORRECTION
@@ -127,7 +154,7 @@ def objective_and_gradient(x):
         scaled_obj = (total_obj - BASELINE_OBJ) * SCALE_FACTOR
         scaled_grad = total_grad * SCALE_FACTOR
 
-        print(f"Objective (Raw): {obj_val:.4e} | Reg: {reg_obj:.4e} | Total: {total_obj:.4e}")
+        print(f"Objective (Raw): {obj_val:.4e} | Reg(smooth): {reg_obj_smooth:.4e} | Reg(prior): {reg_obj_prior:.4e} | Total: {total_obj:.4e}")
         print(f"Objective (Scaled): {scaled_obj:.4f}")
         print(f"Gradient Norm (Raw): {np.linalg.norm(total_grad):.4e} | (Scaled): {np.linalg.norm(scaled_grad):.4e}")
 
@@ -173,7 +200,7 @@ if __name__ == '__main__':
             'maxiter': 300,    # More iterations for 200 parameters
             'ftol': 1e-12,     # High precision
             'gtol': 1e-10,
-            'disp': True,      # Print convergence info
+            'iprint': 1,       # Print convergence info (0=silent, 1=summary)
         }
     )
 
