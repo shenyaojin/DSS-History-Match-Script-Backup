@@ -15,10 +15,10 @@ BASELINE_OBJ = 0.0
 
 # --- Regularization (combats ill-posedness: caprock layers being pulled up) ---
 # Smoothness (Tikhonov on first differences): penalizes non-smooth alpha
-BETA_SMOOTH = 1e-3
+BETA_SMOOTH = 1e-6
 # Prior anchoring: penalizes deviation from background caprock value (-18)
 ALPHA_PRIOR = -18.0
-BETA_PRIOR = 1e-3
+BETA_PRIOR = 1e-6
 
 # The MOOSE VPP (ElementOptimizationDiffusionCoefFunctionInnerProduct) computes
 # ∫ f'(α)·∇p·∇p† dΩ, but PorousFlow Darcy uses (ρ/μ)·K·∇p.
