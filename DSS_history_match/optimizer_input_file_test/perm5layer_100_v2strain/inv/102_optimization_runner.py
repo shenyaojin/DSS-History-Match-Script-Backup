@@ -41,22 +41,22 @@ SCALE_FACTOR = 1e6      # maps strain_yy objective (~3e-6 at init) to O(1)
 BASELINE_OBJ = 0.0
 
 # --- Regularization -----------------------------------------------------------
-# Smoothness (Tikhonov on first differences of alpha)
-BETA_SMOOTH = 1e-6
-# Prior anchor toward background caprock value
+# Reg weights are sized relative to the data misfit (~3e-6 at the initial
+# guess). Earlier 1e-6 was ~150x the data fit at modest alpha deviations,
+# which dominated and stalled the run. 1e-9 keeps reg one decade below the
+# data fit at SRV-scale deviations.
+BETA_SMOOTH = 1e-9
 ALPHA_PRIOR = -18.0
-BETA_PRIOR = 1e-6
+BETA_PRIOR = 1e-9
 
 # --- Adjoint gradient correction ---------------------------------------------
-# ElementOptimization*InnerProduct VPPs compute the perm gradient from
-# forward pressure x adjoint pressure, but PorousFlow Darcy carries a rho/mu
-# factor that the VPP does not. Multiply the raw gradient by rho/mu to recover
-# the correct physical sensitivity. This is a property of the forward PDE
-# parameter, not of the observation channel, so it is identical to the disp_y
-# case.
-FLUID_DENSITY = 1000.0      # kg/m^3 (SimpleFluid density0)
-FLUID_VISCOSITY = 1.0e-3    # Pa.s  (SimpleFluid viscosity)
-GRAD_CORRECTION = FLUID_DENSITY / FLUID_VISCOSITY   # 1e6
+# The custom C++ VPP PorousFlowOptimizationAnisotropicDiffusionInnerProduct
+# already multiplies the inner product by rho/mu at each quadrature point
+# (using the actual material-property values, not a constant), so no
+# additional Python-side scaling is needed. Kept as 1.0 so the variable is
+# still wired in case we ever want to study a sensitivity to a constant
+# scaling.
+GRAD_CORRECTION = 1.0
 
 TOTAL_LAYERS = 200
 
@@ -85,9 +85,13 @@ runner = MooseRunner(
 # --- History files (reset on every fresh driver invocation) ------------------
 HISTORY_FILE = os.path.join(WORKDIR, "parameter_history.csv")
 GRADIENT_HISTORY_FILE = os.path.join(WORKDIR, "gradient_history.csv")
-for p in (HISTORY_FILE, GRADIENT_HISTORY_FILE):
+OBJECTIVE_HISTORY_FILE = os.path.join(WORKDIR, "objective_history.csv")
+CHECKPOINT_FILE = os.path.join(WORKDIR, "checkpoint_alpha.npy")
+for p in (HISTORY_FILE, GRADIENT_HISTORY_FILE, OBJECTIVE_HISTORY_FILE):
     if os.path.exists(p):
         os.remove(p)
+with open(OBJECTIVE_HISTORY_FILE, "w") as f:
+    f.write("iter,obj_raw,reg_smooth,reg_prior,obj_total,obj_scaled,grad_norm_scaled\n")
 
 iteration_count = 0
 
@@ -190,6 +194,13 @@ def objective_and_gradient(x):
         with open(GRADIENT_HISTORY_FILE, "a") as f:
             f.write(",".join(f"{v:.10e}" for v in scaled_grad) + "\n")
 
+        with open(OBJECTIVE_HISTORY_FILE, "a") as f:
+            f.write(
+                f"{iteration_count},{obj_val:.10e},{reg_obj_smooth:.10e},"
+                f"{reg_obj_prior:.10e},{total_obj:.10e},{scaled_obj:.10e},"
+                f"{np.linalg.norm(scaled_grad):.10e}\n"
+            )
+
         return scaled_obj, scaled_grad
 
     except Exception as e:
@@ -214,12 +225,18 @@ if __name__ == "__main__":
 
     print(f"Starting L-BFGS-B optimization with {TOTAL_LAYERS} parameters...")
 
+    # Persist the current alpha vector after every accepted iteration so the
+    # run can be inspected (or resumed) without losing all progress on a crash.
+    def _checkpoint(xk):
+        np.save(CHECKPOINT_FILE, xk)
+
     res = minimize(
         objective_and_gradient,
         x0,
         method="L-BFGS-B",
         jac=True,
         bounds=bounds,
+        callback=_checkpoint,
         options={
             "maxiter": 300,
             "ftol": 1e-12,

@@ -5074,7 +5074,7 @@
 
 [VectorPostprocessors]
   [grad_perm_layer_1]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_1'
@@ -5084,7 +5084,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_2]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_2'
@@ -5094,7 +5094,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_3]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_3'
@@ -5104,7 +5104,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_4]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_4'
@@ -5114,7 +5114,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_5]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_5'
@@ -5124,7 +5124,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_6]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_6'
@@ -5134,7 +5134,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_7]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_7'
@@ -5144,7 +5144,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_8]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_8'
@@ -5154,7 +5154,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_9]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_9'
@@ -5164,7 +5164,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_10]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_10'
@@ -5174,7 +5174,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_11]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_11'
@@ -5184,7 +5184,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_12]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_12'
@@ -5194,7 +5194,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_13]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_13'
@@ -5204,7 +5204,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_14]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_14'
@@ -5214,7 +5214,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_15]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_15'
@@ -5224,7 +5224,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_16]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_16'
@@ -5234,7 +5234,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_17]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_17'
@@ -5244,7 +5244,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_18]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_18'
@@ -5254,7 +5254,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_19]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_19'
@@ -5264,7 +5264,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_20]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_20'
@@ -5274,7 +5274,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_21]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_21'
@@ -5284,7 +5284,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_22]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_22'
@@ -5294,7 +5294,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_23]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_23'
@@ -5304,7 +5304,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_24]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_24'
@@ -5314,7 +5314,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_25]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_25'
@@ -5324,7 +5324,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_26]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_26'
@@ -5334,7 +5334,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_27]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_27'
@@ -5344,7 +5344,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_28]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_28'
@@ -5354,7 +5354,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_29]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_29'
@@ -5364,7 +5364,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_30]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_30'
@@ -5374,7 +5374,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_31]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_31'
@@ -5384,7 +5384,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_32]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_32'
@@ -5394,7 +5394,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_33]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_33'
@@ -5404,7 +5404,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_34]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_34'
@@ -5414,7 +5414,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_35]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_35'
@@ -5424,7 +5424,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_36]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_36'
@@ -5434,7 +5434,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_37]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_37'
@@ -5444,7 +5444,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_38]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_38'
@@ -5454,7 +5454,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_39]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_39'
@@ -5464,7 +5464,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_40]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_40'
@@ -5474,7 +5474,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_41]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_41'
@@ -5484,7 +5484,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_42]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_42'
@@ -5494,7 +5494,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_43]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_43'
@@ -5504,7 +5504,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_44]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_44'
@@ -5514,7 +5514,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_45]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_45'
@@ -5524,7 +5524,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_46]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_46'
@@ -5534,7 +5534,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_47]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_47'
@@ -5544,7 +5544,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_48]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_48'
@@ -5554,7 +5554,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_49]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_49'
@@ -5564,7 +5564,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_50]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_50'
@@ -5574,7 +5574,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_51]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_51'
@@ -5584,7 +5584,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_52]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_52'
@@ -5594,7 +5594,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_53]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_53'
@@ -5604,7 +5604,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_54]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_54'
@@ -5614,7 +5614,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_55]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_55'
@@ -5624,7 +5624,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_56]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_56'
@@ -5634,7 +5634,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_57]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_57'
@@ -5644,7 +5644,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_58]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_58'
@@ -5654,7 +5654,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_59]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_59'
@@ -5664,7 +5664,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_60]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_60'
@@ -5674,7 +5674,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_61]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_61'
@@ -5684,7 +5684,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_62]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_62'
@@ -5694,7 +5694,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_63]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_63'
@@ -5704,7 +5704,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_64]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_64'
@@ -5714,7 +5714,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_65]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_65'
@@ -5724,7 +5724,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_66]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_66'
@@ -5734,7 +5734,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_67]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_67'
@@ -5744,7 +5744,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_68]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_68'
@@ -5754,7 +5754,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_69]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_69'
@@ -5764,7 +5764,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_70]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_70'
@@ -5774,7 +5774,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_71]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_71'
@@ -5784,7 +5784,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_72]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_72'
@@ -5794,7 +5794,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_73]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_73'
@@ -5804,7 +5804,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_74]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_74'
@@ -5814,7 +5814,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_75]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_75'
@@ -5824,7 +5824,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_76]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_76'
@@ -5834,7 +5834,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_77]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_77'
@@ -5844,7 +5844,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_78]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_78'
@@ -5854,7 +5854,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_79]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_79'
@@ -5864,7 +5864,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_80]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_80'
@@ -5874,7 +5874,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_81]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_81'
@@ -5884,7 +5884,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_82]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_82'
@@ -5894,7 +5894,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_83]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_83'
@@ -5904,7 +5904,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_84]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_84'
@@ -5914,7 +5914,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_85]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_85'
@@ -5924,7 +5924,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_86]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_86'
@@ -5934,7 +5934,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_87]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_87'
@@ -5944,7 +5944,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_88]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_88'
@@ -5954,7 +5954,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_89]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_89'
@@ -5964,7 +5964,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_90]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_90'
@@ -5974,7 +5974,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_91]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_91'
@@ -5984,7 +5984,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_92]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_92'
@@ -5994,7 +5994,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_93]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_93'
@@ -6004,7 +6004,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_94]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_94'
@@ -6014,7 +6014,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_95]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_95'
@@ -6024,7 +6024,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_96]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_96'
@@ -6034,7 +6034,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_97]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_97'
@@ -6044,7 +6044,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_98]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_98'
@@ -6054,7 +6054,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_99]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_99'
@@ -6064,7 +6064,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_100]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_100'
@@ -6074,7 +6074,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_101]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_101'
@@ -6084,7 +6084,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_102]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_102'
@@ -6094,7 +6094,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_103]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_103'
@@ -6104,7 +6104,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_104]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_104'
@@ -6114,7 +6114,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_105]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_105'
@@ -6124,7 +6124,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_106]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_106'
@@ -6134,7 +6134,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_107]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_107'
@@ -6144,7 +6144,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_108]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_108'
@@ -6154,7 +6154,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_109]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_109'
@@ -6164,7 +6164,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_110]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_110'
@@ -6174,7 +6174,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_111]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_111'
@@ -6184,7 +6184,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_112]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_112'
@@ -6194,7 +6194,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_113]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_113'
@@ -6204,7 +6204,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_114]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_114'
@@ -6214,7 +6214,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_115]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_115'
@@ -6224,7 +6224,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_116]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_116'
@@ -6234,7 +6234,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_117]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_117'
@@ -6244,7 +6244,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_118]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_118'
@@ -6254,7 +6254,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_119]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_119'
@@ -6264,7 +6264,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_120]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_120'
@@ -6274,7 +6274,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_121]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_121'
@@ -6284,7 +6284,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_122]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_122'
@@ -6294,7 +6294,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_123]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_123'
@@ -6304,7 +6304,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_124]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_124'
@@ -6314,7 +6314,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_125]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_125'
@@ -6324,7 +6324,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_126]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_126'
@@ -6334,7 +6334,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_127]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_127'
@@ -6344,7 +6344,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_128]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_128'
@@ -6354,7 +6354,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_129]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_129'
@@ -6364,7 +6364,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_130]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_130'
@@ -6374,7 +6374,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_131]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_131'
@@ -6384,7 +6384,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_132]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_132'
@@ -6394,7 +6394,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_133]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_133'
@@ -6404,7 +6404,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_134]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_134'
@@ -6414,7 +6414,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_135]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_135'
@@ -6424,7 +6424,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_136]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_136'
@@ -6434,7 +6434,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_137]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_137'
@@ -6444,7 +6444,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_138]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_138'
@@ -6454,7 +6454,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_139]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_139'
@@ -6464,7 +6464,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_140]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_140'
@@ -6474,7 +6474,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_141]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_141'
@@ -6484,7 +6484,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_142]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_142'
@@ -6494,7 +6494,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_143]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_143'
@@ -6504,7 +6504,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_144]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_144'
@@ -6514,7 +6514,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_145]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_145'
@@ -6524,7 +6524,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_146]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_146'
@@ -6534,7 +6534,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_147]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_147'
@@ -6544,7 +6544,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_148]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_148'
@@ -6554,7 +6554,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_149]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_149'
@@ -6564,7 +6564,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_150]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_150'
@@ -6574,7 +6574,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_151]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_151'
@@ -6584,7 +6584,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_152]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_152'
@@ -6594,7 +6594,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_153]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_153'
@@ -6604,7 +6604,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_154]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_154'
@@ -6614,7 +6614,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_155]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_155'
@@ -6624,7 +6624,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_156]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_156'
@@ -6634,7 +6634,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_157]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_157'
@@ -6644,7 +6644,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_158]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_158'
@@ -6654,7 +6654,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_159]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_159'
@@ -6664,7 +6664,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_160]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_160'
@@ -6674,7 +6674,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_161]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_161'
@@ -6684,7 +6684,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_162]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_162'
@@ -6694,7 +6694,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_163]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_163'
@@ -6704,7 +6704,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_164]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_164'
@@ -6714,7 +6714,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_165]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_165'
@@ -6724,7 +6724,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_166]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_166'
@@ -6734,7 +6734,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_167]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_167'
@@ -6744,7 +6744,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_168]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_168'
@@ -6754,7 +6754,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_169]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_169'
@@ -6764,7 +6764,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_170]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_170'
@@ -6774,7 +6774,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_171]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_171'
@@ -6784,7 +6784,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_172]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_172'
@@ -6794,7 +6794,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_173]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_173'
@@ -6804,7 +6804,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_174]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_174'
@@ -6814,7 +6814,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_175]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_175'
@@ -6824,7 +6824,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_176]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_176'
@@ -6834,7 +6834,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_177]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_177'
@@ -6844,7 +6844,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_178]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_178'
@@ -6854,7 +6854,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_179]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_179'
@@ -6864,7 +6864,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_180]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_180'
@@ -6874,7 +6874,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_181]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_181'
@@ -6884,7 +6884,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_182]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_182'
@@ -6894,7 +6894,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_183]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_183'
@@ -6904,7 +6904,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_184]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_184'
@@ -6914,7 +6914,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_185]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_185'
@@ -6924,7 +6924,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_186]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_186'
@@ -6934,7 +6934,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_187]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_187'
@@ -6944,7 +6944,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_188]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_188'
@@ -6954,7 +6954,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_189]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_189'
@@ -6964,7 +6964,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_190]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_190'
@@ -6974,7 +6974,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_191]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_191'
@@ -6984,7 +6984,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_192]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_192'
@@ -6994,7 +6994,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_193]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_193'
@@ -7004,7 +7004,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_194]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_194'
@@ -7014,7 +7014,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_195]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_195'
@@ -7024,7 +7024,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_196]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_196'
@@ -7034,7 +7034,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_197]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_197'
@@ -7044,7 +7044,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_198]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_198'
@@ -7054,7 +7054,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_199]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_199'
@@ -7064,7 +7064,7 @@
     outputs = 'none'
   []
   [grad_perm_layer_200]
-    type = ElementOptimizationAnisotropicDiffusionInnerProduct
+    type = PorousFlowOptimizationAnisotropicDiffusionInnerProduct
     variable = 'pp_adjoint'
     forward_variable = 'pp'
     function = 'perm_layer_200'
