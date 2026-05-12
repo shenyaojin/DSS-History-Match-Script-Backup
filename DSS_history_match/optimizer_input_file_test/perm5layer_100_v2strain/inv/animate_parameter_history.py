@@ -56,7 +56,6 @@ def update(frame):
 anim = FuncAnimation(
     fig, update, frames=n_iterations, init_func=init, interval=500, blit=True
 )
-
 plt.tight_layout()
 
 # Save as GIF
