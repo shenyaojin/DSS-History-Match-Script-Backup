@@ -10,7 +10,7 @@ import os
 
 # Load data
 script_dir = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(script_dir, "parameter_history.csv")
+csv_path = os.path.join(script_dir, "parameter_history_TV.csv")
 
 data = np.loadtxt(csv_path, delimiter=",")
 n_iterations, n_params = data.shape
