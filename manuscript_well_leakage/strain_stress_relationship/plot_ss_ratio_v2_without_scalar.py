@@ -128,22 +128,28 @@ y_actual = DASchan_strain.flatten()
 def calculate_wls(x_data, y_data):
     if x_data is None or y_data is None or len(x_data) < 2 or len(y_data) < 2 or len(x_data) != len(y_data):
         return np.array([np.nan, np.nan])
-    X_matrix = np.vstack([x_data, np.ones_like(x_data)]).T
+    x_arr = np.asarray(x_data, dtype=float).ravel()
+    y_arr = np.asarray(y_data, dtype=float).ravel()
+    finite_mask = np.isfinite(x_arr) & np.isfinite(y_arr)
+    x_arr = x_arr[finite_mask]
+    y_arr = y_arr[finite_mask]
+    if len(x_arr) < 2 or np.ptp(x_arr) == 0:
+        return np.array([np.nan, np.nan])
+    X_matrix = np.vstack([x_arr, np.ones_like(x_arr)]).T
     try:
-        beta_ols = np.linalg.lstsq(X_matrix, y_data, rcond=None)[0]
-        residuals = np.abs(y_data - (X_matrix @ beta_ols))
+        beta_ols = np.linalg.lstsq(X_matrix, y_arr, rcond=None)[0]
+        residuals = np.abs(y_arr - (X_matrix @ beta_ols))
         weights = 1.0 / (np.maximum(residuals, 1e-9))
         W_diag = np.diag(weights)
         XTWX = X_matrix.T @ W_diag @ X_matrix
-        XTWy = X_matrix.T @ W_diag @ y_data
+        XTWy = X_matrix.T @ W_diag @ y_arr
         if np.linalg.cond(XTWX) < 1.0 / np.finfo(float).eps:
             beta_wls = np.linalg.solve(XTWX, XTWy)
         else:
             beta_wls = beta_ols
         return beta_wls
     except np.linalg.LinAlgError:
-        beta_ols = np.linalg.lstsq(X_matrix, y_data, rcond=None)[0]
-        return beta_ols
+        return np.array([np.nan, np.nan])
 
 #%% Calculate WLS for necessary datasets
 print("Calculating WLS fits...")
@@ -159,12 +165,18 @@ if not np.isnan(beta_wls_g2_raw).any():
     predicted_strain_rate_g2_orig_units = beta_wls_g2_raw[0] * gauge_data2_grad + beta_wls_g2_raw[1]
 
 if len(x_actual) > 0 and len(y_actual) > 0:
-    z_x_actual = zscore(x_actual)
-    z_y_actual = zscore(y_actual)
-    threshold_actual = 3.0
-    mask_actual = (np.abs(z_x_actual) < threshold_actual) & (np.abs(z_y_actual) < threshold_actual)
-    x_filtered_actual = x_actual[mask_actual]
-    y_filtered_actual = y_actual[mask_actual]
+    finite_pair_mask = np.isfinite(x_actual) & np.isfinite(y_actual)
+    x_finite = x_actual[finite_pair_mask]
+    y_finite = y_actual[finite_pair_mask]
+    if len(x_finite) > 1:
+        z_x_actual = zscore(x_finite)
+        z_y_actual = zscore(y_finite)
+        threshold_actual = 3.0
+        mask_actual = (np.abs(z_x_actual) < threshold_actual) & (np.abs(z_y_actual) < threshold_actual)
+        x_filtered_actual = x_finite[mask_actual]
+        y_filtered_actual = y_finite[mask_actual]
+    else:
+        x_filtered_actual, y_filtered_actual = x_finite, y_finite
 else:
     x_filtered_actual, y_filtered_actual = np.array([]), np.array([])
 beta_wls_filt_actual = calculate_wls(x_filtered_actual, y_filtered_actual)
@@ -254,6 +266,16 @@ def plot_scatter_scalar_free(ax, x_data, y_data_orig_scale, beta_wls_coeffs, poi
             x_range_for_line = np.array([x_min, x_max])
         y_fit_on_line_micro = (beta_wls_coeffs[0] * x_range_for_line + beta_wls_coeffs[1]) * micro_scale_factor
         ax.plot(x_range_for_line, y_fit_on_line_micro, color='black', linestyle='-', lw=2, label="WLS Fit")
+
+        y_pred = beta_wls_coeffs[0] * x_data + beta_wls_coeffs[1]
+        ss_res = np.sum((y_data_orig_scale - y_pred) ** 2)
+        ss_tot = np.sum((y_data_orig_scale - np.mean(y_data_orig_scale)) ** 2)
+        if ss_tot > 0:
+            r_squared = 1.0 - ss_res / ss_tot
+            ax.text(0.05, 0.95, f"$R^2 = {r_squared:.3f}$",
+                    transform=ax.transAxes, ha='left', va='top',
+                    fontsize=9,
+                    bbox=dict(boxstyle='round,pad=0.3', facecolor='white', edgecolor='gray', alpha=0.8))
 
     ax.set_xlabel("")
     ax.set_ylabel("")

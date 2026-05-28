@@ -20,6 +20,8 @@
 #
 # Run as:
 #   python scripts/.../perm5layer_100_v2strain/inv/102_optimization_runner.py
+# 
+# Designed by Shenyao Jin, 2025-03.
 
 import os
 import re

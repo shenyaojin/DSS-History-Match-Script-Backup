@@ -14,6 +14,9 @@
 #
 # Run as:
 #   python 103_optimization_runner_TV.py
+#
+# Diagnostic truth probe:
+#   TV_RUN_MODE=truth_probe python 103_optimization_runner_TV.py
 
 import os
 import re
@@ -53,10 +56,20 @@ DELTA_TV = 0.05
 GRAD_CORRECTION = 1.0
 
 TOTAL_LAYERS = 200
+LAYER_HEIGHT = 0.5
+BACKGROUND_ALPHA = -18.0
+
+# Run modes:
+#   optimize    - start L-BFGS-B from the synthetic truth alpha vector.
+#   truth_probe - evaluate obj+grad once at the synthetic truth and exit.
+RUN_MODE = os.environ.get("TV_RUN_MODE", "optimize").strip().lower()
+TRUE_ALPHA_FILE = os.path.join(WORKDIR, "true_alphas_TV.txt")
+TRUE_PROBE_SUMMARY_FILE = os.path.join(WORKDIR, "truth_probe_TV_summary.txt")
 
 print(f"Working directory : {WORKDIR}")
 print(f"MOOSE cwd         : {OUTPUT_DIR}")
 print(f"Regularization    : TV only, beta_TV = {BETA_TV}, delta = {DELTA_TV}")
+print(f"Run mode          : {RUN_MODE}")
 
 # --- Sanity check -------------------------------------------------------------
 with open(INPUT_FILE, "r") as f:
@@ -89,6 +102,60 @@ with open(OBJECTIVE_HISTORY_FILE, "w") as f:
     f.write("iter,obj_raw,reg_tv,obj_total,obj_scaled,grad_norm_scaled\n")
 
 iteration_count = 0
+
+
+def build_synthetic_truth_alpha():
+    """Return the exact alpha profile used by fwd/output_gt/casing_model_test.i."""
+    alpha = np.full(TOTAL_LAYERS, BACKGROUND_ALPHA)
+    y_bottom = -50.0 + np.arange(TOTAL_LAYERS) * LAYER_HEIGHT
+    y_top = y_bottom + LAYER_HEIGHT
+
+    low_perm_srv = (y_bottom >= -20.0) & (y_top <= -16.0)
+    high_perm_srv = (y_bottom >= 14.0) & (y_top <= 20.0)
+
+    alpha[low_perm_srv] = -15.0                 # 1e-15 m^2
+    alpha[high_perm_srv] = np.log10(3e-15)      # 3e-15 m^2
+    return alpha
+
+
+def make_bounds():
+    """Free layers inside the observation window; fixed background outside."""
+    bounds = []
+    for i in range(TOTAL_LAYERS):
+        y_center = -50.0 + (i + 0.5) * LAYER_HEIGHT
+        if -25.0 <= y_center <= 25.0:
+            bounds.append((-25.0, -10.0))
+        else:
+            bounds.append((BACKGROUND_ALPHA, BACKGROUND_ALPHA))
+    return bounds
+
+
+def summarize_alpha(name, alpha):
+    active = np.where(np.abs(alpha - BACKGROUND_ALPHA) > 1e-12)[0]
+    print(f"{name}: min={alpha.min():.6f}, max={alpha.max():.6f}, active_layers={len(active)}")
+    if len(active):
+        print(f"{name}: active 1-based layer range {active[0] + 1}..{active[-1] + 1}")
+
+
+def write_truth_probe_summary():
+    if not os.path.exists(OBJECTIVE_HISTORY_FILE):
+        return
+
+    df = pd.read_csv(OBJECTIVE_HISTORY_FILE)
+    if df.empty:
+        return
+
+    row = df.iloc[-1]
+    with open(TRUE_PROBE_SUMMARY_FILE, "w") as f:
+        f.write("Synthetic truth probe for 103_optimization_runner_TV.py\n")
+        f.write(f"run_mode={RUN_MODE}\n")
+        f.write(f"beta_tv={BETA_TV:.10e}\n")
+        f.write(f"delta_tv={DELTA_TV:.10e}\n")
+        f.write(f"obj_raw={row['obj_raw']:.10e}\n")
+        f.write(f"reg_tv={row['reg_tv']:.10e}\n")
+        f.write(f"obj_total={row['obj_total']:.10e}\n")
+        f.write(f"obj_scaled={row['obj_scaled']:.10e}\n")
+        f.write(f"grad_norm_scaled={row['grad_norm_scaled']:.10e}\n")
 
 
 def tv_obj_and_grad(x):
@@ -201,18 +268,28 @@ def objective_and_gradient(x):
 
 
 if __name__ == "__main__":
-    # Initial guess: background caprock value.
-    x0 = np.full(TOTAL_LAYERS, -18.0)
+    if RUN_MODE not in {"optimize", "truth_probe"}:
+        raise RuntimeError("TV_RUN_MODE must be either 'optimize' or 'truth_probe'.")
 
-    # Bounds: free inside the +/-25 m observation window, fixed at -18 outside.
-    bounds = []
-    layer_height = 0.5
-    for i in range(TOTAL_LAYERS):
-        y_center = -50.0 + (i + 0.5) * layer_height
-        if -25.0 <= y_center <= 25.0:
-            bounds.append((-25.0, -10.0))
-        else:
-            bounds.append((-18.0, -18.0))
+    # Initial guess: exact synthetic truth from fwd/output_gt/casing_model_test.i.
+    x0 = build_synthetic_truth_alpha()
+    np.savetxt(TRUE_ALPHA_FILE, x0)
+    summarize_alpha("Synthetic truth alpha", x0)
+    print(f"Synthetic truth alpha saved to: {TRUE_ALPHA_FILE}")
+
+    bounds = make_bounds()
+
+    if RUN_MODE == "truth_probe":
+        print("Evaluating objective/gradient once at the synthetic truth...")
+        obj, grad = objective_and_gradient(x0)
+        write_truth_probe_summary()
+        print(f"Truth probe scaled objective: {obj:.10e}")
+        print(f"Truth probe scaled grad norm: {np.linalg.norm(grad):.10e}")
+        print(f"Truth probe summary saved to: {TRUE_PROBE_SUMMARY_FILE}")
+        temp_i = os.path.join(WORKDIR, "optimize_temp.i")
+        if os.path.exists(temp_i):
+            os.remove(temp_i)
+        raise SystemExit(0)
 
     print(f"Starting L-BFGS-B (TV) with {TOTAL_LAYERS} parameters...")
 
