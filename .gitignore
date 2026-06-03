@@ -9,3 +9,17 @@
 *.log
 *.rds
 *.npy
+*.so
+*.txt
+*.meta
+
+header
+data
+output
+
+*.bak
+*.stdout
+*.gz
+
+*.pyc
+__pycache__/
