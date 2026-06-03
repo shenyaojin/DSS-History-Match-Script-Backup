@@ -58,17 +58,23 @@ GRAD_CORRECTION = 1.0
 TOTAL_LAYERS = 200
 LAYER_HEIGHT = 0.5
 BACKGROUND_ALPHA = -18.0
+MATRIX_INIT_ALPHA = float(os.environ.get("TV_MATRIX_INIT_ALPHA", "-20.0"))
+LOW_SRV_INIT_ALPHA = -18.0
+FRACTURE_INIT_ALPHA = -16.0
 
 # Run modes:
-#   optimize    - start L-BFGS-B from the synthetic truth alpha vector.
+#   optimize    - start L-BFGS-B from the two-SRV seeded alpha vector.
 #   truth_probe - evaluate obj+grad once at the synthetic truth and exit.
 RUN_MODE = os.environ.get("TV_RUN_MODE", "optimize").strip().lower()
 TRUE_ALPHA_FILE = os.path.join(WORKDIR, "true_alphas_TV.txt")
 TRUE_PROBE_SUMMARY_FILE = os.path.join(WORKDIR, "truth_probe_TV_summary.txt")
+INITIAL_ALPHA_FILE = os.path.join(WORKDIR, "initial_alpha_TV.txt")
+INITIAL_ZONE_FILE = os.path.join(WORKDIR, "initial_zones_TV.csv")
 
 print(f"Working directory : {WORKDIR}")
 print(f"MOOSE cwd         : {OUTPUT_DIR}")
 print(f"Regularization    : TV only, beta_TV = {BETA_TV}, delta = {DELTA_TV}")
+print("Initial model     : matrix=-20, low SRV=-18, fracture=-16")
 print(f"Run mode          : {RUN_MODE}")
 
 # --- Sanity check -------------------------------------------------------------
@@ -118,6 +124,32 @@ def build_synthetic_truth_alpha():
     return alpha
 
 
+def layer_bounds_y():
+    y_bottom = -50.0 + np.arange(TOTAL_LAYERS) * LAYER_HEIGHT
+    y_top = y_bottom + LAYER_HEIGHT
+    y_center = 0.5 * (y_bottom + y_top)
+    return y_bottom, y_top, y_center
+
+
+def initial_zone_masks():
+    y_bottom, y_top, y_center = layer_bounds_y()
+    free_window = (-25.0 <= y_center) & (y_center <= 25.0)
+    low_perm_srv = (y_bottom >= -20.0) & (y_top <= -16.0)
+    fracture = (y_bottom >= 14.0) & (y_top <= 20.0)
+    return y_bottom, y_top, y_center, free_window, low_perm_srv, fracture
+
+
+def build_initial_alpha():
+    """Initial model with two explicit SRV areas in the free window."""
+    alpha = np.full(TOTAL_LAYERS, BACKGROUND_ALPHA)
+    _, _, _, free_window, low_perm_srv, fracture = initial_zone_masks()
+
+    alpha[free_window] = MATRIX_INIT_ALPHA
+    alpha[low_perm_srv] = LOW_SRV_INIT_ALPHA
+    alpha[fracture] = FRACTURE_INIT_ALPHA
+    return alpha
+
+
 def make_bounds():
     """Free layers inside the observation window; fixed background outside."""
     bounds = []
@@ -131,10 +163,42 @@ def make_bounds():
 
 
 def summarize_alpha(name, alpha):
+    _, _, _, free_window, low_perm_srv, fracture = initial_zone_masks()
     active = np.where(np.abs(alpha - BACKGROUND_ALPHA) > 1e-12)[0]
+    free_layers = np.where(free_window)[0]
+    low_layers = np.where(low_perm_srv)[0]
+    frac_layers = np.where(fracture)[0]
+
     print(f"{name}: min={alpha.min():.6f}, max={alpha.max():.6f}, active_layers={len(active)}")
+    print(f"{name}: free window 1-based layer range {free_layers[0] + 1}..{free_layers[-1] + 1}")
+    print(
+        f"{name}: low SRV 1-based layers {low_layers[0] + 1}..{low_layers[-1] + 1}, "
+        f"alpha={alpha[low_layers[0]]:.6f}"
+    )
+    print(
+        f"{name}: fracture 1-based layers {frac_layers[0] + 1}..{frac_layers[-1] + 1}, "
+        f"alpha={alpha[frac_layers[0]]:.6f}"
+    )
     if len(active):
         print(f"{name}: active 1-based layer range {active[0] + 1}..{active[-1] + 1}")
+
+
+def save_initial_zone_table(alpha):
+    y_bottom, y_top, y_center, free_window, low_perm_srv, fracture = initial_zone_masks()
+    zone = np.full(TOTAL_LAYERS, "fixed_outside", dtype=object)
+    zone[free_window] = "matrix_init"
+    zone[low_perm_srv] = "low_srv"
+    zone[fracture] = "fracture"
+
+    df = pd.DataFrame({
+        "layer_1based": np.arange(1, TOTAL_LAYERS + 1),
+        "y_bottom": y_bottom,
+        "y_top": y_top,
+        "y_center": y_center,
+        "zone": zone,
+        "alpha_initial": alpha,
+    })
+    df.to_csv(INITIAL_ZONE_FILE, index=False)
 
 
 def write_truth_probe_summary():
@@ -163,7 +227,7 @@ def tv_obj_and_grad(x):
     Returns (J_tv, dJ_tv/dx)."""
     diffs = np.diff(x)                                      # length N-1
     denom = np.sqrt(diffs * diffs + DELTA_TV * DELTA_TV)
-    obj = BETA_TV * np.sum(denom)                            # drop -DELTA_TV constant
+    obj = BETA_TV * np.sum(denom - DELTA_TV)
     g = diffs / denom                                        # smooth sign of each diff
     grad = np.zeros_like(x)
     grad[1:]  += BETA_TV * g                                 # contribution from k = i+1 in Delta_i
@@ -271,17 +335,16 @@ if __name__ == "__main__":
     if RUN_MODE not in {"optimize", "truth_probe"}:
         raise RuntimeError("TV_RUN_MODE must be either 'optimize' or 'truth_probe'.")
 
-    # Initial guess: exact synthetic truth from fwd/output_gt/casing_model_test.i.
-    x0 = build_synthetic_truth_alpha()
-    np.savetxt(TRUE_ALPHA_FILE, x0)
-    summarize_alpha("Synthetic truth alpha", x0)
+    truth_alpha = build_synthetic_truth_alpha()
+    np.savetxt(TRUE_ALPHA_FILE, truth_alpha)
+    summarize_alpha("Synthetic truth alpha", truth_alpha)
     print(f"Synthetic truth alpha saved to: {TRUE_ALPHA_FILE}")
 
     bounds = make_bounds()
 
     if RUN_MODE == "truth_probe":
         print("Evaluating objective/gradient once at the synthetic truth...")
-        obj, grad = objective_and_gradient(x0)
+        obj, grad = objective_and_gradient(truth_alpha)
         write_truth_probe_summary()
         print(f"Truth probe scaled objective: {obj:.10e}")
         print(f"Truth probe scaled grad norm: {np.linalg.norm(grad):.10e}")
@@ -290,6 +353,13 @@ if __name__ == "__main__":
         if os.path.exists(temp_i):
             os.remove(temp_i)
         raise SystemExit(0)
+
+    x0 = build_initial_alpha()
+    np.savetxt(INITIAL_ALPHA_FILE, x0)
+    save_initial_zone_table(x0)
+    summarize_alpha("Initial alpha", x0)
+    print(f"Initial alpha saved to: {INITIAL_ALPHA_FILE}")
+    print(f"Initial zone table saved to: {INITIAL_ZONE_FILE}")
 
     print(f"Starting L-BFGS-B (TV) with {TOTAL_LAYERS} parameters...")
 

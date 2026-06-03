@@ -12,7 +12,7 @@ import os
 # script_dir = os.path.dirname(os.path.abspath(__file__))
 # csv_path = os.path.join(script_dir, "gradient_history.csv")
 
-csv_path = "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/gradient_history.csv"
+csv_path = "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/parameter_history_no_reg_fracture_init.csv"
 
 data = np.loadtxt(csv_path, delimiter=",")
 n_iterations, n_params = data.shape

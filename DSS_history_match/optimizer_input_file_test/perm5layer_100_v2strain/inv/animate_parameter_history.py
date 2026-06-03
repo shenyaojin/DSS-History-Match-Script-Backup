@@ -10,9 +10,10 @@ import os
 
 # Load data
 script_dir = os.path.dirname(os.path.abspath(__file__))
-csv_path = os.path.join(script_dir, "parameter_history_TV.csv")
+csv_path = os.path.join(script_dir, "parameter_history_no_reg_fracture_init.csv")
 
 data = np.loadtxt(csv_path, delimiter=",")
+data = np.atleast_2d(data)
 n_iterations, n_params = data.shape
 
 # Flip layer order so index 0 corresponds to the TOP (y=+50) instead of bottom.
