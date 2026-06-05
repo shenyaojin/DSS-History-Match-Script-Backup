@@ -33,7 +33,7 @@ LOW_SRV_INIT_ALPHA = -16.0
 FRACTURE_INIT_ALPHA = -16.0
 
 ALPHA_REFERENCE = -18.0
-BETA_L1 = float(os.environ.get("BETA_L1", "1e-9"))
+BETA_L1 = float(os.environ.get("BETA_L1", "2e-11"))
 DELTA_L1 = float(os.environ.get("DELTA_L1", "0.05"))
 
 RUN_MODE = os.environ.get("L1_RUN_MODE", "optimize").strip().lower()
