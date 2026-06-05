@@ -65,14 +65,14 @@ GRAD_CORRECTION = 1.0
 TOTAL_LAYERS = 200
 LAYER_HEIGHT = 0.5
 FIXED_OUTSIDE_ALPHA = -18.0
-MATRIX_INIT_ALPHA = float(os.environ.get("TIKHONOV_MATRIX_INIT_ALPHA", "-20.0"))
-LOW_SRV_INIT_ALPHA = -18.0
+MATRIX_INIT_ALPHA = float(os.environ.get("TIKHONOV_MATRIX_INIT_ALPHA", "-18.0"))
+LOW_SRV_INIT_ALPHA = -16.0
 FRACTURE_INIT_ALPHA = -16.0
 
 print(f"Working directory : {WORKDIR}")
 print(f"MOOSE cwd         : {OUTPUT_DIR}")
 print(f"Regularization    : zero-order Tikhonov, beta = {BETA_TIKHONOV}")
-print("Initial model     : matrix=-20, low SRV=-18, fracture=-16")
+print("Initial model     : matrix=-18, low SRV=-16, fracture=-16")
 
 # --- Quick sanity check that we really are running the strain_yy pipeline ----
 with open(INPUT_FILE, "r") as f:

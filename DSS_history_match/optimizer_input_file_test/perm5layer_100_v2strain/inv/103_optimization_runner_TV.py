@@ -58,8 +58,8 @@ GRAD_CORRECTION = 1.0
 TOTAL_LAYERS = 200
 LAYER_HEIGHT = 0.5
 BACKGROUND_ALPHA = -18.0
-MATRIX_INIT_ALPHA = float(os.environ.get("TV_MATRIX_INIT_ALPHA", "-20.0"))
-LOW_SRV_INIT_ALPHA = -18.0
+MATRIX_INIT_ALPHA = float(os.environ.get("TV_MATRIX_INIT_ALPHA", "-18.0"))
+LOW_SRV_INIT_ALPHA = -16.0
 FRACTURE_INIT_ALPHA = -16.0
 
 # Run modes:
@@ -74,7 +74,7 @@ INITIAL_ZONE_FILE = os.path.join(WORKDIR, "initial_zones_TV.csv")
 print(f"Working directory : {WORKDIR}")
 print(f"MOOSE cwd         : {OUTPUT_DIR}")
 print(f"Regularization    : TV only, beta_TV = {BETA_TV}, delta = {DELTA_TV}")
-print("Initial model     : matrix=-20, low SRV=-18, fracture=-16")
+print("Initial model     : matrix=-18, low SRV=-16, fracture=-16")
 print(f"Run mode          : {RUN_MODE}")
 
 # --- Sanity check -------------------------------------------------------------

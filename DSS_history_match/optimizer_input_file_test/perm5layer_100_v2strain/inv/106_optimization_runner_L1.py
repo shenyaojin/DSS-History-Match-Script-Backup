@@ -1,22 +1,13 @@
-# L-BFGS-B outer driver for the strain_yy permeability inversion, no reg.
+# L-BFGS-B outer driver for the strain_yy permeability inversion, L1 variant.
 #
-# This case is intended to test the data term alone from a biased initial model.
-# Inside the free observation window, the initial model has matrix/background
-# at alpha=-18 and both SRV areas seeded at alpha=-16:
-#   - matrix between the SRV areas: alpha = -18
-#   - low-perm SRV interval: alpha = -16
-#   - high-perm SRV / fracture interval: alpha = -16
+# Regularization:
+#   J_L1(alpha) = BETA_L1 * Sum_i |alpha_i - ALPHA_REFERENCE|
 #
-# Outside the free observation window, layers stay fixed at alpha = -18.
-#
-# The objective returned to SciPy is only the MOOSE OptimizationData misfit.
-# No Tikhonov smoothness, no prior anchor, and no TV term are added.
+# For L-BFGS-B this is smoothed as:
+#   |z| ~= sqrt(z^2 + DELTA_L1^2) - DELTA_L1
 #
 # Run as:
-#   python 105_optimization_runner_no_reg_fracture_init.py
-#
-# One-probe check at the initial model:
-#   NO_REG_RUN_MODE=init_probe python 105_optimization_runner_no_reg_fracture_init.py
+#   python 106_optimization_runner_L1.py
 
 import os
 import re
@@ -26,42 +17,36 @@ from scipy.optimize import minimize
 from fiberis.moose.runner import MooseRunner
 
 
-# --- Paths --------------------------------------------------------------------
 WORKDIR = os.path.dirname(os.path.abspath(__file__))
 INPUT_FILE = os.path.join(WORKDIR, "optimize.i")
 OUTPUT_DIR = os.path.join(WORKDIR, "inv_output")
 
-# --- Objective / gradient scaling for L-BFGS-B --------------------------------
 SCALE_FACTOR = 1e6
 BASELINE_OBJ = 0.0
-
-# --- Adjoint gradient correction ---------------------------------------------
-# The custom C++ VPP already includes rho/mu in the adjoint inner product.
 GRAD_CORRECTION = 1.0
 
 TOTAL_LAYERS = 200
 LAYER_HEIGHT = 0.5
 FIXED_OUTSIDE_ALPHA = -18.0
-MATRIX_INIT_ALPHA = float(os.environ.get("NO_REG_MATRIX_INIT_ALPHA", "-18.0"))
+MATRIX_INIT_ALPHA = float(os.environ.get("L1_MATRIX_INIT_ALPHA", "-18.0"))
 LOW_SRV_INIT_ALPHA = -16.0
 FRACTURE_INIT_ALPHA = -16.0
 
-# Run modes:
-#   optimize   - run full L-BFGS-B from the seeded initial model.
-#   init_probe - evaluate obj+grad once at the seeded initial model and exit.
-RUN_MODE = os.environ.get("NO_REG_RUN_MODE", "optimize").strip().lower()
-MAXITER = int(os.environ.get("NO_REG_MAXITER", "300"))
+ALPHA_REFERENCE = -18.0
+BETA_L1 = float(os.environ.get("BETA_L1", "1e-9"))
+DELTA_L1 = float(os.environ.get("DELTA_L1", "0.05"))
+
+RUN_MODE = os.environ.get("L1_RUN_MODE", "optimize").strip().lower()
+MAXITER = int(os.environ.get("L1_MAXITER", "300"))
+NUM_PROCESSORS = int(os.environ.get("L1_NUM_PROCESSORS", "20"))
 
 print(f"Working directory : {WORKDIR}")
 print(f"MOOSE cwd         : {OUTPUT_DIR}")
-print("Regularization    : none")
-print(f"Matrix init alpha : {MATRIX_INIT_ALPHA}")
-print(f"Low SRV init alpha: {LOW_SRV_INIT_ALPHA}")
-print(f"Frac init alpha   : {FRACTURE_INIT_ALPHA}")
+print(f"Regularization    : smoothed L1, beta = {BETA_L1}, delta = {DELTA_L1}")
+print(f"Initial model     : matrix={MATRIX_INIT_ALPHA}, low SRV=-16, fracture=-16")
 print(f"Run mode          : {RUN_MODE}")
 print(f"Max iterations    : {MAXITER}")
 
-# --- Sanity check -------------------------------------------------------------
 with open(INPUT_FILE, "r") as f:
     base_moose_content = f.read()
 if "measurement_data.csv" not in base_moose_content:
@@ -80,21 +65,20 @@ runner = MooseRunner(
     mpiexec_path="/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec",
 )
 
-# --- History files ------------------------------------------------------------
-RUN_TAG = "no_reg_fracture_init"
-HISTORY_FILE = os.path.join(WORKDIR, f"parameter_history_{RUN_TAG}.csv")
-GRADIENT_HISTORY_FILE = os.path.join(WORKDIR, f"gradient_history_{RUN_TAG}.csv")
-OBJECTIVE_HISTORY_FILE = os.path.join(WORKDIR, f"objective_history_{RUN_TAG}.csv")
-CHECKPOINT_FILE = os.path.join(WORKDIR, f"checkpoint_alpha_{RUN_TAG}.npy")
-INITIAL_ALPHA_FILE = os.path.join(WORKDIR, f"initial_alpha_{RUN_TAG}.txt")
-INITIAL_ZONE_FILE = os.path.join(WORKDIR, f"initial_zones_{RUN_TAG}.csv")
-OPTIMIZED_ALPHA_FILE = os.path.join(WORKDIR, f"optimized_alphas_{RUN_TAG}.txt")
+RUN_TAG = "L1"
+HISTORY_FILE = os.path.join(WORKDIR, "parameter_history_L1.csv")
+GRADIENT_HISTORY_FILE = os.path.join(WORKDIR, "gradient_history_L1.csv")
+OBJECTIVE_HISTORY_FILE = os.path.join(WORKDIR, "objective_history_L1.csv")
+CHECKPOINT_FILE = os.path.join(WORKDIR, "checkpoint_alpha_L1.npy")
+INITIAL_ALPHA_FILE = os.path.join(WORKDIR, "initial_alpha_L1.txt")
+INITIAL_ZONE_FILE = os.path.join(WORKDIR, "initial_zones_L1.csv")
+OPTIMIZED_ALPHA_FILE = os.path.join(WORKDIR, "optimized_alphas_L1.txt")
 
 for p in (HISTORY_FILE, GRADIENT_HISTORY_FILE, OBJECTIVE_HISTORY_FILE):
     if os.path.exists(p):
         os.remove(p)
 with open(OBJECTIVE_HISTORY_FILE, "w") as f:
-    f.write("iter,obj_raw,obj_total,obj_scaled,grad_norm_scaled\n")
+    f.write("iter,obj_raw,reg_l1,obj_total,obj_scaled,grad_norm_scaled\n")
 
 iteration_count = 0
 
@@ -115,10 +99,8 @@ def initial_zone_masks():
 
 
 def build_initial_alpha():
-    """Initial model with two explicit SRV areas in the free window."""
     alpha = np.full(TOTAL_LAYERS, FIXED_OUTSIDE_ALPHA)
     _, _, _, free_window, low_perm_srv, fracture = initial_zone_masks()
-
     alpha[free_window] = MATRIX_INIT_ALPHA
     alpha[low_perm_srv] = LOW_SRV_INIT_ALPHA
     alpha[fracture] = FRACTURE_INIT_ALPHA
@@ -126,7 +108,6 @@ def build_initial_alpha():
 
 
 def make_bounds():
-    """Free layers inside the observation window; fixed background outside."""
     _, _, y_center = layer_bounds_y()
     bounds = []
     for yc in y_center:
@@ -143,17 +124,10 @@ def summarize_alpha(name, alpha):
     free_layers = np.where(free_window)[0]
     low_layers = np.where(low_perm_srv)[0]
     frac_layers = np.where(fracture)[0]
-
     print(f"{name}: min={alpha.min():.6f}, max={alpha.max():.6f}, active_layers={len(active)}")
     print(f"{name}: free window 1-based layer range {free_layers[0] + 1}..{free_layers[-1] + 1}")
-    print(
-        f"{name}: low SRV 1-based layers {low_layers[0] + 1}..{low_layers[-1] + 1}, "
-        f"alpha={LOW_SRV_INIT_ALPHA:.6f}"
-    )
-    print(
-        f"{name}: fracture 1-based layers {frac_layers[0] + 1}..{frac_layers[-1] + 1}, "
-        f"alpha={FRACTURE_INIT_ALPHA:.6f}"
-    )
+    print(f"{name}: low SRV 1-based layers {low_layers[0] + 1}..{low_layers[-1] + 1}")
+    print(f"{name}: fracture 1-based layers {frac_layers[0] + 1}..{frac_layers[-1] + 1}")
     if len(active):
         print(f"{name}: active 1-based layer range {active[0] + 1}..{active[-1] + 1}")
 
@@ -164,22 +138,27 @@ def save_initial_zone_table(alpha):
     zone[free_window] = "matrix_init"
     zone[low_perm_srv] = "low_srv"
     zone[fracture] = "fracture"
-
-    df = pd.DataFrame({
+    pd.DataFrame({
         "layer_1based": np.arange(1, TOTAL_LAYERS + 1),
         "y_bottom": y_bottom,
         "y_top": y_top,
         "y_center": y_center,
         "zone": zone,
         "alpha_initial": alpha,
-    })
-    df.to_csv(INITIAL_ZONE_FILE, index=False)
+    }).to_csv(INITIAL_ZONE_FILE, index=False)
+
+
+def l1_obj_and_grad(x):
+    deviation = x - ALPHA_REFERENCE
+    denom = np.sqrt(deviation * deviation + DELTA_L1 * DELTA_L1)
+    obj = BETA_L1 * np.sum(denom - DELTA_L1)
+    grad = BETA_L1 * deviation / denom
+    return obj, grad
 
 
 def objective_and_gradient(x):
     global iteration_count
     iteration_count += 1
-
     print(f"\n--- Iter {iteration_count}: evaluating obj+grad for {len(x)} layers ---")
 
     with open(HISTORY_FILE, "a") as f:
@@ -193,13 +172,13 @@ def objective_and_gradient(x):
         count=1,
     )
 
-    temp_input_path = os.path.join(WORKDIR, "optimize_temp_no_reg.i")
+    temp_input_path = os.path.join(WORKDIR, "optimize_temp_L1.i")
     with open(temp_input_path, "w") as f:
         f.write(new_moose_content)
 
-    obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_no_reg_out.csv")
-    grad_csv = os.path.join(OUTPUT_DIR, "optimize_temp_no_reg_out_OptimizationReporter_0001.csv")
-    log_path = os.path.join(OUTPUT_DIR, "simulation_opt_no_reg.log")
+    obj_csv = os.path.join(OUTPUT_DIR, "optimize_temp_L1_out.csv")
+    grad_csv = os.path.join(OUTPUT_DIR, "optimize_temp_L1_out_OptimizationReporter_0001.csv")
+    log_path = os.path.join(OUTPUT_DIR, "simulation_opt_L1.log")
     for p in (obj_csv, grad_csv, log_path):
         if os.path.exists(p):
             os.remove(p)
@@ -207,8 +186,8 @@ def objective_and_gradient(x):
     success, _, _ = runner.run(
         input_file_path=temp_input_path,
         output_directory=OUTPUT_DIR,
-        num_processors=20,
-        log_file_name="simulation_opt_no_reg.log",
+        num_processors=NUM_PROCESSORS,
+        log_file_name="simulation_opt_L1.log",
         stream_output=True,
         clean_output_dir=False,
     )
@@ -217,7 +196,6 @@ def objective_and_gradient(x):
         return 1e10, np.zeros_like(x)
 
     try:
-        # --- Objective (CSV preferred, log fallback) ---
         obj_val = None
         if os.path.exists(obj_csv):
             obj_df = pd.read_csv(obj_csv)
@@ -232,32 +210,31 @@ def objective_and_gradient(x):
         if obj_val is None:
             raise RuntimeError("Could not parse objective value from MOOSE output")
 
-        # --- Raw per-layer gradient ---
         grad_df = pd.read_csv(grad_csv)
         grad_cols = [f"grad_perm_{i+1}" for i in range(TOTAL_LAYERS)]
         grad_array = grad_df[grad_cols].iloc[-1].values.copy()
+
+        reg_obj, reg_grad = l1_obj_and_grad(x)
         grad_array *= GRAD_CORRECTION
 
-        total_obj = float(obj_val)
-        total_grad = grad_array
-
+        total_obj = float(obj_val) + reg_obj
+        total_grad = grad_array + reg_grad
         scaled_obj = (total_obj - BASELINE_OBJ) * SCALE_FACTOR
         scaled_grad = total_grad * SCALE_FACTOR
 
-        print(f"Obj raw: {obj_val:.4e} | Reg: 0.0000e+00 | Total: {total_obj:.4e}")
+        print(f"Obj raw: {obj_val:.4e} | Reg L1: {reg_obj:.4e} | Total: {total_obj:.4e}")
         print(f"Obj scaled: {scaled_obj:.4f}")
         print(f"||grad|| raw={np.linalg.norm(total_grad):.4e}  "
               f"scaled={np.linalg.norm(scaled_grad):.4e}")
 
         with open(GRADIENT_HISTORY_FILE, "a") as f:
             f.write(",".join(f"{v:.10e}" for v in scaled_grad) + "\n")
-
         with open(OBJECTIVE_HISTORY_FILE, "a") as f:
             f.write(
-                f"{iteration_count},{obj_val:.10e},{total_obj:.10e},"
-                f"{scaled_obj:.10e},{np.linalg.norm(scaled_grad):.10e}\n"
+                f"{iteration_count},{obj_val:.10e},{reg_obj:.10e},"
+                f"{total_obj:.10e},{scaled_obj:.10e},"
+                f"{np.linalg.norm(scaled_grad):.10e}\n"
             )
-
         return scaled_obj, scaled_grad
 
     except Exception as e:
@@ -267,7 +244,7 @@ def objective_and_gradient(x):
 
 if __name__ == "__main__":
     if RUN_MODE not in {"optimize", "init_probe"}:
-        raise RuntimeError("NO_REG_RUN_MODE must be either 'optimize' or 'init_probe'.")
+        raise RuntimeError("L1_RUN_MODE must be either 'optimize' or 'init_probe'.")
 
     x0 = build_initial_alpha()
     np.savetxt(INITIAL_ALPHA_FILE, x0)
@@ -279,11 +256,10 @@ if __name__ == "__main__":
     bounds = make_bounds()
 
     if RUN_MODE == "init_probe":
-        print("Evaluating objective/gradient once at the seeded initial model...")
         obj, grad = objective_and_gradient(x0)
         print(f"Initial probe scaled objective: {obj:.10e}")
         print(f"Initial probe scaled grad norm: {np.linalg.norm(grad):.10e}")
-        temp_i = os.path.join(WORKDIR, "optimize_temp_no_reg.i")
+        temp_i = os.path.join(WORKDIR, "optimize_temp_L1.i")
         if os.path.exists(temp_i):
             os.remove(temp_i)
         raise SystemExit(0)
@@ -309,7 +285,7 @@ if __name__ == "__main__":
     )
 
     print("\n" + "=" * 50)
-    print("Optimization Result Summary (No Reg, Fracture Init):")
+    print("Optimization Result Summary (L1):")
     print("=" * 50)
     print(res.message)
     print(f"Success       : {res.success}")
@@ -318,6 +294,6 @@ if __name__ == "__main__":
     np.savetxt(OPTIMIZED_ALPHA_FILE, res.x)
     print(f"Optimized alphas saved to: {OPTIMIZED_ALPHA_FILE}")
 
-    temp_i = os.path.join(WORKDIR, "optimize_temp_no_reg.i")
+    temp_i = os.path.join(WORKDIR, "optimize_temp_L1.i")
     if os.path.exists(temp_i):
         os.remove(temp_i)
