@@ -118,6 +118,16 @@ def main():
     parser.add_argument("--label", default=None, help="Output label. Defaults to history stem plus row.")
     parser.add_argument("--np", type=int, default=20, help="MPI process count.")
     parser.add_argument("--keep-inputs", action="store_true", help="Keep temporary qc_opt/qc_forward inputs.")
+    parser.add_argument(
+        "--skip-run",
+        action="store_true",
+        help="Do not run MOOSE; plot from an existing qc_output_<label> directory.",
+    )
+    parser.add_argument(
+        "--stream-output",
+        action="store_true",
+        help="Stream MOOSE stdout while the QC run is executing.",
+    )
     args = parser.parse_args()
 
     history_file = os.path.abspath(args.history_file)
@@ -131,20 +141,26 @@ def main():
     os.makedirs(output_dir, exist_ok=True)
 
     alpha = read_history_row(history_file, args.row)
-    parent_input = make_parent_input(label, alpha)
-    forward_input = make_forward_input(label)
+    alpha_path = os.path.join(WORKDIR, f"qc_alpha_{label}.txt")
+    np.savetxt(alpha_path, alpha)
 
-    runner = MooseRunner(moose_executable_path=MOOSE_EXE, mpiexec_path=MPIEXEC)
-    success, _, _ = runner.run(
-        input_file_path=parent_input,
-        output_directory=output_dir,
-        num_processors=args.np,
-        log_file_name=f"qc_{label}.log",
-        stream_output=True,
-        clean_output_dir=False,
-    )
-    if not success:
-        raise RuntimeError("MOOSE QC run failed.")
+    parent_input = None
+    forward_input = None
+    if not args.skip_run:
+        parent_input = make_parent_input(label, alpha)
+        forward_input = make_forward_input(label)
+
+        runner = MooseRunner(moose_executable_path=MOOSE_EXE, mpiexec_path=MPIEXEC)
+        success, _, _ = runner.run(
+            input_file_path=parent_input,
+            output_directory=output_dir,
+            num_processors=args.np,
+            log_file_name=f"qc_{label}.log",
+            stream_output=args.stream_output,
+            clean_output_dir=False,
+        )
+        if not success:
+            raise RuntimeError("MOOSE QC run failed.")
 
     strain_csv = find_strain_csv(output_dir)
     if strain_csv is None:
@@ -165,15 +181,13 @@ def main():
         "--output",
         plot_path,
         "--alpha-file",
-        os.path.join(WORKDIR, f"qc_alpha_{label}.txt"),
+        alpha_path,
         "--alpha-label",
         f"qc {label}",
     ]
-    alpha_path = os.path.join(WORKDIR, f"qc_alpha_{label}.txt")
-    np.savetxt(alpha_path, alpha)
     subprocess.run(plot_cmd, check=True)
 
-    if not args.keep_inputs:
+    if not args.keep_inputs and not args.skip_run:
         for path in (parent_input, forward_input):
             if os.path.exists(path):
                 os.remove(path)
