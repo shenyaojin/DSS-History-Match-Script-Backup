@@ -18,12 +18,12 @@ def process_tensor_data(output_dir: str, fig_dir: str):
 
     # Load pressure gauge data
     pg_data_orig = Data1DGauge()
-    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/gauge_data_for_simulation_synthetic_fault_pressure.npz")
+    pg_data_orig.load_npz("data_fervo/fiberis_format/post_processing/synthetic_data_simulation.npz")
 
     # Load the real start time
     try:
         time_profile = Data1D()
-        time_profile.load_npz("data_fervo/fiberis_format/post_processing/gauge_data_for_simulation_synthetic_fault_pressure.npz")
+        time_profile.load_npz("data_fervo/fiberis_format/post_processing/synthetic_data_simulation.npz")
         real_start_time = time_profile.start_time
         print(f"Successfully loaded real start time: {real_start_time}")
     except Exception as e:
@@ -193,4 +193,3 @@ if __name__ == "__main__":
     process_tensor_data(moose_output_directory, figures_directory)
 
     print("\n--- All processing complete. ---")
-
