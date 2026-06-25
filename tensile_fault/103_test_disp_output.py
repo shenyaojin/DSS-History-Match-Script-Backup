@@ -15,8 +15,12 @@ import os
 
 # In this case, let's just render this baseline model to see if it works
 project_name = "1124_misfit_func"
+shift_list_ft = np.array([60.0, 80.0, 100.0, 120.0, 140.0, 160.0])
 builder = build_baseline_model(project_name=project_name,
+                               shift_list_ft=shift_list_ft,
+                               angle=30,
                                )
+print(f"Configured fiber line postprocessors at offsets ft: {shift_list_ft}")
 
 # Output the model
 output_dir = f"output/{project_name}"

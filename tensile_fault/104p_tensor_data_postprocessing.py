@@ -58,13 +58,17 @@ def process_tensor_data(output_dir: str, fig_dir: str):
             plt.show()
         # ------------------------------------
 
-        # Rotate the tensor field by 30 degrees counter-clockwise
-        rotate_degree = 30
-        tensor_data.rotate_tensor(rotate_degree)
-        print(f"Rotated tensor by {rotate_degree} degrees.")
-
-        # Extract the yy-component (now aligned with the monitor well)
-        strain_yy_data: Data2D = tensor_data.get_component('yy')
+        # The model generator defines the fiber sampler as 30 degrees clockwise
+        # from +y. Project directly onto that line instead of relying on an
+        # ambiguous tensor rotation convention.
+        fiber_angle_from_y = 30
+        strain_yy_data: Data2D = tensor_data.get_directional_component(
+            fiber_angle_from_y,
+            reference_axis="y",
+            clockwise=True,
+            name=f"{sampler_name}_fiber_aligned"
+        )
+        print(f"Projected tensor along fiber direction: {fiber_angle_from_y} deg clockwise from +y.")
 
         # Replace the simulation start time with the real start time
         strain_yy_data.set_start_time(real_start_time)

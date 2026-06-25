@@ -24,6 +24,7 @@ if str(FIBERIS_SRC) not in sys.path:
     sys.path.insert(0, str(FIBERIS_SRC))
 
 from fiberis.analyzer.Data1D.Data1D_Gauge import Data1DGauge
+from fiberis.analyzer.TensorProcessor.coreT2D import Tensor2D
 from fiberis.io.reader_moose_tensor_from_data2d import MOOSETensorFromData2D
 from fiberis.moose.templates.baseline_model_generator_fervo import (
     post_processor_info_extractor,
@@ -41,6 +42,7 @@ SOURCE_PRESSURE_PATH = (
     / "synthetic_data_simulation.npz"
 )
 PSI_TO_PA = 6894.76
+FIBER_ANGLE_FROM_Y_DEG = 30.0
 
 
 def set_sim_start_time(dataframes, start_time):
@@ -77,6 +79,32 @@ def compute_strain_rate_from_strain(strain_xx, strain_yy, strain_xy):
         rate_data = np.gradient(dataframe.data, dataframe.taxis, axis=1)
         strain_rates.append(clone_like(dataframe, rate_data, name))
     return strain_rates
+
+
+def tensor2d_from_components(component_xx, component_yy, component_xy, name):
+    tensor = np.zeros((component_xx.data.shape[0], component_xx.data.shape[1], 2, 2))
+    tensor[:, :, 0, 0] = component_xx.data
+    tensor[:, :, 1, 1] = component_yy.data
+    tensor[:, :, 0, 1] = component_xy.data
+    tensor[:, :, 1, 0] = component_xy.data
+    return Tensor2D(
+        data=tensor,
+        taxis=component_xx.taxis,
+        daxis=component_xx.daxis,
+        dim=2,
+        start_time=component_xx.start_time,
+        name=name,
+    )
+
+
+def fiber_aligned_component(component_xx, component_yy, component_xy, name):
+    tensor = tensor2d_from_components(component_xx, component_yy, component_xy, name)
+    return tensor.get_directional_component(
+        FIBER_ANGLE_FROM_Y_DEG,
+        reference_axis="y",
+        clockwise=True,
+        name=f"{name}_fiber_aligned",
+    )
 
 
 def load_or_compute_strain_rate(output_dir, strain_xx, strain_yy, strain_xy, start_time):
@@ -165,6 +193,16 @@ def save_strain_rate_components(strain_rate_xx, strain_rate_yy, strain_rate_xy, 
         plot_data2d(ax, component, component.data, title, "bwr", clim, "strain rate (1/s)")
     fig.suptitle(f"Simulated Strain-Rate Components ({source_label})")
     path = FIG_DIR / "strain_rate_components.png"
+    fig.savefig(path, dpi=300)
+    plt.close(fig)
+    return path
+
+
+def save_fiber_aligned_map(dataframe, filename, title, clabel):
+    clim = finite_limits(dataframe.data, percentile=99.0, symmetric=True)
+    fig, ax = plt.subplots(figsize=(11.5, 5.8), constrained_layout=True)
+    plot_data2d(ax, dataframe, dataframe.data, title, "bwr", clim, clabel)
+    path = FIG_DIR / filename
     fig.savefig(path, dpi=300)
     plt.close(fig)
     return path
@@ -360,10 +398,29 @@ def main():
         strain_xy,
         source_pressure.start_time,
     )
+    fiber_strain = fiber_aligned_component(strain_xx, strain_yy, strain_xy, "strain")
+    fiber_strain_rate = fiber_aligned_component(
+        strain_rate_xx,
+        strain_rate_yy,
+        strain_rate_xy,
+        "strain_rate",
+    )
 
     paths = [
         save_strain_components(strain_xx, strain_yy, strain_xy),
         save_strain_rate_components(strain_rate_xx, strain_rate_yy, strain_rate_xy, strain_rate_source),
+        save_fiber_aligned_map(
+            fiber_strain,
+            "fiber_aligned_strain.png",
+            f"Fiber-Aligned Strain ({FIBER_ANGLE_FROM_Y_DEG:g} deg clockwise from +y)",
+            "strain",
+        ),
+        save_fiber_aligned_map(
+            fiber_strain_rate,
+            "fiber_aligned_strain_rate.png",
+            f"Fiber-Aligned Strain Rate ({FIBER_ANGLE_FROM_Y_DEG:g} deg clockwise from +y)",
+            "strain rate (1/s)",
+        ),
         save_pressure_map(pressure_dataframe),
         save_pressure_source_comparison(pressure_dataframe, source_pressure),
         save_centerline_traces(strain_xx, strain_yy, strain_xy),
@@ -372,7 +429,17 @@ def main():
     ]
     summary_path = write_summary(
         paths,
-        [pressure_dataframe, strain_xx, strain_yy, strain_xy, strain_rate_xx, strain_rate_yy, strain_rate_xy],
+        [
+            pressure_dataframe,
+            strain_xx,
+            strain_yy,
+            strain_xy,
+            fiber_strain,
+            strain_rate_xx,
+            strain_rate_yy,
+            strain_rate_xy,
+            fiber_strain_rate,
+        ],
     )
 
     print(f"Saved QC figures to: {FIG_DIR}")
