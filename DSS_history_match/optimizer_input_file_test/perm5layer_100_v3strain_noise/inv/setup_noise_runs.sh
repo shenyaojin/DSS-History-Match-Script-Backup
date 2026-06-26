@@ -1,9 +1,13 @@
 #!/usr/bin/env bash
-# Stage one self-contained L1 inversion run folder per noise level.
+# Stage one self-contained L1 inversion run folder per noise dataset.
 #
-# Each inv/noise_<tag>/ gets its own copy of the v2 L1 run set plus the noisy
-# observation file renamed to measurement_data.csv (the name optimize.i expects).
-# Because the runner uses its own directory as WORKDIR, the four runs are fully
+# Two families are staged:
+#   peak    -> inv/noise_<tag>/      from measurement_data_noise_<tag>.csv
+#   median  -> inv/mednoise_<tag>/   from measurement_data_mednoise_<tag>.csv
+#
+# Each run folder gets its own copy of the v2 L1 run set plus the noisy
+# observation renamed to measurement_data.csv (the name optimize.i expects).
+# Because the runner uses its own directory as WORKDIR, all runs are fully
 # independent and never overwrite each other's histories/outputs.
 #
 # Re-running this script is safe: it refreshes the template files and the
@@ -31,7 +35,17 @@ TEMPLATE_FILES=(
   "run_parameter_history_qc.py"
 )
 
-TAGS=("0p5pct" "1pct" "2pct" "5pct")
+# run_folder : noisy_csv_basename  (in noise_adding/)
+RUNS=(
+  "noise_0p5pct:measurement_data_noise_0p5pct"
+  "noise_1pct:measurement_data_noise_1pct"
+  "noise_2pct:measurement_data_noise_2pct"
+  "noise_5pct:measurement_data_noise_5pct"
+  "mednoise_1pct:measurement_data_mednoise_1pct"
+  "mednoise_2pct:measurement_data_mednoise_2pct"
+  "mednoise_5pct:measurement_data_mednoise_5pct"
+  "mednoise_10pct:measurement_data_mednoise_10pct"
+)
 
 echo "v2 template source : $V2_INV"
 echo "noise data source  : $NOISE_DIR"
@@ -44,9 +58,12 @@ for f in "${TEMPLATE_FILES[@]}"; do
   fi
 done
 
-for tag in "${TAGS[@]}"; do
-  run_dir="$INV_DIR/noise_${tag}"
-  noisy_csv="$NOISE_DIR/measurement_data_noise_${tag}.csv"
+for entry in "${RUNS[@]}"; do
+  folder="${entry%%:*}"
+  stem="${entry##*:}"
+  run_dir="$INV_DIR/$folder"
+  noisy_csv="$NOISE_DIR/${stem}.csv"
+  noisy_meta="$NOISE_DIR/${stem}.meta"
   if [[ ! -f "$noisy_csv" ]]; then
     echo "ERROR: missing noisy data $noisy_csv (run noise_adding/add_noise.py first)" >&2
     exit 1
@@ -56,9 +73,9 @@ for tag in "${TAGS[@]}"; do
     cp -f "$V2_INV/$f" "$run_dir/$f"
   done
   cp -f "$noisy_csv" "$run_dir/measurement_data.csv"
-  cp -f "$NOISE_DIR/measurement_data_noise_${tag}.meta" "$run_dir/measurement_data.meta"
-  echo "staged: $run_dir  (measurement_data.csv <- measurement_data_noise_${tag}.csv)"
+  [[ -f "$noisy_meta" ]] && cp -f "$noisy_meta" "$run_dir/measurement_data.meta"
+  echo "staged: $folder  (measurement_data.csv <- ${stem}.csv)"
 done
 
 echo ""
-echo "Done. Each inv/noise_<tag>/ is ready to run independently."
+echo "Done. Each inv/{noise,mednoise}_<tag>/ is ready to run independently."

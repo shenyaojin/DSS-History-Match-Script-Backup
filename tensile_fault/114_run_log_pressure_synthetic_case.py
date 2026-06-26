@@ -35,6 +35,10 @@ spec.loader.exec_module(case)
 
 PROJECT_NAME = "0625_perpendicular_monitor_5sixth_log_pressure_synthetic"
 MATRIX_PERM = 1e-18
+CURVE_STYLE_NAME = "Log-Style"
+CURVE_SHORT_NAME = "log"
+PRESSURE_LINE_LABEL = "Synthetic log injection"
+PLOT_TITLE_PREFIX = "Synthetic Log-Pressure Case"
 REFERENCE_PRESSURE_PATH = (
     REPO_ROOT
     / "data_fervo"
@@ -75,7 +79,7 @@ def create_log_pressure_curve() -> Data1DGauge:
         data=start_psi + (end_psi - start_psi) * ramp,
         taxis=reference.taxis.copy(),
         start_time=reference.start_time,
-        name="synthetic_log_pressure",
+        name=f"synthetic_{CURVE_SHORT_NAME}_pressure",
     )
     SYNTHETIC_PRESSURE_PATH.parent.mkdir(parents=True, exist_ok=True)
     pressure.savez(str(SYNTHETIC_PRESSURE_PATH))
@@ -105,11 +109,11 @@ def plot_synthetic_pressure(pressure: Data1DGauge) -> Path:
         color="black",
         linewidth=2.2,
     )
-    ax.set_title("Synthetic Log-Style Injection Pressure")
+    ax.set_title(f"Synthetic {CURVE_STYLE_NAME} Injection Pressure")
     ax.set_xlabel("Simulation time (hours)")
     ax.set_ylabel("Pressure (psi)")
     ax.grid(True, linestyle=":", alpha=0.35)
-    path = FIG_DIR / "synthetic_log_injection_curve.png"
+    path = FIG_DIR / f"synthetic_{CURVE_SHORT_NAME}_injection_curve.png"
     fig.savefig(path, dpi=300)
     plt.close(fig)
     return path
@@ -185,7 +189,7 @@ def plot_waterfall_with_log_pressure(
         pressure.data,
         color="black",
         linewidth=2.1,
-        label="Synthetic log injection",
+        label=PRESSURE_LINE_LABEL,
     )
     ax_pressure.set_ylabel("Pressure (psi)")
     ax_pressure.set_xlabel("Datetime")
@@ -206,15 +210,15 @@ def plot_coplots(pressure: Data1DGauge) -> list[Path]:
         plot_waterfall_with_log_pressure(
             pressure,
             case.EXPORT_DIR / "monitor_normal_strain_no_rotation.npz",
-            "synthetic_log_strain_waterfall_with_pressure_datetime.png",
-            "Synthetic Log-Pressure Case: Strain Waterfall",
+            f"synthetic_{CURVE_SHORT_NAME}_strain_waterfall_with_pressure_datetime.png",
+            f"{PLOT_TITLE_PREFIX}: Strain Waterfall",
             "strain_yy, baseline corrected",
         ),
         plot_waterfall_with_log_pressure(
             pressure,
             case.EXPORT_DIR / "monitor_normal_strain_rate_no_rotation.npz",
-            "synthetic_log_strain_rate_waterfall_with_pressure_datetime.png",
-            "Synthetic Log-Pressure Case: Strain-Rate Waterfall",
+            f"synthetic_{CURVE_SHORT_NAME}_strain_rate_waterfall_with_pressure_datetime.png",
+            f"{PLOT_TITLE_PREFIX}: Strain-Rate Waterfall",
             "strain_rate_yy (1/s)",
         ),
     ]
