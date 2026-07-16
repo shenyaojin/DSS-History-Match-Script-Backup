@@ -47,7 +47,12 @@ OUTPUT_PREFIX = "LFDAS_G4-PB"
 SOURCE_DIRS = {
     "202501": "NPY_G4-PB_MM_UTC_202501",
     "202502": "NPY_G4-PB_MM_UTC_202502",
+    "202503": "NPY_G4-PB_MM_UTC_202503",
 }
+
+# Skip a month whose output .npz already exists (idempotent re-runs). Set True to
+# rebuild everything, or delete a specific .npz to regenerate just that month.
+OVERWRITE_EXISTING = False
 
 # --- Acquisition constants (from the 07-13-2026 reference notebook) --------- #
 TIME_SAMPLE_OFFSETS_S = np.arange(5, 60, 10)   # 6 samples/file, offsets in seconds
@@ -187,6 +192,12 @@ def main():
         dir_path = os.path.abspath(os.path.join(SOURCE_ROOT, sub_dir))
         if not os.path.isdir(dir_path):
             print(f"Warning: source directory not found, skipping: {dir_path}")
+            continue
+
+        out_file = os.path.join(output_path, f"{OUTPUT_PREFIX}_{label}.npz")
+        if os.path.exists(out_file) and not OVERWRITE_EXISTING:
+            print(f"=== {label}: output exists, skipping "
+                  f"(set OVERWRITE_EXISTING=True to rebuild) ===")
             continue
 
         print(f"=== Processing {label} ({sub_dir}) ===")
