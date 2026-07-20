@@ -12,7 +12,7 @@ Each source ``.npy`` has shape ``(6, 2304)``:
   * columns -> the 2304 fiber channels.
 
 Processing (kept consistent with the reference notebook
-``from_pc/LFDAS_NPY_Vis_07-13-2026.ipynb``):
+``from_pc/LFDAS_NPY_Vis_07-13-2026-1.ipynb``, the corrected reference):
   1. Raw counts are scaled to strain rate in nanostrain/s:  116 * fs / GL / 8192.
   2. The channel index is calibrated to Gold 4-PB measured depth (ft):
         MD = DEPTH_SLOPE * channel + DEPTH_LEAD
@@ -45,9 +45,10 @@ OUTPUT_PREFIX = "LFDAS_G4-PB"
 
 # {output label : source sub-directory under SOURCE_ROOT}. One .npz per entry.
 SOURCE_DIRS = {
-    "202501": "NPY_G4-PB_MM_UTC_202501",
-    "202502": "NPY_G4-PB_MM_UTC_202502",
-    "202503": "NPY_G4-PB_MM_UTC_202503",
+    "202501": "NPY_G4-PB_MM_UTC_202501",       # Jan 25-29
+    "202502": "NPY_G4-PB_MM_UTC_202502",       # early Feb (Feb 1-7)
+    "202502_late": "BKP_FEBDATA",              # late Feb (Feb 24-28); joins 202503 into a continuous Feb24->Mar7 record
+    "202503": "NPY_G4-PB_MM_UTC_202503",       # Mar 1-7
 }
 
 # Skip a month whose output .npz already exists (idempotent re-runs). Set True to

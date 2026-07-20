@@ -22,7 +22,7 @@ reduction before plotting so short-lived strain-rate transients are preserved
 rather than aliased away.
 
 Processing constants follow the reference notebook
-``from_pc/LFDAS_NPY_Vis_07-13-2026.ipynb``.
+``from_pc/LFDAS_NPY_Vis_07-13-2026-1.ipynb`` (the corrected reference).
 
 Author: Shenyao Jin, shenyaojin@mines.edu
 """
