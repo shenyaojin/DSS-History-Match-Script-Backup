@@ -15,6 +15,7 @@ MD 10200-10500 window. Emits:
 
 T1 = 2025-02-24 15:00 to match the unified forward model (poro_dd_real_ls).
 """
+import argparse
 import os
 from pathlib import Path
 
@@ -36,9 +37,9 @@ SEGMENTS = ["LFDAS_G4-PB_202502_late.npz", "LFDAS_G4-PB_202503.npz"]
 OUT = REPO / "output" / "inversion"; OUT.mkdir(parents=True, exist_ok=True)
 FIG = REPO / "figs" / "tensile_fault_qc" / "inversion"; FIG.mkdir(parents=True, exist_ok=True)
 
-T1 = pd.Timestamp("2025-02-24 15:00")     # match the forward model
+T1 = pd.Timestamp("2025-02-24 12:00")
 T2 = pd.Timestamp("2025-02-28 00:00")
-T3 = pd.Timestamp("2025-03-03 22:00")
+T3 = pd.Timestamp("2025-03-04 00:00")
 MD_LO, MD_HI = 10200.0, 10500.0
 DEMEAN_LO, DEMEAN_HI = 1800.0, 5000.0
 MEDFILT = (3, 7)
@@ -86,7 +87,19 @@ def clean_rate(das):
     return rate, daxis, times
 
 
-def main():
+def main(args=None):
+    # Optional overrides; defaults reproduce the original behaviour byte-for-byte.
+    global T1, T2, T3
+    if args is not None:
+        T1 = pd.Timestamp(args.t1); T2 = pd.Timestamp(args.t2); T3 = pd.Timestamp(args.t3)
+    out_name = (args.out if args is not None else "observation.npz")
+    stem = Path(out_name).stem
+    suffix = "" if stem == "observation" else "_" + stem.replace("observation_", "")
+    obs_path = OUT / out_name
+    meas_path = OUT / f"measurement_data{suffix}.csv"
+    fig_path = FIG / f"observation_strain_waterfall{suffix}.png"
+    print(f"T1={T1}  T2={T2}  T3={T3}  ->  {obs_path.name}")
+
     das = load_merged()
     print(f"merged {das.data.shape}, {das.start_time} .. {das.get_end_time()}")
     rate, daxis, times = clean_rate(das)
@@ -119,7 +132,7 @@ def main():
     centers = pd.DatetimeIndex(centers)
     print(f"{strain_4h.shape[1]} 4-hour profiles; peak profile |eps|={np.nanmax(np.abs(strain_4h)):.4f} me")
 
-    np.savez(OUT / "observation.npz",
+    np.savez(obs_path,
              strain_4h=strain_4h.astype(np.float32), md_ft=md,
              window_starts=np.array([str(c) for c in centers]),
              strain_wf=strain.astype(np.float32),
@@ -135,8 +148,8 @@ def main():
             rows.append((FIBER_X, y_model, 0.0, t_rel, float(strain_4h[i, j])))
     pd.DataFrame(rows, columns=["measurement_xcoord", "measurement_ycoord",
                                 "measurement_zcoord", "measurement_time",
-                                "measurement_values"]).to_csv(OUT / "measurement_data.csv", index=False)
-    print("wrote", OUT / "observation.npz", "and", OUT / "measurement_data.csv")
+                                "measurement_values"]).to_csv(meas_path, index=False)
+    print("wrote", obs_path, "and", meas_path)
 
     # QC figure: strain waterfall + 4h profile overlay
     fig, ax = plt.subplots(figsize=(14, 5.5), constrained_layout=True)
@@ -150,9 +163,14 @@ def main():
         ax.axvline(mdates.date2num(tt), color="green", ls="--", lw=1.4)
         ax.text(mdates.date2num(tt), 1.01, lb, transform=ax.get_xaxis_transform(), color="green", ha="center", fontweight="bold")
     ax.xaxis.set_major_formatter(mdates.DateFormatter("%m/%d")); plt.colorbar(im, ax=ax, label="me")
-    fig.savefig(FIG / "observation_strain_waterfall.png", dpi=140)
-    print("saved", FIG / "observation_strain_waterfall.png")
+    fig.savefig(fig_path, dpi=140)
+    print("saved", fig_path)
 
 
 if __name__ == "__main__":
-    main()
+    ap = argparse.ArgumentParser(description="Build the observed DAS strain target from the LFDAS npz.")
+    ap.add_argument("--t1", default="2025-02-24 12:00")
+    ap.add_argument("--t2", default="2025-02-28 00:00")
+    ap.add_argument("--t3", default="2025-03-04 00:00")
+    ap.add_argument("--out", default="observation.npz", help="filename inside output/inversion/")
+    main(ap.parse_args())
