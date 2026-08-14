@@ -115,7 +115,7 @@ def main(args=None):
 
     # crop to T1..T3
     tm = (times >= T1) & (times <= T3)
-    strain = strain[:, tm]; twf = times[tm]
+    strain = strain[:, tm]; rate_wf = rate[:, tm]; twf = times[tm]
     print(f"strain waterfall {strain.shape}, MD {md.min():.0f}..{md.max():.0f}, peak |eps|={np.nanmax(np.abs(strain)):.4f} me")
 
     # 4-hour-mean profiles, anchored at window start
@@ -136,6 +136,7 @@ def main(args=None):
              strain_4h=strain_4h.astype(np.float32), md_ft=md,
              window_starts=np.array([str(c) for c in centers]),
              strain_wf=strain.astype(np.float32),
+             rate_wf=rate_wf.astype(np.float32),
              times=np.array([str(t) for t in twf]),
              T1=str(T1), T2=str(T2), T3=str(T3))
 
