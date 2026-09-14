@@ -92,7 +92,9 @@ def main():
             grid = np.full((len(BG_LEVELS), len(W_LEVELS)), np.nan)
             for a, i in enumerate(BG_LEVELS):
                 for b, j in enumerate(W_LEVELS):
-                    sub = df[(df.bg == i) & (df.white == j) & (df.shift == k)]
+                    # NB: df["shift"] not df.shift — .shift is a DataFrame method
+                    # and df.shift == k would silently match nothing (blank heatmap).
+                    sub = df[(df["bg"] == i) & (df["white"] == j) & (df["shift"] == k)]
                     if len(sub):
                         grid[a, b] = sub[metric].iloc[0]
             im = ax.imshow(grid, origin="lower", cmap="magma_r", vmin=0, vmax=vmax, aspect="auto")

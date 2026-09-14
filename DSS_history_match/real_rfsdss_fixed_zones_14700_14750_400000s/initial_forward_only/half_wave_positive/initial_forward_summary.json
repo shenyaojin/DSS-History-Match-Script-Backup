@@ -1,0 +1,18 @@
+{
+  "theta": [
+    -15.5,
+    -15.5,
+    -15.5,
+    -16.5,
+    -16.5
+  ],
+  "optimized": false,
+  "forward_only": true,
+  "n_time": 130,
+  "n_solver_steps": 129,
+  "native_n_time": 3318,
+  "simulation_min": 0.0,
+  "simulation_max": 2.871679464315127e-05,
+  "data_misfit": 2.056043494311658e-06,
+  "source": "Half-wave transform of the identical unrectified initial-model forward solution"
+}

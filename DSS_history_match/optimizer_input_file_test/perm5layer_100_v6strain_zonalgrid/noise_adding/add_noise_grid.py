@@ -72,38 +72,83 @@ def median_channel_peak(df):
 
 
 def load_real_bg_residual():
-    """Return the detrended real DSS background block (n_ch x n_t, strain)."""
-    d = np.load(DAS_NPZ, allow_pickle=True)
-    raw = np.asarray(d["data"], dtype=float)          # (45, 4620) millistrain, ch x t
-    lo, hi = DAS_BG_TCOLS
-    bg = raw[:, lo:hi] * 1e-3                          # -> dimensionless strain
-    tt = np.arange(bg.shape[1], dtype=float)
-    res = np.empty_like(bg)
-    for c in range(bg.shape[0]):
-        p = np.polyfit(tt, bg[c], 1)                  # remove within-window linear drift
-        res[c] = bg[c] - np.polyval(p, tt)
-    return res                                        # ~ real high-freq + short-corr texture
+    """Return first differences, excluding the integration startup increment."""
+    with np.load(DAS_NPZ, allow_pickle=True) as d:
+        raw = np.asarray(d["data"], dtype=float)
+    block = raw[:, 1:42] * 1e-3
+    return np.diff(block, axis=1)[:, 1:]
 
 
 def real_texture(rng, n_time, n_chan, bg_res):
-    """Unit-std (130 x 500) field carrying real per-channel temporal texture.
-
-    Each output channel gets a random real channel's residual trace, resampled
-    (linear) from the 41-sample real window onto the n_time synthetic steps, so
-    the real temporal correlation / wander is preserved; amplitude is normalised.
-    """
-    n_rc, n_rt = bg_res.shape
-    xr = np.linspace(0.0, 1.0, n_rt)
-    xo = np.linspace(0.0, 1.0, n_time)
-    T = np.empty((n_time, n_chan))
-    for c in range(n_chan):
-        idx = int(rng.integers(n_rc))
-        T[:, c] = np.interp(xo, xr, bg_res[idx])
+    """Bootstrap independent standardized increments with real channel scales."""
+    s_real = bg_res.std(axis=1)
+    if np.any(s_real <= 0):
+        raise ValueError("Real DSS channel has zero increment variance")
+    pool = ((bg_res - bg_res.mean(axis=1, keepdims=True)) /
+            s_real[:, None]).ravel()
+    real_channels = rng.integers(len(s_real), size=n_chan)
+    indices = rng.integers(pool.size, size=(n_time, n_chan))
+    T = pool[indices] * s_real[real_channels][None, :] / np.median(s_real)
     T -= T.mean()
-    s = T.std()
-    if s > 0:
-        T /= s
+    T /= T.std()
     return T
+
+
+def mean_lag1(field):
+    """Mean of per-channel Pearson lag-1 correlations, including t=0."""
+    x = field[:-1] - field[:-1].mean(axis=0)
+    y = field[1:] - field[1:].mean(axis=0)
+    return float(np.mean(np.sum(x*y, axis=0) /
+                         np.sqrt(np.sum(x*x, axis=0)*np.sum(y*y, axis=0))))
+
+
+def build_extraction_qc(diag, bg_res):
+    import matplotlib.pyplot as plt
+    with np.load(DAS_NPZ, allow_pickle=True) as d:
+        raw = np.asarray(d["data"], dtype=float)
+    block = raw[:, 1:42] * 1e-3
+    centered = bg_res - bg_res.mean(axis=1, keepdims=True)
+    native_std = bg_res.std(axis=1)
+    pool = (centered / native_std[:, None]).ravel()
+    d = diag[(3, 3)]
+    A, B = d["noise_a"], d["noise_b"]
+    ac = mean_lag1(A)
+    fig, axes = plt.subplots(2, 3, figsize=(19, 10), constrained_layout=True)
+    ax = axes.ravel()
+    lim = np.percentile(np.abs(raw), 99)
+    im = ax[0].imshow(raw, aspect="auto", origin="lower", cmap="RdBu_r",
+                      vmin=-lim, vmax=lim, extent=(-0.5, 4619.5, -0.5, 44.5))
+    ax[0].axvspan(1, 41, color="lime", alpha=0.8)
+    ax[0].annotate("Extract indices 1–41 (1–41 min)", xy=(21, 35), xytext=(700, 36),
+                   arrowprops=dict(arrowstyle="->", color="black"), fontsize=9)
+    ax[0].set(title="(a) Full cumulative DSS waterfall", xlabel="Time index (60 s/sample)", ylabel="Real channel")
+    fig.colorbar(im, ax=ax[0], label="mstrain (color clipped at 99th percentile)")
+    for c in [0, 11, 22, 33, 44]:
+        ax[1].plot(np.arange(1,42), block[c]*1e9, label=f"ch {c}")
+        ax[2].plot(np.arange(3,42), centered[c]*1e9, label=f"ch {c}", lw=1)
+    ax[1].set(title="(b) Extracted cumulative strain: drift", xlabel="Time index / minutes", ylabel="Cumulative strain [nε]")
+    ax[1].legend(fontsize=8, ncol=2)
+    ax[2].axhline(0, color="black", lw=0.6)
+    ax[2].set(title=f"(c) First differences, channel-centered\nMedian native std = {np.median(native_std):.2e} strain", xlabel="Increment ending at time index (startup dropped)", ylabel="Increment [nε]")
+    ax[3].hist(pool, bins=65, density=True, alpha=0.65, label=f"DSS empirical pool (n={pool.size})")
+    xx=np.linspace(min(pool.min(), -4), max(pool.max(),4), 500)
+    ax[3].plot(xx, np.exp(-xx**2/2)/np.sqrt(2*np.pi), label="Gaussian N(0,1)")
+    ax[3].set_yscale("log")
+    ax[3].set(title="(d) Standardized increments: distribution / tails", xlabel="Increment / channel std", ylabel="Probability density (log scale)")
+    ax[3].legend(fontsize=8)
+    lim=np.percentile(np.abs(A*1e9),99)
+    im=ax[4].imshow(A*1e9, aspect="auto", origin="lower", cmap="RdBu_r", vmin=-lim,vmax=lim)
+    ax[4].set(title="(e) bg3 A: independent bootstrap, 130 × 500", xlabel="Output channel", ylabel="Output time index")
+    fig.colorbar(im, ax=ax[4], label="Noise [nε], 99th-percentile color limits")
+    ax[5].plot(A[:,0]*1e9, label="A: DSS bootstrap", lw=1)
+    ax[5].plot(B[:,0]*1e9, label="B: Gaussian white", lw=1, alpha=0.7)
+    ax[5].set(title=f"(f) A lag1 autocorr = {ac:.5f} (channel mean)\nOld ≈ 0.97; one output channel shown", xlabel="Output time index", ylabel="Noise [nε]")
+    ax[5].legend(fontsize=8)
+    fig.suptitle("DSS noise extraction: cumulative strain → increments → independent bootstrap", fontsize=16)
+    out=os.path.join(NOISE_DIR,"dss_noise_extraction.png")
+    fig.savefig(out,dpi=170)
+    plt.close(fig)
+    print(f"Wrote DSS extraction figure: {out}")
 
 
 def main():
@@ -123,7 +168,7 @@ def main():
 
     bg_res = load_real_bg_residual()
     print(f"REF (median channel peak): {ref:.6e}  ({ref*1e9:.0f} nε)")
-    print(f"real DSS bg residual block: {bg_res.shape}  std={bg_res.std():.3e} strain "
+    print(f"real DSS first-difference block: {bg_res.shape}  std={bg_res.std():.3e} strain "
           f"(native, before scaling)")
     print(f"LEVELS_A (real texture) x REF: {[f'{p*100:.0f}%={p*ref*1e9:.0f}nε' for p in LEVELS_A]}")
     print(f"LEVELS_B (white)        x REF: {[f'{p*100:.0f}%={p*ref*1e9:.0f}nε' for p in LEVELS_B]}\n")
@@ -136,6 +181,11 @@ def main():
             sigma_a = fa * ref
             sigma_b = fb * ref
             noise_a = sigma_a * real_texture(rng, n_time, n_chan, bg_res)
+            noise_a[0, :] = 0.0
+            ac = mean_lag1(noise_a)
+            print(f"bg{i}_w{j}: A mean channel lag1 autocorr = {ac:.6f}")
+            if abs(ac) >= 0.03:
+                raise ValueError(f"A lag1 acceptance failed: {ac}")
             noise_b = sigma_b * rng.standard_normal((n_time, n_chan))
             noise = noise_a + noise_b
             noise[0, :] = 0.0                          # keep t=0 reference frame
@@ -179,6 +229,7 @@ def main():
 
     pd.DataFrame(summary).to_csv(os.path.join(NOISE_DIR, "grid_noise_summary.csv"), index=False)
     build_qc(diag, ref, chans, times)
+    build_extraction_qc(diag, bg_res)
     print(f"\nWrote 9 datasets + summary to {NOISE_DIR}")
 
 

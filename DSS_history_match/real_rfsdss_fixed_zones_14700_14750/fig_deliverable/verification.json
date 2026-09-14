@@ -1,0 +1,24 @@
+[
+  {
+    "case": "unrectified",
+    "source": "unrectified/solver_output/evaluate_out_forward0_csv_data_0345.csv",
+    "J_initial": 5.3584089034189e-10,
+    "J_best": 5.2965493386034e-10,
+    "reduction_percent": 1.1544390495475398,
+    "L1": 1.7763949315889893e-14,
+    "L1_percent_of_data": 0.0033538721496312747,
+    "rmse_microstrain": 0.14307255466365346,
+    "initial_frame_energy": 1.2039772237570627e-13
+  },
+  {
+    "case": "half_wave_positive",
+    "source": "half_wave_positive/solver_output/evaluate_out_forward0_csv_data_0345.csv",
+    "J_initial": 3.3509463666499003e-10,
+    "J_best": 2.9856320190474005e-10,
+    "reduction_percent": 10.901826159865458,
+    "L1": 2.944868016198955e-14,
+    "L1_percent_of_data": 0.009863466084941534,
+    "rmse_microstrain": 0.1074182222425408,
+    "initial_frame_energy": 0.0
+  }
+]

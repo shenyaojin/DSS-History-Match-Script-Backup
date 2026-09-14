@@ -1,0 +1,1 @@
+User corrected scope: only original initial-alpha forward comparisons. Do not run gradient checks or inversion.

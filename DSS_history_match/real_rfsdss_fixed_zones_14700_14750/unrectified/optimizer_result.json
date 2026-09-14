@@ -1,0 +1,14 @@
+{
+  "success": true,
+  "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+  "iterations": 16,
+  "evaluations": 20,
+  "theta": [
+    -15.524180754265716,
+    -14.90644189659993,
+    -17.34235890896611,
+    -18.0,
+    -16.579106589984885
+  ],
+  "objective": 0.4731746044008016
+}

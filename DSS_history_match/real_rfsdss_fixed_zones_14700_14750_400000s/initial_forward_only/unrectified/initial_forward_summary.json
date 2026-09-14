@@ -1,0 +1,17 @@
+{
+  "theta": [
+    -15.5,
+    -15.5,
+    -15.5,
+    -16.5,
+    -16.5
+  ],
+  "optimized": false,
+  "forward_only": true,
+  "n_time": 130,
+  "n_solver_steps": 129,
+  "native_n_time": 3318,
+  "simulation_min": -2.739759690907768e-07,
+  "simulation_max": 2.871679464315127e-05,
+  "data_misfit": 2.089133018835365e-06
+}

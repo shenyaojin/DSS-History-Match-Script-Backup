@@ -1,0 +1,12 @@
+[
+  {
+    "case": "unrectified",
+    "optimizer_pid": 1685030,
+    "stopped_process_group": 1685026
+  },
+  {
+    "case": "half_wave_positive",
+    "optimizer_pid": 1685031,
+    "stopped_process_group": 1685027
+  }
+]
