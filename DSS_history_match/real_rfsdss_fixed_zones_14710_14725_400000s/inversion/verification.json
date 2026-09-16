@@ -1,0 +1,8 @@
+{
+  "input_check_20_ranks": "passed",
+  "parameter_mapping": "passed",
+  "l1_gradient": "passed",
+  "unchanged_physics_and_source": "byte-identical outside documented blocks",
+  "source_cache_max_abs_difference_strain": 4.5142951436173955e-13,
+  "source_cache_difference_reason": "float32 cache versus float64 DSS2D arithmetic"
+}

@@ -1,0 +1,12 @@
+{
+  "success": true,
+  "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+  "iterations": 1,
+  "evaluations": 2,
+  "theta": [
+    -18.0,
+    -18.0,
+    -18.0
+  ],
+  "objective": 114.52461424667624
+}

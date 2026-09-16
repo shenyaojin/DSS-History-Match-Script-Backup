@@ -1,0 +1,47 @@
+{
+  "optimizer": {
+    "success": true,
+    "message": "CONVERGENCE: NORM OF PROJECTED GRADIENT <= PGTOL",
+    "iterations": 1,
+    "evaluations": 2,
+    "theta": [
+      -18.0,
+      -18.0,
+      -18.0
+    ],
+    "objective": 114.52461424667624
+  },
+  "initial": {
+    "data_objective": 7.303965128441196e-07,
+    "residual_rms_microstrain": 15.863288816439383,
+    "observation_rms_microstrain": 0.5194471848599773,
+    "observation_peak_microstrain": 2.8735254129847903,
+    "simulation_peak_microstrain": 28.71679464315124
+  },
+  "final": {
+    "data_objective": 3.7151040435452305e-07,
+    "residual_rms_microstrain": 11.313562392399941,
+    "observation_rms_microstrain": 0.5194471848599773,
+    "observation_peak_microstrain": 2.8735254129847903,
+    "simulation_peak_microstrain": 20.632990035527488
+  },
+  "data_objective_reduction_fraction": 0.49135791611615975,
+  "gradient": [
+    0.9178429425734482,
+    0.9791370246264427,
+    2.7039909000651123
+  ],
+  "projected_gradient_inf": 0.0,
+  "initial_regularization_to_data_ratio": 3.700011294113994e-08,
+  "at_lower_bound": [
+    true,
+    true,
+    true
+  ],
+  "at_upper_bound": [
+    false,
+    false,
+    false
+  ],
+  "finite_difference_checks": "Skipped at explicit user request; prior validation reported by user"
+}

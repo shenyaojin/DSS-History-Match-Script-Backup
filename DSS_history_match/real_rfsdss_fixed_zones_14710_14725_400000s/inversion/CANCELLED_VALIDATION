@@ -1,0 +1,1 @@
+User cancelled repeated finite-difference validation on 2026-09-15. MPI process terminated intentionally with SIGTERM; not a diagnosed numerical failure. Initial objective and adjoint gradient retained.

@@ -1,0 +1,14 @@
+{
+  "status": "preliminary forward-only trial; adjoint incomplete before tmux migration",
+  "theta": [
+    -18.0,
+    -18.0,
+    -18.0
+  ],
+  "data_objective": 3.715104043545233e-07,
+  "observation_rms_microstrain": 0.5194471848599773,
+  "simulation_rms_microstrain": 11.612636121240055,
+  "residual_rms_microstrain": 11.313562392399946,
+  "observation_max_microstrain": 2.8735254129847903,
+  "simulation_max_microstrain": 20.63299003552753
+}

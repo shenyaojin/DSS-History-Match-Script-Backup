@@ -1,0 +1,25 @@
+{
+  "native_shape": [
+    45,
+    3318
+  ],
+  "solver_shape": [
+    45,
+    130
+  ],
+  "solver_steps": 129,
+  "max_solver_steps": 240,
+  "last_time_s": 384301.087267,
+  "negative_fraction": 0.37801218940459447,
+  "interpolation_exact": true,
+  "initial_forward_source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14700_14750_400000s/initial_forward_only/unrectified",
+  "initial_data_objective": 7.3039651284412e-07,
+  "initial_simulation_max": 2.871679464315127e-05,
+  "regularization_note": "one term per active zone; user handover formula",
+  "input_sha256": {
+    "forward_and_adjoint.i": "01f198101bd41451bbba6f8e50f7425b23ac54b0b98541aa8e6ab5d8f3d595da",
+    "optimize.i": "509f8de06e8b7e63885e1d16ffaa6912888e50c2ba04d425547191edf8543ca7",
+    "measurement_data.csv": "401cf47406f890666c278de22cd84bd2c6af8af00fd6ecd1a08897bb11d3eacb",
+    "config.json": "4db0b143c02fca4688c5f1029544945bbf0ff0693fe2ad019cfcf634e1011f2d"
+  }
+}

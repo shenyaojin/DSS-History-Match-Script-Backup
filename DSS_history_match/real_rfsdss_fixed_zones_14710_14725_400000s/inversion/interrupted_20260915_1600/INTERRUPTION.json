@@ -1,0 +1,5 @@
+{
+  "reason": "Original Codex process and MPI job exited during user move to tmux; process absence confirmed.",
+  "completed": "Initial objective and gradient; trial [-18,-18,-18] forward output only",
+  "restart": "Reuse saved initial evaluation, repeat incomplete trial, skip finite differences per user."
+}
