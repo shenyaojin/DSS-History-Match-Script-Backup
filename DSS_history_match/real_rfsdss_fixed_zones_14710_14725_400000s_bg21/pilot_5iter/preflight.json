@@ -1,0 +1,12 @@
+{
+  "initial_source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s_bg21/inversion",
+  "max_accepted_iterations": 5,
+  "input_sha256": {
+    "forward_and_adjoint.i": "af3d0be222876d6a59dd865fe451dd410ff6f539f916addd73fab296ceafe14a",
+    "optimize.i": "a8f7537c1048c16f517fa0cf3f20b387be83b9f622d43a1c5d55e97bd9e6b295",
+    "measurement_data.csv": "401cf47406f890666c278de22cd84bd2c6af8af00fd6ecd1a08897bb11d3eacb",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885",
+    "initial_alpha.txt": "0e367112b155d7293aa07e5c1ba69f8c1d416fb70d734ff6fdeb84408bb16aa3",
+    "config.json": "f3c7d5922083ccff175b795068be4123f08f25197057a589f699796074d1e115"
+  }
+}

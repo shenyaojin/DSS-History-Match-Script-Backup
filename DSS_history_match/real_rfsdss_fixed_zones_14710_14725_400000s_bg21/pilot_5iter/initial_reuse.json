@@ -1,0 +1,18 @@
+{
+  "source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s_bg21/inversion",
+  "source_regularization_reference": -18.0,
+  "new_reference": -21.0,
+  "data_gradient": [
+    5.5427443693804e-08,
+    2.0670643443098e-07,
+    3.77012430363129e-07
+  ],
+  "new_scaled_gradient": [
+    17.086485631506875,
+    63.720894398312126,
+    116.22071205998154
+  ],
+  "data_objective": 5.55192953271e-07,
+  "new_regularization": 7.246157093151881e-14,
+  "new_scaled_objective": 171.14801189737958
+}

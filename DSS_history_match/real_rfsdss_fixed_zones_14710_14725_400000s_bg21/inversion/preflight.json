@@ -1,0 +1,26 @@
+{
+  "background_alpha": -21.0,
+  "changed_layer_count": 193,
+  "transverse_permeability_m2": 1e-21,
+  "initial_theta": [
+    -15.5,
+    -16.5,
+    -16.5
+  ],
+  "theta_bounds": [
+    -18.0,
+    -12.0
+  ],
+  "regularization_reference_alpha": -18.0,
+  "beta_l1": 5.049311379654719e-15,
+  "n_solver_steps": 129,
+  "max_solver_steps": 240,
+  "scope": "Initial response only; no finite differences and no optimization launched",
+  "source_case": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s",
+  "input_sha256": {
+    "forward_and_adjoint.i": "af3d0be222876d6a59dd865fe451dd410ff6f539f916addd73fab296ceafe14a",
+    "optimize.i": "a8f7537c1048c16f517fa0cf3f20b387be83b9f622d43a1c5d55e97bd9e6b295",
+    "measurement_data.csv": "401cf47406f890666c278de22cd84bd2c6af8af00fd6ecd1a08897bb11d3eacb",
+    "config.json": "891d1cff2c4323be526018149d8be279c70719a3ad71d7ad6634a492de9f0a02"
+  }
+}

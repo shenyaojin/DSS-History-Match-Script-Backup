@@ -1,0 +1,39 @@
+{
+  "result": {
+    "success": true,
+    "status": 0,
+    "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+    "iterations": 2,
+    "evaluations": 11,
+    "theta": [
+      -20.98548337332314,
+      -20.992952430186442,
+      -20.991254223035188
+    ],
+    "objective": 0.23971877111341092,
+    "stopped_at_user_limit": false,
+    "termination": "converged_early"
+  },
+  "at_lower_bound": [
+    false,
+    false,
+    false
+  ],
+  "distance_from_lower_bound": [
+    0.01451662667685838,
+    0.007047569813558141,
+    0.008745776964811824
+  ],
+  "projected_gradient_inf": 2.1078616435765343e-06,
+  "initial_data_objective": 5.55192953271e-07,
+  "after_pilot_data_objective": 7.776320946792576e-10,
+  "zero_prediction_data_objective": 7.831681592356183e-10,
+  "improvement_over_zero_prediction_fraction": 0.007068806987459708,
+  "data_objective_reduction_fraction": 0.9985993480463005,
+  "initial_residual_rms_microstrain": 13.830435589165218,
+  "after_pilot_residual_rms_microstrain": 0.5176079929276133,
+  "observation_peak_microstrain": 2.8735254129847903,
+  "simulation_peak_microstrain": 0.08275228185435196,
+  "evaluations_total": 11,
+  "stopped_for_user_review": true
+}

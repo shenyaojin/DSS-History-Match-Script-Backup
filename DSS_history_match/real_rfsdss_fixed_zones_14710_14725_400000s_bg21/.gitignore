@@ -1,0 +1,19 @@
+# Keep local solver output and cancelled attempts without committing them.
+/cancelled_kxx_only/
+/inversion/*
+!/inversion/config.json
+!/inversion/preflight.json
+/pilot_5iter/*
+!/pilot_5iter/README.md
+!/pilot_5iter/config.json
+!/pilot_5iter/preflight.json
+!/pilot_5iter/initial_reuse.json
+!/pilot_5iter/optimizer_result.json
+!/pilot_5iter/summary.json
+!/pilot_5iter/RESULTS.md
+!/pilot_5iter/accepted_iteration_history.csv
+!/pilot_5iter/objective_history.csv
+!/pilot_5iter/permeability_after_pilot.csv
+!/pilot_5iter/qc_after_pilot.png
+!/pilot_5iter/pilot_history.png
+!/pilot_5iter/pilot_history.pdf
