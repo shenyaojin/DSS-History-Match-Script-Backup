@@ -1,0 +1,7 @@
+{
+  "coarse_J_data": 3.280836451158612e-10,
+  "refined_J_data": 4.0300860952627454e-10,
+  "reduction_fraction": -0.2283715312415342,
+  "passed": false,
+  "criterion": "refined_J_data < coarse_J_data"
+}
