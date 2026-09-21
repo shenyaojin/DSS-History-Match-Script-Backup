@@ -1,0 +1,15 @@
+/data/
+/inversion/solver_output/
+/inversion/input_check/
+/inversion/evaluations/
+/inversion/iterations/
+/inversion/*.i
+/inversion/measurement_data.csv
+/inversion/solver_times.csv
+/inversion/initial_alpha.txt
+/inversion/driver.log
+/inversion/last_solver_stderr.txt
+/inversion/RUNNING
+/inversion/INPUT_CHECK_PASSED
+/inversion/strain_final.csv
+/inversion/strain_signed_final.csv

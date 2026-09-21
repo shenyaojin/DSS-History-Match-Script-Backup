@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-21T01:45:02.249173+00:00",
+  "pid": 148796,
+  "driver_sha256": "3340f76e05da1c498b5f407ec3d4583e71306213c2b4066b1928c73674e39819",
+  "input_sha256": {
+    "forward_and_adjoint.i": "60c739652eb0423031138e7961df2b7c4a15c99ce86409f7cb3c509c39e8101e",
+    "optimize.i": "41ae181cdccc70753c515aeabac7d524ea4eaf5e6fc40463db4094ea66994456",
+    "config.json": "ac6294b6b294e4c25029814865e146276f3b58d6c676c3efa396cab41a5ac6aa",
+    "initial_alpha.txt": "9b8b0b0d5260f69a2245120a66b8d85f9003f0d9789eb9dc99a9f1532d6ef8ca",
+    "measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885"
+  },
+  "authorization": "User approved the proposed 14376-ft initial model and requested inversion",
+  "mpi_ranks": 20,
+  "gradient_check_required": true,
+  "maxiter": 60
+}

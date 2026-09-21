@@ -1,0 +1,20 @@
+{
+  "evaluation": 21,
+  "purpose": "optimize",
+  "theta": [
+    -17.78228682214237,
+    -17.500615011523077
+  ],
+  "data_objective": 6.6148728109249e-11,
+  "regularization": 3.34155540330209e-14,
+  "scaled_objective": 0.02040180943579344,
+  "gradient_scaled": [
+    -1.4813102708828547e-05,
+    4.299298745623866e-06
+  ],
+  "data_gradient_unscaled": [
+    -5.3101444201289e-14,
+    8.8978496287278e-15
+  ],
+  "wall_seconds": 823.6734116510488
+}
