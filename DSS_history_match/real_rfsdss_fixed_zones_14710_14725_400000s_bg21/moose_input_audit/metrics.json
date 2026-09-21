@@ -1,0 +1,79 @@
+{
+  "input_sha256": "e867d3d06e7c8721167934bce775d18aa8498f2c82cf3c145c8dafceae3f97ce",
+  "n_channels": 45,
+  "n_solver_times": 130,
+  "n_depth_cells": 9,
+  "groups": [
+    {
+      "layer_index_zero_based": 91,
+      "channels": 6,
+      "lo_ft": 14709.5,
+      "hi_ft": 14712.0
+    },
+    {
+      "layer_index_zero_based": 92,
+      "channels": 5,
+      "lo_ft": 14712.0,
+      "hi_ft": 14713.517060367454
+    },
+    {
+      "layer_index_zero_based": 93,
+      "channels": 4,
+      "lo_ft": 14713.517060367454,
+      "hi_ft": 14715.0
+    },
+    {
+      "layer_index_zero_based": 94,
+      "channels": 6,
+      "lo_ft": 14715.0,
+      "hi_ft": 14717.0
+    },
+    {
+      "layer_index_zero_based": 95,
+      "channels": 5,
+      "lo_ft": 14717.0,
+      "hi_ft": 14718.438320209974
+    },
+    {
+      "layer_index_zero_based": 96,
+      "channels": 5,
+      "lo_ft": 14718.438320209974,
+      "hi_ft": 14720.07874015748
+    },
+    {
+      "layer_index_zero_based": 97,
+      "channels": 2,
+      "lo_ft": 14720.07874015748,
+      "hi_ft": 14721.0
+    },
+    {
+      "layer_index_zero_based": 98,
+      "channels": 7,
+      "lo_ft": 14721.0,
+      "hi_ft": 14723.359580052493
+    },
+    {
+      "layer_index_zero_based": 99,
+      "channels": 5,
+      "lo_ft": 14723.359580052493,
+      "hi_ft": 14725.0
+    }
+  ],
+  "cell_constant_lower_bound": {
+    "J_data": 1.719534467698579e-10,
+    "rms_microstrain": 0.2433993020696918
+  },
+  "final_fit": {
+    "J_data": 3.280836451158612e-10,
+    "rms_microstrain": 0.3362065549407646
+  },
+  "lower_bound_fraction_of_final_J": 0.5241146559107918,
+  "max_within_cell_simulation_spread_strain": 0.0,
+  "pressure_reconstruction_max_error_Pa": 3.725290298461914e-09,
+  "drained_bulk_modulus_Pa": 23333333333.333332,
+  "consistent_solid_bulk_compliance_per_Pa": 4.285714285714286e-11,
+  "fluid_only_storage_per_Pa": 4.545454545454545e-12,
+  "declared_biot_storage_per_Pa": 6.1254545454545445e-12,
+  "elastic_consistent_biot_storage_per_Pa": 1.1316883116883115e-11,
+  "note": "Projection is an optimistic spatial representation bound, not a PDE solution. Initial frame excluded. No solver inputs modified."
+}
