@@ -1,0 +1,74 @@
+{
+  "time_end_s": 384301.087267,
+  "native_times": 3318,
+  "strain_units": "microstrain, signed; no normalization, smoothing, or rectification",
+  "pressure_units": "MPa change relative to DSS start, separate right axis",
+  "pressure_source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/data/fiberis_format/prod/gauges/pressure_g1.npz",
+  "source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz",
+  "drift": "Per-time median over 7500 < MD < 15000 ft",
+  "layout": "Left: all native channels within +/-8 ft; right: 13 consecutive native channels within about +/-2 ft",
+  "waterfall_limits_microstrain": [
+    -5,
+    5
+  ],
+  "cases": [
+    {
+      "candidate_ft": 14887.6357421875,
+      "waterfall_depth_ft": [
+        14879.9609375,
+        14895.3154296875
+      ],
+      "individual_channels_ft": [
+        14885.6357421875,
+        14885.96875,
+        14886.302734375,
+        14886.63671875,
+        14886.9697265625,
+        14887.3017578125,
+        14887.6357421875,
+        14887.9697265625,
+        14888.306640625,
+        14888.6396484375,
+        14888.9736328125,
+        14889.3076171875,
+        14889.640625
+      ],
+      "strain_axis_limits_microstrain": [
+        -3.150163993835449,
+        5.445245966911316
+      ],
+      "waterfall_clipped_fraction": 0.0,
+      "png": "qc_region_14888_waterfall_channels.png",
+      "pdf": "qc_region_14888_waterfall_channels.pdf"
+    },
+    {
+      "candidate_ft": 14375.943359375,
+      "waterfall_depth_ft": [
+        14368.2666015625,
+        14383.623046875
+      ],
+      "individual_channels_ft": [
+        14373.94140625,
+        14374.2744140625,
+        14374.6083984375,
+        14374.9423828125,
+        14375.275390625,
+        14375.609375,
+        14375.943359375,
+        14376.2763671875,
+        14376.61328125,
+        14376.947265625,
+        14377.279296875,
+        14377.61328125,
+        14377.9462890625
+      ],
+      "strain_axis_limits_microstrain": [
+        -0.983606653213501,
+        2.819672064781189
+      ],
+      "waterfall_clipped_fraction": 0.0,
+      "png": "qc_region_14376_waterfall_channels.png",
+      "pdf": "qc_region_14376_waterfall_channels.pdf"
+    }
+  ]
+}

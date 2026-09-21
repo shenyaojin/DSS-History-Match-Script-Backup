@@ -1,0 +1,59 @@
+{
+  "source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz",
+  "pressure_source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/data/fiberis_format/prod/gauges/pressure_g1.npz",
+  "start_time": "2021-08-04 17:07:09.036762",
+  "depth_range_ft": [
+    0.12203491479158401,
+    18861.0234375
+  ],
+  "channels": 56507,
+  "native_times": 3318,
+  "last_time_s": 384301.087267,
+  "drift": "Per-time median over 7500 < MD < 15000 ft; same Fiberis workflow; verified against inversion crop",
+  "ranking": "Signed Pearson correlation, zero time shift, uniform 1000 s QC grid; threshold dynamic p95-p05 >= 0.5 microstrain",
+  "roi_for_primary_candidates_ft": [
+    11500,
+    16700
+  ],
+  "min_candidate_separation_ft": 5,
+  "plot_pressure": "Least-squares scale and offset only; not a forward model fit",
+  "lag_search_s": [
+    -20000,
+    40000
+  ],
+  "lag_step_s": 1000,
+  "lag_note": "Descriptive only, restricted common support; positive lag means strain after pressure; not hydraulic travel time",
+  "selected_depths_ft": [
+    14983.1015625,
+    14887.6357421875,
+    14375.943359375,
+    16177.384765625,
+    12583.513671875,
+    14848.91796875,
+    15066.544921875,
+    12786.1220703125,
+    14716.4033203125,
+    14843.24609375,
+    14863.2705078125,
+    14781.8271484375
+  ],
+  "full_depth_top_ft": [
+    14983.1015625,
+    14887.6357421875,
+    14375.943359375,
+    16177.384765625,
+    12583.513671875,
+    14848.91796875,
+    15066.544921875,
+    12786.1220703125,
+    14716.4033203125,
+    14843.24609375,
+    14863.2705078125,
+    14781.8271484375
+  ],
+  "historical_depths_ft": [
+    14887.9697265625,
+    14972.083984375,
+    14992.111328125
+  ]
+}
