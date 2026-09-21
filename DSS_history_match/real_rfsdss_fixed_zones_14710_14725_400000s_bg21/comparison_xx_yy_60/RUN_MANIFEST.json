@@ -1,0 +1,14 @@
+{
+  "recorded_at_utc": "2026-09-19T06:33:00.754030+00:00",
+  "tmux_session": "rfsdss_xx_yy_60",
+  "max_accepted_iterations_per_case": 60,
+  "mpi_ranks_per_case": 20,
+  "code_sha256": {
+    "prepare_xy_comparison.py": "81bf5cb26932db31faafb84038e5d98caeca4f8f9e9e0634d30dd2f6c3cb11e4",
+    "run_xy_comparison.py": "9cad8370cc9fc8b36031d1bc6444a47bd8739255eb21f55c4bcc21b9a949541f",
+    "summarize_xy_comparison.py": "bbd16850eb89b4f466005db0aeb5a7cc90cb812f36b24e1e7f29671e271b1819",
+    "launch_xy_comparison.sh": "76a40d14e9379bba8076212bbad2b0ab323631006e8f44e1bcdc147be26a1a63",
+    "run_inversion.py": "c420880ba380195ef6f3d477f76000b58b2b2c55d6cc5992f96c3200c8df45d6"
+  },
+  "status": "Both workers launched; initial evaluations in progress; completion determined by per-case markers"
+}

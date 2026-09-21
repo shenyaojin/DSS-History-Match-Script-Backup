@@ -1,0 +1,119 @@
+{
+  "fixed_yy": {
+    "status": "complete",
+    "accepted_iterations": 18,
+    "last_accepted": {
+      "iteration": 18.0,
+      "evaluation": 37.0,
+      "data_objective": 3.2808364511586e-10,
+      "regularization": 4.54580047132853e-14,
+      "scaled_objective": 0.1011515653869312,
+      "residual_rms_microstrain": 0.3362065549407645,
+      "xx_A": -17.762985193845356,
+      "xx_B": -17.677889678148734,
+      "xx_C": -18.407556915150288,
+      "yy_A": -18.0,
+      "yy_B": -17.5,
+      "yy_C": -19.0
+    },
+    "data_objective": 3.2808364511586e-10,
+    "zero_prediction_objective": 7.831681592356183e-10,
+    "improvement_over_zero_fraction": 0.5810814813563492,
+    "rms_microstrain": 0.3362065549407645,
+    "observation_peak_microstrain": 2.8735254129847903,
+    "simulation_peak_microstrain": 1.578374244577091,
+    "total_evaluations": 37,
+    "optimizer_result": {
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 18,
+      "optimizer_evaluations": 37,
+      "total_evaluations": 37,
+      "theta": [
+        -17.762985193845356,
+        -17.677889678148734,
+        -18.407556915150288
+      ],
+      "objective": 0.10115156538693128,
+      "termination": "converged"
+    }
+  },
+  "free_yy": {
+    "status": "complete",
+    "accepted_iterations": 18,
+    "last_accepted": {
+      "iteration": 18.0,
+      "evaluation": 41.0,
+      "data_objective": 3.2808335689405e-10,
+      "regularization": 8.7682852804116e-14,
+      "scaled_objective": 0.1011644930893356,
+      "residual_rms_microstrain": 0.3362064072618352,
+      "xx_A": -17.76298508777118,
+      "xx_B": -17.677889300873616,
+      "xx_C": -18.407566462968077,
+      "yy_A": -17.990923025858045,
+      "yy_B": -17.500759189494868,
+      "yy_C": -18.99720896543761
+    },
+    "data_objective": 3.2808335689405e-10,
+    "zero_prediction_objective": 7.831681592356183e-10,
+    "improvement_over_zero_fraction": 0.5810818493766864,
+    "rms_microstrain": 0.3362064072618352,
+    "observation_peak_microstrain": 2.8735254129847903,
+    "simulation_peak_microstrain": 1.5783746832008259,
+    "total_evaluations": 41,
+    "optimizer_result": {
+      "success": true,
+      "status": 0,
+      "message": "CONVERGENCE: RELATIVE REDUCTION OF F <= FACTR*EPSMCH",
+      "iterations": 18,
+      "optimizer_evaluations": 37,
+      "total_evaluations": 41,
+      "theta": [
+        -17.76298508777118,
+        -17.677889300873616,
+        -18.407566462968074,
+        -17.990923025858045,
+        -17.500759189494868,
+        -18.99720896543761
+      ],
+      "objective": 0.10116449308933564,
+      "termination": "converged"
+    },
+    "new_yy_gradient_check": [
+      {
+        "direction": [
+          0.0,
+          0.0,
+          0.0,
+          -0.543305367994433,
+          -0.6985354731356995,
+          0.4656903154237997
+        ],
+        "h": 0.02,
+        "fd": 9.691326047917004e-06,
+        "adjoint": 9.692055495019482e-06,
+        "relative_error": 7.526237368871264e-05,
+        "passed": true
+      },
+      {
+        "direction": [
+          0.0,
+          0.0,
+          0.0,
+          0.4472135954999579,
+          0.7155417527999327,
+          -0.5366563145999494
+        ],
+        "h": 0.02,
+        "fd": -1.0826116434575761e-05,
+        "adjoint": -1.0826827272659611e-05,
+        "relative_error": 6.565525300703093e-05,
+        "passed": true
+      }
+    ]
+  },
+  "matched_initial_response": true,
+  "free_vs_fixed_data_reduction_fraction": 8.785009990575077e-07
+}

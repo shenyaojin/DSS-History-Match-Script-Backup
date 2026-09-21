@@ -1,0 +1,23 @@
+{
+  "input_sha256": {
+    "config.json": "c4251616a5531d5a1eee61e0ce9c67e580551ea6e93caf906dceaec760599338",
+    "optimize.i": "0cc58947c432e5e6d83e3a7d517e41ef6b3d8ab0a965522c59a76c38e07baee0",
+    "forward_and_adjoint.i": "e867d3d06e7c8721167934bce775d18aa8498f2c82cf3c145c8dafceae3f97ce",
+    "measurement_data.csv": "401cf47406f890666c278de22cd84bd2c6af8af00fd6ecd1a08897bb11d3eacb",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885",
+    "initial_alpha.txt": "a1b9d86a5fdc27c349b3b25f2d87ad52f24a1f0b2d0bf55e9cef51aa0b02023b"
+  },
+  "source_case": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s_bg21/pilot_5iter",
+  "n_solver_steps": 129,
+  "max_solver_steps": 240,
+  "background_yy_layers": 195,
+  "active_yy_layers": [
+    91,
+    94,
+    98,
+    99,
+    100
+  ],
+  "yy_gradient_component": 1,
+  "mpi_ranks": 20
+}
