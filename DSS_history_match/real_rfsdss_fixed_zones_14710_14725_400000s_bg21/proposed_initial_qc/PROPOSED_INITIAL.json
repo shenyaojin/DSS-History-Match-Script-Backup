@@ -1,0 +1,121 @@
+{
+  "status": "QC proposal only; no forward solve or inversion launched",
+  "background_alpha": -21.0,
+  "background_tensor_m2": [
+    1e-21,
+    1e-21,
+    1e-21
+  ],
+  "transverse_permeability_m2": 1e-21,
+  "initial_theta_proposed": [
+    -18.0,
+    -17.5,
+    -19.0
+  ],
+  "zones": [
+    {
+      "group": "fracture_candidate",
+      "lo_ft": 14701.5,
+      "hi_ft": 14704.0,
+      "alpha": -15.5,
+      "original_zone_id": 1,
+      "optimized": false,
+      "initial_kxx_m2": 3.1622776601683793e-16,
+      "layer_indices_zero_based": [
+        86
+      ],
+      "previous_initial_alpha": -15.5,
+      "proposed_alpha": -15.5,
+      "proposed_kxx_m2": 3.1622776601683793e-16
+    },
+    {
+      "group": "fracture_candidate",
+      "lo_ft": 14709.5,
+      "hi_ft": 14712.0,
+      "alpha": -15.5,
+      "original_zone_id": 2,
+      "optimized": true,
+      "initial_kxx_m2": 3.1622776601683793e-16,
+      "layer_indices_zero_based": [
+        91
+      ],
+      "previous_initial_alpha": -15.5,
+      "proposed_alpha": -18.0,
+      "label": "A",
+      "proposed_kxx_m2": 1e-18,
+      "solver_sample_mean_positive_microstrain": 0.46744503018257394,
+      "solver_sample_peak_positive_microstrain": 2.8735254129847903
+    },
+    {
+      "group": "srv_candidate",
+      "lo_ft": 14715.0,
+      "hi_ft": 14717.0,
+      "alpha": -16.5,
+      "original_zone_id": 4,
+      "optimized": true,
+      "initial_kxx_m2": 3.1622776601683796e-17,
+      "layer_indices_zero_based": [
+        94
+      ],
+      "previous_initial_alpha": -16.5,
+      "proposed_alpha": -17.5,
+      "label": "B",
+      "proposed_kxx_m2": 3.1622776601683795e-18,
+      "solver_sample_mean_positive_microstrain": 0.6358746100357271,
+      "solver_sample_peak_positive_microstrain": 2.4872543183559457
+    },
+    {
+      "group": "srv_candidate",
+      "lo_ft": 14721.0,
+      "hi_ft": 14727.0,
+      "alpha": -16.5,
+      "original_zone_id": 5,
+      "optimized": true,
+      "initial_kxx_m2": 3.1622776601683796e-17,
+      "layer_indices_zero_based": [
+        98,
+        99,
+        100
+      ],
+      "previous_initial_alpha": -16.5,
+      "proposed_alpha": -19.0,
+      "label": "C",
+      "proposed_kxx_m2": 1e-19,
+      "solver_sample_mean_positive_microstrain": 0.047209636317181586,
+      "solver_sample_peak_positive_microstrain": 0.5109854982036558
+    },
+    {
+      "group": "fracture_candidate",
+      "lo_ft": 14737.5,
+      "hi_ft": 14739.5,
+      "alpha": -15.5,
+      "original_zone_id": 3,
+      "optimized": false,
+      "initial_kxx_m2": 3.1622776601683793e-16,
+      "layer_indices_zero_based": [
+        108
+      ],
+      "previous_initial_alpha": -15.5,
+      "proposed_alpha": -15.5,
+      "proposed_kxx_m2": 3.1622776601683793e-16
+    }
+  ],
+  "fixed_positions": true,
+  "depth_crop_ft": [
+    14710,
+    14725
+  ],
+  "nominal_end_s": 400000.0,
+  "actual_end_s": 384301.087267,
+  "n_channels": 45,
+  "native_n_time": 3318,
+  "n_solver_times": 130,
+  "n_solver_steps": 129,
+  "transform": "Existing median-corrected positive-half-wave observations; no new preprocessing",
+  "rationale": "Heuristic amplitudes: B has strongest sustained signal, A is elevated, C is weaker. These guesses are not a quantitative strain-to-permeability conversion.",
+  "original_source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/data/fiberis_format/s_well/dss_data/Mariner 14x-36-POW-S - RFS strain change.npz",
+  "input_sha256": {
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s/data/half_wave_positive_native.npz": "8607dc1c52201041e5b138e7ac7fa2154e7f5a67bd9b45ba8297aef046e29823",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14710_14725_400000s/data/half_wave_positive_solver.npz": "ba2949217419799806d0a2f627c9d70e4ee86855d3a9e5ace6c651059805726d"
+  }
+}
