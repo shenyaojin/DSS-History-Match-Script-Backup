@@ -1,0 +1,16 @@
+# Reproducible solver inputs and large runtime products stay local.
+/input_check/
+/solver_output/
+/evaluations/
+/*.i
+/measurement_data.csv
+/solver_times.csv
+/initial_alpha.txt
+/driver.log
+/last_solver_stderr.txt
+/RUNNING
+/INPUT_CHECK_PASSED
+/FAILED
+/COMPLETE
+/strain_refined.csv
+/strain_signed.csv

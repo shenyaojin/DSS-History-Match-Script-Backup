@@ -1,0 +1,47 @@
+{
+  "input_sha256": {
+    "config.json": "e11d6425e21fdcbe01644dd89f7c041f62abb0deac210b4ae6beeacc97d4aa0d",
+    "forward_and_adjoint.i": "491d518bccdd710414c7afb5dda03a920327df8d42db87a39a4ee6f7bc3c5e3d",
+    "optimize.i": "a5ea3cd34931f798d418e79cb248f586a9a9be3bce9190f4a9ee8b9dd6f28c5e",
+    "measurement_data.csv": "401cf47406f890666c278de22cd84bd2c6af8af00fd6ecd1a08897bb11d3eacb",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885",
+    "initial_alpha.txt": "5dc174abd22522aaeca9d0d1065a37351375a9ca267c806751757ad8713fc694"
+  },
+  "source_input_sha256": "e867d3d06e7c8721167934bce775d18aa8498f2c82cf3c145c8dafceae3f97ce",
+  "target_y_spacing_m": 0.10120312499999784,
+  "nx": 200,
+  "ny": 242,
+  "old_elements": 40000,
+  "new_elements": 48400,
+  "distinct_observation_elements": 45,
+  "material_blocks": 200,
+  "refined_material_blocks": [
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100
+  ],
+  "crop_dy_range_m": [
+    0.08708571428571434,
+    0.1
+  ],
+  "n_solver_steps": 129,
+  "max_solver_steps": 240,
+  "mpi_ranks": 20,
+  "fixed_xx_alpha": [
+    -17.762985193845356,
+    -17.677889678148734,
+    -18.407556915150288
+  ],
+  "fixed_yy_alpha": [
+    -18.0,
+    -17.5,
+    -19.0
+  ],
+  "gradient_status": "Sampling updated; no finite-difference validation or optimization in this case"
+}

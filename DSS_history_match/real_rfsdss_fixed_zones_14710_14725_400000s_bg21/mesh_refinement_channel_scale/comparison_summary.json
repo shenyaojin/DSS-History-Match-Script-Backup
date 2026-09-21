@@ -1,0 +1,16 @@
+{
+  "coarse": {
+    "J_data": 3.280836451158612e-10,
+    "rms_microstrain": 0.3362065549407646
+  },
+  "refined": {
+    "J_data": 4.0300860952627454e-10,
+    "rms_microstrain": 0.37262419246716744
+  },
+  "fixed_parameter_comparison": true,
+  "optimization_performed": false,
+  "relative_J_change": 0.2283715312415342,
+  "coarse_to_refined_rms_microstrain": 0.19665598069776155,
+  "signed_prediction_min_microstrain": -0.1652783343312344,
+  "signed_prediction_negative_fraction": 0.5571059431524548
+}
