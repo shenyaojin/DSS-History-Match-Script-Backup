@@ -1,0 +1,32 @@
+{
+  "input_sha256": {
+    "forward_and_adjoint.i": "93a98353953bb2ac458747b20a7e02fbe6c9b17834f8bc9ad53bc7b750e2fcc7",
+    "optimize.i": "187ddd638d9aa1da60380a71fdfaed1d78972b1b01c8e6979aeccfff6a45fd0d",
+    "config.json": "0c857e08b68081e6ee14ff293ff2ea09b11101d5fcbb6da717a02e4864e0ce49",
+    "initial_alpha.txt": "74ed63b37be6e8f17cc31c185e9a5ccb999a8ef441e915b3c1d8f2329da3217c",
+    "measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885"
+  },
+  "source_sha256": {
+    "forward_and_adjoint.i": "60c739652eb0423031138e7961df2b7c4a15c99ce86409f7cb3c509c39e8101e",
+    "optimize.i": "41ae181cdccc70753c515aeabac7d524ea4eaf5e6fc40463db4094ea66994456",
+    "config.json": "ac6294b6b294e4c25029814865e146276f3b58d6c676c3efa396cab41a5ac6aa",
+    "initial_alpha.txt": "9b8b0b0d5260f69a2245120a66b8d85f9003f0d9789eb9dc99a9f1532d6ef8ca",
+    "measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885"
+  },
+  "source_driver_sha256": "3340f76e05da1c498b5f407ec3d4583e71306213c2b4066b1928c73674e39819",
+  "nx": 200,
+  "ny": 216,
+  "n_solver_steps": 129,
+  "max_solver_steps": 240,
+  "mpi_ranks": 20,
+  "n_parameters": 3,
+  "moose_reporter_slots": 201,
+  "changes": [
+    "Initial active xx/yy=-17",
+    "Private solver observation file for d/C",
+    "External coupling objective and chain-rule gradients"
+  ],
+  "forward_physics_byte_identical": true
+}

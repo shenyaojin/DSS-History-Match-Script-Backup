@@ -1,0 +1,13 @@
+{
+  "unconstrained_C": 0.11215931738019891,
+  "initial_theta": [
+    -17.0,
+    -17.0,
+    0.11215931738019891
+  ],
+  "bootstrap_evaluation": "evaluations/0001",
+  "bounds": [
+    1e-06,
+    1.0
+  ]
+}

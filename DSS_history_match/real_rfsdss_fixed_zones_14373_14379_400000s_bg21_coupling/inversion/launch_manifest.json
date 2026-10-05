@@ -1,0 +1,17 @@
+{
+  "utc": "2026-09-23T21:02:20.304385+00:00",
+  "pid": 1286392,
+  "driver_sha256": "f5db6f2b61a5030c130590ddffef0739441f5b4e01988deb65a73938957de187",
+  "input_sha256": {
+    "forward_and_adjoint.i": "93a98353953bb2ac458747b20a7e02fbe6c9b17834f8bc9ad53bc7b750e2fcc7",
+    "optimize.i": "187ddd638d9aa1da60380a71fdfaed1d78972b1b01c8e6979aeccfff6a45fd0d",
+    "config.json": "0c857e08b68081e6ee14ff293ff2ea09b11101d5fcbb6da717a02e4864e0ce49",
+    "initial_alpha.txt": "74ed63b37be6e8f17cc31c185e9a5ccb999a8ef441e915b3c1d8f2329da3217c",
+    "measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885"
+  },
+  "authorization": "User approved 14376-ft xx/yy=-17 and global attenuation C, then requested one inversion",
+  "mpi_ranks": 20,
+  "gradient_check_required": true,
+  "maxiter": 60
+}

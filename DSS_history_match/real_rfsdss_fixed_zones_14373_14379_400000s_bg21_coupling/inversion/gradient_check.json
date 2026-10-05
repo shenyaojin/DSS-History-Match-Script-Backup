@@ -1,0 +1,39 @@
+[
+  {
+    "direction": [
+      1.0,
+      0.0,
+      0.0
+    ],
+    "h": 0.02,
+    "fd": -0.0016695729403309184,
+    "adjoint": -0.0017299151425326496,
+    "relative_error": 0.03488159662755961,
+    "passed": true
+  },
+  {
+    "direction": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "h": 0.02,
+    "fd": 8.058781295929018e-07,
+    "adjoint": 8.055942782021693e-07,
+    "relative_error": 0.00035222619935842747,
+    "passed": true
+  },
+  {
+    "direction": [
+      0,
+      0,
+      1
+    ],
+    "h": 0.0001,
+    "fd": 0.0,
+    "adjoint": 5.717254995532493e-15,
+    "method": "Frozen forward, exact because C is absent from PDE",
+    "absolute_error": 5.717254995532493e-15,
+    "passed": true
+  }
+]
