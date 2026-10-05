@@ -1,0 +1,56 @@
+[
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/fwd/output_gt/casing_model_test.i",
+    "copy": "02_forward_model/representative_forward.i",
+    "bytes": 15144,
+    "sha256": "20af447250754684e02cc7732604d282c59a49e01a410fb118fa2b35fef8cd05"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/106_optimization_runner_L1.py",
+    "copy": "03_inversion/original/106_optimization_runner_L1.py",
+    "bytes": 15607,
+    "sha256": "fe10c85931adf325cbd12f95edc1a20113e621134a3b0c67ecc7414e11640c2c"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/forward_and_adjoint.i",
+    "copy": "03_inversion/original/forward_and_adjoint.i",
+    "bytes": 299571,
+    "sha256": "d72aacfb597f3131aa8f90d1da182dac7e65ec7d585cda69fbc9ea55090e0757"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/optimize.i",
+    "copy": "03_inversion/original/optimize.i",
+    "bytes": 30599,
+    "sha256": "dcc1be63d7659236583c91c5b1da65f23873550d0c7291c8c5c5d99adba74ae7"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/initial_alpha_L1.txt",
+    "copy": "03_inversion/existing_records/initial_alpha_L1.txt",
+    "bytes": 5200,
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/optimized_alphas_L1.txt",
+    "copy": "03_inversion/existing_records/optimized_alphas_L1.txt",
+    "bytes": 5200,
+    "sha256": "f9aa5397e6ab083a4792d6359679e0344a9a772de6cee0c33dc4796f6d74f401"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/initial_zones_L1.csv",
+    "copy": "03_inversion/existing_records/initial_zones_L1.csv",
+    "bytes": 7861,
+    "sha256": "c8b06c5c6aec78b523c4592004712726a0a29b4b557defc64ab0a9a9c826aab6"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/objective_history_L1.csv",
+    "copy": "03_inversion/existing_records/objective_history_L1.csv",
+    "bytes": 2953,
+    "sha256": "042ee09aa63a95216b94222dfbc44970091ad642600552bd70f8f713d055383c"
+  },
+  {
+    "source": "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/step_history_L1.csv",
+    "copy": "03_inversion/existing_records/step_history_L1.csv",
+    "bytes": 1184,
+    "sha256": "0163b27efe5919a7d321d7de5f553441bb67c134c4f17a436fcbea2a2dfc2f0c"
+  }
+]
