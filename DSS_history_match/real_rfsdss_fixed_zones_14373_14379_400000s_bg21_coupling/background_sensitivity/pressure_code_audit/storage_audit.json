@@ -1,0 +1,8 @@
+{
+  "fluid_only_storage_Pa_inv": 4.545454545454545e-12,
+  "declared_biot_storage_Pa_inv": 6.1254545454545445e-12,
+  "elasticity_consistent_drained_compliance_Pa_inv": 4.285714285714286e-11,
+  "declared_compliance_Pa_inv": 1e-11,
+  "biot_storage_if_compliance_consistent_Pa_inv": 1.1316883116883115e-11,
+  "caution": "Declared Biot modulus is not consumed by the active mass kernel; changing it alone will not change the current pressure equation."
+}

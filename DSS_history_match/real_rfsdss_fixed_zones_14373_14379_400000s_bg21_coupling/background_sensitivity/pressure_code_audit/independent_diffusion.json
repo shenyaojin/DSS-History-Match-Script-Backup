@@ -1,0 +1,39 @@
+{
+  "method": "Independent 1D linear diffusion: nodal finite volume, implicit Euler, same x grid/times, applied p at x45, no-flow endpoints. Compare MOOSE y=0 far from horizontal band.",
+  "storage_Pa_inv": 4.545454545454545e-12,
+  "results": [
+    {
+      "background_alpha": -21,
+      "diffusivity_m2_s": 2.1999999999999998e-07,
+      "relative_rms_to_source_peak": 3.1927171187564483e-06,
+      "max_absolute_difference_Pa": 127.59869839932071,
+      "independent_final_left_corner_Pa": 2.7804445615132124e-116,
+      "moose_final_left_corner_Pa": 2.7812615724820074e-116,
+      "independent_final_right_corner_Pa": 5.131343657018111e-144,
+      "moose_final_right_corner_Pa": 4.847829378605755e-131,
+      "all_200_xx_material_mappings_verified": true
+    },
+    {
+      "background_alpha": -19,
+      "diffusivity_m2_s": 2.2e-05,
+      "relative_rms_to_source_peak": 1.470110780691521e-05,
+      "max_absolute_difference_Pa": 233.66574339405634,
+      "independent_final_left_corner_Pa": 8.134250785233552e-10,
+      "moose_final_left_corner_Pa": 8.160452550763368e-10,
+      "independent_final_right_corner_Pa": 6.925175651484021e-14,
+      "moose_final_right_corner_Pa": 1.835575783999878e-12,
+      "all_200_xx_material_mappings_verified": true
+    },
+    {
+      "background_alpha": -18,
+      "diffusivity_m2_s": 0.00022000000000000003,
+      "relative_rms_to_source_peak": 2.9727290864361112e-05,
+      "max_absolute_difference_Pa": 258.72281958989333,
+      "independent_final_left_corner_Pa": 983.6491082560962,
+      "moose_final_left_corner_Pa": 1017.845719438941,
+      "independent_final_right_corner_Pa": 69.54768731217402,
+      "moose_final_right_corner_Pa": 91.39151622404951,
+      "all_200_xx_material_mappings_verified": true
+    }
+  ]
+}

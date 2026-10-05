@@ -1,0 +1,64 @@
+{
+  "method": "Exact bounded scalar least squares: C=clip(dot(s,d)/dot(s,s),1e-6,1)",
+  "scope": "Refit one global C per bg=-19/-18; retain bg=-21 original C as comparison",
+  "immutable": "All permeability components, mesh, physics, pressure source and forward solutions fixed",
+  "observations": "Existing half-wave positive observations and simulations, all 18 channels; exclude t=0; retain zeros",
+  "regularization": "No C penalty; permeability regularization is constant and does not affect this scalar optimum",
+  "interpretation_limit": "Existing pressure overshoot has not been resolved; amplitude refit does not validate pressure numerics",
+  "source_prediction_sha256": {
+    "-21": "262c2e1915384eb13c8899e094c89e7a80383940bb04262d225d34b78a269338",
+    "-19": "4678cd47ab4ca1fa0490e99141310ae95d383e189b16440ab4dbcc970ac7aaba",
+    "-18": "75cb38738094d3362be4180650006fc9a9d42127dff598a24cffc311d9964fcb"
+  },
+  "coupling_bounds": [
+    1e-06,
+    1.0
+  ],
+  "results": [
+    {
+      "background_alpha": -21,
+      "refitted": false,
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.03047460428008047,
+      "unconstrained_optimum_C": 0.030474864153277274,
+      "coupling_at_bound": false,
+      "derivative_dJ_dC": -1.2800174606680224e-13,
+      "data_objective_before": 5.930319213916222e-11,
+      "data_objective_after": 5.930319213916222e-11,
+      "rms_before_microstrain": 0.22600753865141648,
+      "rms_after_microstrain": 0.22600753865141648,
+      "data_error_reduction_percent": 0.0,
+      "sample_count": 2322
+    },
+    {
+      "background_alpha": -19,
+      "refitted": true,
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.028102753375810106,
+      "unconstrained_optimum_C": 0.028102753375810106,
+      "coupling_at_bound": false,
+      "derivative_dJ_dC": 1.4655857748279458e-24,
+      "data_objective_before": 5.256863649067648e-11,
+      "data_objective_after": 5.087939208395842e-11,
+      "rms_before_microstrain": 0.2127880557438536,
+      "rms_after_microstrain": 0.20934126633686723,
+      "data_error_reduction_percent": 3.2134073080203773,
+      "sample_count": 2322
+    },
+    {
+      "background_alpha": -18,
+      "refitted": true,
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.03357176008499793,
+      "unconstrained_optimum_C": 0.03357176008499793,
+      "coupling_at_bound": false,
+      "derivative_dJ_dC": -5.142378572176799e-24,
+      "data_objective_before": 4.0231020494915305e-11,
+      "data_objective_after": 3.810395396996127e-11,
+      "rms_before_microstrain": 0.18615058895945746,
+      "rms_after_microstrain": 0.18116275314363497,
+      "data_error_reduction_percent": 5.287130425197317,
+      "sample_count": 2322
+    }
+  ]
+}

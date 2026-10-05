@@ -1,0 +1,82 @@
+{
+  "method": "C=clip(sum(w*s*d)/sum(w*s*s), 0.05, 1)",
+  "objective": "0.5 * sum(w * (C * positive_simulation - positive_observation)**2), t>0",
+  "coupling_bounds": [
+    0.05,
+    1.0
+  ],
+  "core_weight": 2.0,
+  "central_channel_depths_ft": [
+    14375.609375,
+    14375.943359375,
+    14376.2763671875,
+    14376.61328125
+  ],
+  "other_channel_weight": 1.0,
+  "scope": "Only C refitted for bg=-19/-18; bg=-21 kept as historical reference outside new bounds",
+  "sample_count": 2322,
+  "weighted_sample_count": 2838,
+  "regularization": "Permeability and its regularization unchanged; no penalty on C",
+  "interpretation_limit": "Existing pressure overshoot unresolved; scalar refit does not validate pressure numerics",
+  "source_sha256": {
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_21/strain_prediction.csv": "262c2e1915384eb13c8899e094c89e7a80383940bb04262d225d34b78a269338",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_19/strain_prediction.csv": "4678cd47ab4ca1fa0490e99141310ae95d383e189b16440ab4dbcc970ac7aaba",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_18/strain_prediction.csv": "75cb38738094d3362be4180650006fc9a9d42127dff598a24cffc311d9964fcb"
+  },
+  "results": [
+    {
+      "background_alpha": -21,
+      "refitted": false,
+      "role": "historical reference, exempt from new C bounds",
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.03047460428008047,
+      "unconstrained_optimum_C": 0.03200284694632399,
+      "coupling_at_bound": false,
+      "derivative_dJ_dC": -1.224627260408305e-09,
+      "weighted_objective_before": 6.939461860838294e-11,
+      "weighted_rms_before_microstrain": 0.22114223722012558,
+      "unweighted_rms_before_microstrain": 0.22600753865141648,
+      "core_rms_before_microstrain": 0.1977727384708287,
+      "weighted_objective_after": 6.939461860838294e-11,
+      "weighted_rms_after_microstrain": 0.22114223722012558,
+      "unweighted_rms_after_microstrain": 0.22600753865141648,
+      "core_rms_after_microstrain": 0.1977727384708287
+    },
+    {
+      "background_alpha": -19,
+      "refitted": true,
+      "role": "bounded weighted refit",
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.05,
+      "unconstrained_optimum_C": 0.030689928193210824,
+      "coupling_at_bound": true,
+      "derivative_dJ_dC": 1.6970498997426895e-08,
+      "weighted_objective_before": 6.4955259054269e-11,
+      "weighted_rms_before_microstrain": 0.21395180849807652,
+      "unweighted_rms_before_microstrain": 0.2127880557438536,
+      "core_rms_before_microstrain": 0.21911222004982941,
+      "weighted_objective_after": 2.2878566269115602e-10,
+      "weighted_rms_after_microstrain": 0.40153481326752977,
+      "unweighted_rms_after_microstrain": 0.4096779175352833,
+      "core_rms_after_microstrain": 0.3626350120157131
+    },
+    {
+      "background_alpha": -18,
+      "refitted": true,
+      "role": "bounded weighted refit",
+      "previous_C": 0.03047460428008047,
+      "fitted_C": 0.05,
+      "unconstrained_optimum_C": 0.034584063989010996,
+      "coupling_at_bound": true,
+      "derivative_dJ_dC": 1.1109625970337675e-08,
+      "weighted_objective_before": 5.392360753311755e-11,
+      "weighted_rms_before_microstrain": 0.19493879260774866,
+      "unweighted_rms_before_microstrain": 0.18615058895945746,
+      "core_rms_before_microstrain": 0.23037370245696367,
+      "weighted_objective_after": 1.3347113117273673e-10,
+      "weighted_rms_after_microstrain": 0.30669201779511085,
+      "unweighted_rms_after_microstrain": 0.2904601732201223,
+      "core_rms_after_microstrain": 0.3710498090068447
+    }
+  ]
+}

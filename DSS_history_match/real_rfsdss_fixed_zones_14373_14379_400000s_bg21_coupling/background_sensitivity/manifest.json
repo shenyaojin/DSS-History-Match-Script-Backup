@@ -1,0 +1,71 @@
+{
+  "source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/inversion",
+  "fixed_theta": [
+    -14.938868403094903,
+    -21.0,
+    0.03047460428008047
+  ],
+  "background_alphas": [
+    -21,
+    -19,
+    -18
+  ],
+  "change_scope": "Only non-zone kxx, kyy, kzz; zone tensor and C fixed at best coupled inversion",
+  "zone": {
+    "label": "A",
+    "lo_ft": 14375.4423828125,
+    "hi_ft": 14376.7802734375,
+    "width_m": 0.4077890625,
+    "initial_alpha_xx": -17.0,
+    "initial_alpha_yy": -17.0,
+    "kxx_m2": 1e-17,
+    "kyy_m2": 1e-17,
+    "kzz_m2": 1e-21,
+    "optimized_components": [
+      "xx",
+      "yy"
+    ],
+    "fixed_geometry": true,
+    "layer_indices_zero_based": [
+      99,
+      100
+    ],
+    "n_elements_in_y": 4
+  },
+  "zone_k_m2": [
+    1.1511491493423156e-15,
+    1e-21,
+    1e-21
+  ],
+  "n_solver_steps": 129,
+  "max_steps": 240,
+  "mesh": [
+    200,
+    216
+  ],
+  "mpi_ranks_per_case": 20,
+  "max_concurrent_cases": 2,
+  "observations": "Existing positive native/interpolated data; exclude t=0",
+  "pressure_definition": "pp is pressure change from initial zero; Pa in fields, MPa in plots",
+  "coverage_definition": "Area-weighted cell-center pressure >= 1%, 5%, 10% of peak applied source pressure",
+  "coverage_caution": "Thresholds describe response extent, not a sharp diffusion front or evidence of equilibrium",
+  "source_sha256": {
+    "forward_and_adjoint.i": "93a98353953bb2ac458747b20a7e02fbe6c9b17834f8bc9ad53bc7b750e2fcc7",
+    "theta_final.txt": "659c998f507289607ee73395e054caf23bc630ffa466a9ee58c040ad66678217",
+    "measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885",
+    "config.json": "0c857e08b68081e6ee14ff293ff2ea09b11101d5fcbb6da717a02e4864e0ce49"
+  },
+  "cases": {
+    "-21": {
+      "input_sha256": "edaf12f707be170701637fd21d63410609209056bba21d99f77e93771ce46ceb"
+    },
+    "-19": {
+      "input_sha256": "6e591648fff5bd01fcef70ed1076e32d8cef1a81466d274943340537fa90e575"
+    },
+    "-18": {
+      "input_sha256": "00f8b85af04a094206a3aaa2c8051d7dcf14be0c56c43221a51da8c030f0ad1c"
+    }
+  },
+  "forward_only_compatibility": "Remove 201 unused custom adjoint-gradient VPPs; current executable was rebuilt Sep 30 without that object"
+}

@@ -1,0 +1,81 @@
+{
+  "source_peak_MPa": 2.274014578233277,
+  "final_time_s": 384301.087267,
+  "cases": [
+    {
+      "time_s": 384301.087267,
+      "source_pressure_MPa": 1.541376141124198,
+      "left_max_MPa": 1.5812136457803638,
+      "right_max_MPa": 1.600350918814311,
+      "corner_max_MPa": 2.7812615724820076e-122,
+      "left_mid_MPa": 1.579194683899185,
+      "right_mid_MPa": 1.5986613932644467,
+      "left_far_MPa": 2.7812615724820076e-122,
+      "right_far_MPa": 4.847829378605755e-137,
+      "domain_min_MPa": 4.847829378605755e-137,
+      "domain_max_MPa": 1.600350918814311,
+      "area_ge_1pct_source_peak": 0.0509500000000017,
+      "area_ge_5pct_source_peak": 0.03627654324218792,
+      "area_ge_10pct_source_peak": 0.024225392539062657,
+      "background_alpha": -21,
+      "data_objective": 5.930319213916222e-11,
+      "rms_microstrain": 0.22600753865141648,
+      "maximum_area_ge_1pct": 0.0509500000000017,
+      "peak_corner_pressure_MPa": 2.7812615724820076e-122
+    },
+    {
+      "time_s": 384301.087267,
+      "source_pressure_MPa": 1.541376141124198,
+      "left_max_MPa": 1.6456812991510685,
+      "right_max_MPa": 1.6528246253455146,
+      "corner_max_MPa": 8.162066254883416e-16,
+      "left_mid_MPa": 1.562151994979139,
+      "right_mid_MPa": 1.5911403078842912,
+      "left_far_MPa": 8.160452550763369e-16,
+      "right_far_MPa": 1.835575783999878e-18,
+      "domain_min_MPa": 1.835575783999878e-18,
+      "domain_max_MPa": 1.695205051985019,
+      "area_ge_1pct_source_peak": 0.3145499999999682,
+      "area_ge_5pct_source_peak": 0.22937499999996816,
+      "area_ge_10pct_source_peak": 0.18852500000000671,
+      "background_alpha": -19,
+      "data_objective": 5.256863649067648e-11,
+      "rms_microstrain": 0.2127880557438536,
+      "maximum_area_ge_1pct": 0.3145499999999682,
+      "peak_corner_pressure_MPa": 8.162066254883416e-16
+    },
+    {
+      "time_s": 384301.087267,
+      "source_pressure_MPa": 1.541376141124198,
+      "left_max_MPa": 1.7205158260177136,
+      "right_max_MPa": 1.6908559651685509,
+      "corner_max_MPa": 0.0010185407004427397,
+      "left_mid_MPa": 1.5435777769855636,
+      "right_mid_MPa": 1.587941767802228,
+      "left_far_MPa": 0.001017845719438941,
+      "right_far_MPa": 9.139151622404952e-05,
+      "domain_min_MPa": 9.139151622404952e-05,
+      "domain_max_MPa": 1.7205158260177136,
+      "area_ge_1pct_source_peak": 0.7573250000000545,
+      "area_ge_5pct_source_peak": 0.5709000000000546,
+      "area_ge_10pct_source_peak": 0.46377500000005456,
+      "background_alpha": -18,
+      "data_objective": 4.0231020494915305e-11,
+      "rms_microstrain": 0.18615058895945746,
+      "maximum_area_ge_1pct": 0.7573250000000545,
+      "peak_corner_pressure_MPa": 0.0010185407004427397
+    }
+  ],
+  "baseline_check": {
+    "rms_difference_strain": 8.90797712885654e-22,
+    "relative_rms_difference": 2.006988683041202e-15,
+    "passed": true
+  },
+  "fixed_zone_tensor_m2": [
+    1.1511491493423156e-15,
+    1e-21,
+    1e-21
+  ],
+  "coupling_C": 0.03047460428008047,
+  "interpretation": "Finite-domain forward sensitivity at fixed fitted zone/C; no claim that new backgrounds are reoptimized"
+}
