@@ -1,0 +1,535 @@
+{
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/measurement_data.csv": {
+    "sha256": "bf4ff6bf2baf0122f2ea0d134acc95149c09febca5e3bf7867399983c627c2c4",
+    "bytes": 5802061,
+    "roles": [
+      "clean synthetic observation",
+      "clean_layerwise: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/optimized_alphas_L1.txt": {
+    "sha256": "f9aa5397e6ab083a4792d6359679e0344a9a772de6cee0c33dc4796f6d74f401",
+    "bytes": 5200,
+    "roles": [
+      "clean_layerwise: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/objective_history_L1.csv": {
+    "sha256": "042ee09aa63a95216b94222dfbc44970091ad642600552bd70f8f713d055383c",
+    "bytes": 2953,
+    "roles": [
+      "clean_layerwise: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/parameter_history_L1.csv": {
+    "sha256": "34d5d874e07d481c27ba99246025e127755c924a7359d735f5da2d7675f7369c",
+    "bytes": 118800,
+    "roles": [
+      "clean_layerwise: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/qc_alpha_L1_final.txt": {
+    "sha256": "fb8e1c91d0d1f162dbc44c5b7657a572ae711a50ee71412da2338b693e533dd0",
+    "bytes": 5200,
+    "roles": [
+      "clean_layerwise: actual QC alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/qc_output_L1_final/qc_opt_L1_final_out_forward0_csv_data_0129.csv": {
+    "sha256": "9479b6e6c1688e68e1ebac8789c441d66eef409158fd737429804bdc6374509e",
+    "bytes": 5717151,
+    "roles": [
+      "clean_layerwise: complete final forward response"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_clean/optimized_alphas_L1.txt": {
+    "sha256": "6b4f23ddc1991358b6b4ed01126821189c9e898452a08082b0b52eadac68f35d",
+    "bytes": 5200,
+    "roles": [
+      "clean_zonal: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_clean/measurement_data.csv": {
+    "sha256": "35e3a3c75d1fdccee22cf6096878b1abac776b56f8d20b571e21b4e64db4153e",
+    "bytes": 5783782,
+    "roles": [
+      "clean_zonal: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_clean/objective_history_zonal.csv": {
+    "sha256": "1f5f6a0210ccfac6f54f6b91aabe388595850226721867c2f6a9d6c106eebec5",
+    "bytes": 929,
+    "roles": [
+      "clean_zonal: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_clean/parameter_history_L1.csv": {
+    "sha256": "2d3e6d1ce52bc92c079dad7a59598d1e6a4100dcadd7cccfad31b202f9f278ff",
+    "bytes": 36000,
+    "roles": [
+      "clean_zonal: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_clean/optimized_theta_zonal.txt": {
+    "sha256": "92ac93bf1923b374fe09410c712f4ff6623a30f74afc6c5948b6eb57298c0d96",
+    "bytes": 52,
+    "roles": [
+      "clean_zonal: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/initial_alpha_L1.txt": {
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4",
+    "bytes": 5200,
+    "roles": [
+      "clean initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_1pct/optimized_alphas_L1.txt": {
+    "sha256": "d6cb8c8d5668d226913ea52a41e5c236e2f58770feee966bedd33fe3f7e5b22a",
+    "bytes": 5200,
+    "roles": [
+      "layerwise_1pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_1pct/measurement_data.csv": {
+    "sha256": "1371016ca872bbc9e0d255e32035fd73848b1521cbeef89d57e4c95f1acc7c39",
+    "bytes": 3866025,
+    "roles": [
+      "layerwise_1pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_1pct/objective_history_L1.csv": {
+    "sha256": "edd93a8c1f55681ca0d521fb86cbe77fa63704d764ef2207ccb30a2f70978e77",
+    "bytes": 4009,
+    "roles": [
+      "layerwise_1pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_1pct/parameter_history_L1.csv": {
+    "sha256": "25401947733c8fb2780600ac99e3c87c714b6d6eef35057424d414a8fe8548db",
+    "bytes": 162000,
+    "roles": [
+      "layerwise_1pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/optimized_alphas_L1.txt": {
+    "sha256": "b53ae2b1bc5754dca3c2601366df86906afaca49d183fc35532eef2eefe363aa",
+    "bytes": 5200,
+    "roles": [
+      "zonal_1pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/measurement_data.csv": {
+    "sha256": "1371016ca872bbc9e0d255e32035fd73848b1521cbeef89d57e4c95f1acc7c39",
+    "bytes": 3866025,
+    "roles": [
+      "zonal_1pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/objective_history_zonal.csv": {
+    "sha256": "ac944207615618b4652d7bcdf06e52b396a2bd36ee8e6bf44e5341c1645d633b",
+    "bytes": 1017,
+    "roles": [
+      "zonal_1pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/parameter_history_L1.csv": {
+    "sha256": "0f549ffc719e104bab4adb3e6424eff1e568f95e1e518f86db923279ea7baa4b",
+    "bytes": 39600,
+    "roles": [
+      "zonal_1pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/optimized_theta_zonal.txt": {
+    "sha256": "6d163bf639c22a5c10950be9616f5403bea0a66e10e19194bd8ebb2cc46979a4",
+    "bytes": 52,
+    "roles": [
+      "zonal_1pct: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_1pct/initial_alpha_L1.txt": {
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4",
+    "bytes": 5200,
+    "roles": [
+      "1pct: layerwise initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_1pct/initial_theta_zonal.txt": {
+    "sha256": "29a2025ddd10b090df78dd070e02e076dfbb0b88f30aa1aaa3363504a6c4c98b",
+    "bytes": 52,
+    "roles": [
+      "1pct: zonal initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_2pct/optimized_alphas_L1.txt": {
+    "sha256": "48b727dc95d67ae9180700617cec579aa183690d5c54057410cb76e9d882f39a",
+    "bytes": 5200,
+    "roles": [
+      "layerwise_2pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_2pct/measurement_data.csv": {
+    "sha256": "57c3b4bb44dade1b63cc3616ff2ce7ad2c574d53fc0680a21aad17890cbed808",
+    "bytes": 3866718,
+    "roles": [
+      "layerwise_2pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_2pct/objective_history_L1.csv": {
+    "sha256": "aeb83c6117892a3f7376d39ebb0c2ac39f558a5389dca527c98550e39b5ad88c",
+    "bytes": 12588,
+    "roles": [
+      "layerwise_2pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_2pct/parameter_history_L1.csv": {
+    "sha256": "3db6e0ed280ca765f7f10c17f31f7d63349112f65773ced154d949b01040128e",
+    "bytes": 511200,
+    "roles": [
+      "layerwise_2pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/optimized_alphas_L1.txt": {
+    "sha256": "72c05747f4326d311ec48f6f34fae6a4203f3bf361a541965181d16c75f3b500",
+    "bytes": 5200,
+    "roles": [
+      "zonal_2pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/measurement_data.csv": {
+    "sha256": "57c3b4bb44dade1b63cc3616ff2ce7ad2c574d53fc0680a21aad17890cbed808",
+    "bytes": 3866718,
+    "roles": [
+      "zonal_2pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/objective_history_zonal.csv": {
+    "sha256": "9d1bf61d11d826101bb44eb75d3ad3cd9b369729f47078ca58882ccd214f882d",
+    "bytes": 1017,
+    "roles": [
+      "zonal_2pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/parameter_history_L1.csv": {
+    "sha256": "5d34e03cced109522212beac73890d953d3b00c81c0c73b7c4b66886591f0337",
+    "bytes": 39600,
+    "roles": [
+      "zonal_2pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/optimized_theta_zonal.txt": {
+    "sha256": "e80411db9a0921c6b4f905a46a0e81c34bf17c777baf9b13e4779842a5243c05",
+    "bytes": 52,
+    "roles": [
+      "zonal_2pct: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_2pct/initial_alpha_L1.txt": {
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4",
+    "bytes": 5200,
+    "roles": [
+      "2pct: layerwise initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_2pct/initial_theta_zonal.txt": {
+    "sha256": "29a2025ddd10b090df78dd070e02e076dfbb0b88f30aa1aaa3363504a6c4c98b",
+    "bytes": 52,
+    "roles": [
+      "2pct: zonal initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_5pct/optimized_alphas_L1.txt": {
+    "sha256": "0bc34cb73d6ce4edfb8e27fa5e3a1d1660cd70e8c8333031c37f3f18da6711bb",
+    "bytes": 5200,
+    "roles": [
+      "layerwise_5pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_5pct/measurement_data.csv": {
+    "sha256": "66f245ec84878177aeb4b52424d8dfe42296454520a784a76b77dc2741585367",
+    "bytes": 3868883,
+    "roles": [
+      "layerwise_5pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_5pct/objective_history_L1.csv": {
+    "sha256": "90b789f4b54070d0811990405cadb0eba73261f913631f1f6ba6b3bc255aef7c",
+    "bytes": 11698,
+    "roles": [
+      "layerwise_5pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_5pct/parameter_history_L1.csv": {
+    "sha256": "c155ea0d62f4a7f19b5470d882d3512c968961b19e46bc44d233fad710910107",
+    "bytes": 475200,
+    "roles": [
+      "layerwise_5pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/optimized_alphas_L1.txt": {
+    "sha256": "e40065f4d41af0bc3ce072b31a2935c20656d99656455d501da89ea047f1dea8",
+    "bytes": 5200,
+    "roles": [
+      "zonal_5pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/measurement_data.csv": {
+    "sha256": "66f245ec84878177aeb4b52424d8dfe42296454520a784a76b77dc2741585367",
+    "bytes": 3868883,
+    "roles": [
+      "zonal_5pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/objective_history_zonal.csv": {
+    "sha256": "e2cc8032cf09d7036e96605d9aa5a744758b21ef76a47c96e7e09022fe442683",
+    "bytes": 1105,
+    "roles": [
+      "zonal_5pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/parameter_history_L1.csv": {
+    "sha256": "7551a28cde6af4c5f0f8f6f79506e6068c0f7c9d8d7428027834af87d3aab044",
+    "bytes": 43200,
+    "roles": [
+      "zonal_5pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/optimized_theta_zonal.txt": {
+    "sha256": "b11b11b72423b31177901f1554c63980e264286d7fc6af65e94bf5828bf8804b",
+    "bytes": 52,
+    "roles": [
+      "zonal_5pct: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_5pct/initial_alpha_L1.txt": {
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4",
+    "bytes": 5200,
+    "roles": [
+      "5pct: layerwise initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_5pct/initial_theta_zonal.txt": {
+    "sha256": "29a2025ddd10b090df78dd070e02e076dfbb0b88f30aa1aaa3363504a6c4c98b",
+    "bytes": 52,
+    "roles": [
+      "5pct: zonal initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/optimized_alphas_L1.txt": {
+    "sha256": "ea348d875d300be1eff7255b006fe050e53da722c728b544dfae7e32b712efb9",
+    "bytes": 5200,
+    "roles": [
+      "layerwise_10pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/measurement_data.csv": {
+    "sha256": "fa2c31900e4e001deb50dbf1e1604f0f0fdfe6b7077e881b08814dfa6591efc1",
+    "bytes": 3855015,
+    "roles": [
+      "layerwise_10pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/objective_history_L1.csv": {
+    "sha256": "92fb042e7240289ddead896ba36f5a2c8029c60e45de9150f422541159f79c99",
+    "bytes": 8673,
+    "roles": [
+      "layerwise_10pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/parameter_history_L1.csv": {
+    "sha256": "3c73bce66d1d73df61255ea3702354f80e8cd44931a9a43b4163d1798f49caf6",
+    "bytes": 352800,
+    "roles": [
+      "layerwise_10pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/qc_alpha_L1_final.txt": {
+    "sha256": "25829ee18f3c46b24fa2b4dd4323649d455c8da4714d6aa1f50abd3e5026ead2",
+    "bytes": 5200,
+    "roles": [
+      "layerwise_10pct: actual QC alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/qc_output_L1_final/qc_opt_L1_final_out_forward0_csv_data_0129.csv": {
+    "sha256": "fb0cd9111750ad518e8d41b6e983098fc530343981ddf08278dda2a474529199",
+    "bytes": 5731738,
+    "roles": [
+      "layerwise_10pct: complete final forward response"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/optimized_alphas_L1.txt": {
+    "sha256": "4e9bb2f118c50ae9f070be5168b6547b54b76f3a0a9cfb8f7464460f4bda08da",
+    "bytes": 5200,
+    "roles": [
+      "zonal_10pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/measurement_data.csv": {
+    "sha256": "fa2c31900e4e001deb50dbf1e1604f0f0fdfe6b7077e881b08814dfa6591efc1",
+    "bytes": 3855015,
+    "roles": [
+      "zonal_10pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/objective_history_zonal.csv": {
+    "sha256": "aaf5137f2faee7fcb024ebc80ed08aa32d667fd30c84c0d8275e4d7f1dddb142",
+    "bytes": 1105,
+    "roles": [
+      "zonal_10pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/parameter_history_L1.csv": {
+    "sha256": "f484d1ced39eb316474b8717469804e1fc46b94d46ee30baefb508a63474380d",
+    "bytes": 43200,
+    "roles": [
+      "zonal_10pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/optimized_theta_zonal.txt": {
+    "sha256": "ebc598b59bf170dc7098df25874565e3c06d3e8b087d61df04c277c7de7702ec",
+    "bytes": 52,
+    "roles": [
+      "zonal_10pct: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/qc_alpha_zonal_final.txt": {
+    "sha256": "025a8b5a138a0ea8c8ec7f917d218d9ba54bec6c31bed1ed1ae278bb1e4542db",
+    "bytes": 5200,
+    "roles": [
+      "zonal_10pct: actual QC alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/qc_output_zonal_final/qc_opt_zonal_final_out_forward0_csv_data_0129.csv": {
+    "sha256": "0d75eacc89808e1a5100f921623e455237131b1ddb437339a365a06db161196c",
+    "bytes": 5732245,
+    "roles": [
+      "zonal_10pct: complete final forward response"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/inv/rfsdss_10pct/initial_alpha_L1.txt": {
+    "sha256": "943b77759fa1cecebe41fbd3569a3c7156f572ae5b23e6a18ab6935604d3cad4",
+    "bytes": 5200,
+    "roles": [
+      "10pct: layerwise initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/initial_theta_zonal.txt": {
+    "sha256": "29a2025ddd10b090df78dd070e02e076dfbb0b88f30aa1aaa3363504a6c4c98b",
+    "bytes": 52,
+    "roles": [
+      "10pct: zonal initial model"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/optimized_alphas_L1.txt": {
+    "sha256": "b9d460feb03c2adf0e0ed1ffbe7a4bb835890bf7c8a1f9334aa629773e2009f0",
+    "bytes": 5200,
+    "roles": [
+      "shifted_zonal_10pct: final alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/measurement_data.csv": {
+    "sha256": "fa2c31900e4e001deb50dbf1e1604f0f0fdfe6b7077e881b08814dfa6591efc1",
+    "bytes": 3855015,
+    "roles": [
+      "shifted_zonal_10pct: observations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/objective_history_zonal.csv": {
+    "sha256": "7a1f9c4575da6ffe93c40132cfb95cb8911dd0ed7d8257120fd29958353b3e6e",
+    "bytes": 1545,
+    "roles": [
+      "shifted_zonal_10pct: objective evaluations"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/parameter_history_L1.csv": {
+    "sha256": "b5686667f891aeacf0ead8c8d37dde28bbf72aa2537b361299a9df5f6db04999",
+    "bytes": 61200,
+    "roles": [
+      "shifted_zonal_10pct: evaluated alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/optimized_theta_zonal.txt": {
+    "sha256": "0735aa2d166f7ae8d2695f5178fdcf7143f97d06575dca30b64e740a443fa43f",
+    "bytes": 52,
+    "roles": [
+      "shifted_zonal_10pct: final theta"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/qc_alpha_zonal_final.txt": {
+    "sha256": "850cecffde97ebae9b32b94a9d5d06cacc06af4bb25dfd3e7543c868fd1a9408",
+    "bytes": 5200,
+    "roles": [
+      "shifted_zonal_10pct: actual QC alpha"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/qc_output_zonal_final/qc_opt_zonal_final_out_forward0_csv_data_0129.csv": {
+    "sha256": "859425702a8483b68667e5c2fd922fd1ac453fbc02d82eb2dc605ea41eadff45",
+    "bytes": 5732424,
+    "roles": [
+      "shifted_zonal_10pct: complete final forward response"
+    ]
+  },
+  "scripts/DSS_history_match/paper_theoretical_framework/data/adjoint_console_record.txt": {
+    "sha256": "22b33c88d8ecebd58f5dee933bb13a815dd0df21ba7dd61d9982957260783c69",
+    "bytes": 839,
+    "roles": [
+      "completed discrete validation: rounded console transcription"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/104_gradient_fd_check_eps01.stdout": {
+    "sha256": "a522ac1aca2903222d9eb61f9638686c952fc73098a92aaafaf399c3fd2ba922",
+    "bytes": 1301896,
+    "roles": [
+      "completed MOOSE finite-difference verification"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100layer/fwd/101_ground_truth.py": {
+    "sha256": "e25d5d0cd25de0d0f4ff82dfb9ea24ddb451ca93b627a72019836ab7dd480fa0",
+    "bytes": 9061,
+    "roles": [
+      "synthetic truth, geometry, and acquisition"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/106_optimization_runner_L1.py": {
+    "sha256": "fe10c85931adf325cbd12f95edc1a20113e621134a3b0c67ecc7414e11640c2c",
+    "bytes": 15607,
+    "roles": [
+      "layerwise parameterization, initialization, and L1 settings"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/inv/104_gradient_fd_check_eps01.py": {
+    "sha256": "f8a4324a726fa3206f1db0ed365f351794eecf299fcc2a3fd0e5f6fa41adc1cd",
+    "bytes": 5638,
+    "roles": [
+      "zero-based indexing and finite-difference setup"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/exact_rfsdss_10pct/107_optimization_runner_zonal_L1.py": {
+    "sha256": "ae01bdd3311100d26009fd43f29a9b0ba5f8668f3f17c384b690c8f7db65e23d",
+    "bytes": 21141,
+    "roles": [
+      "zonal expansion and gradient reduction"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v5strain_zonal2p/inv/pert_rfsdss_10pct/zonal.env": {
+    "sha256": "14c15d0b057779616ddb1733110463b93791a3c8dca0bc17d050b921be7dfa9f",
+    "bytes": 16,
+    "roles": [
+      "shifted-zone mode"
+    ]
+  },
+  "scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v4strain_rfsdss/noise_adding/add_noise_rfsdss.py": {
+    "sha256": "8471fc3ad49ce52d7e578148dba33d79c2a44006f555e11268436941719c13d7",
+    "bytes": 22110,
+    "roles": [
+      "structured synthetic noise design"
+    ]
+  },
+  "scripts/DSS_history_match/paper_theoretical_framework/make_figures.py": {
+    "sha256": "7e08d2dfa2c30b2ef4ee11fc53e8f79089ce170df02222dff2dba3a8904cf5b3",
+    "bytes": 26461,
+    "roles": [
+      "reproducible plotting and metric computation"
+    ]
+  }
+}

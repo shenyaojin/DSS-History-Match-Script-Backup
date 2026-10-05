@@ -1,0 +1,3 @@
+zero_based_index,finite_difference,adjoint,relative_error,epsilon
+65,-3.755e-08,-3.673302e-08,0.0218,0.1
+135,-4.135e-08,-4.047876e-08,0.0211,0.1

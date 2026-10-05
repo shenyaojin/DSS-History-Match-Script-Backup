@@ -1,0 +1,51 @@
+{
+  "fig01_adjoint_verification": {
+    "width_mm": 180,
+    "height_mm": 78,
+    "discrete_record_precision": "printed values; console transcription",
+    "moose_indices": "zero-based"
+  },
+  "fig02_clean_reconstruction": {
+    "width_mm": 180,
+    "height_mm": 155,
+    "strain_color_limit_microstrain": 35.892292786472005,
+    "residual_color_limit_microstrain": 0.1627701218067005,
+    "time_coordinates": "native nonuniform; no resampling",
+    "residual_clipped_pct": 0
+  },
+  "fig03_fit_vs_recovery": {
+    "width_mm": 180,
+    "height_mm": 102,
+    "nominal_floor_pct": 10,
+    "relative_noise_rms_pct": 25.824316437291948,
+    "common_residual_limit_microstrain": 21.563421888084406,
+    "clipped_pct_by_case": {
+      "layerwise_10pct": 1.0031007751937984,
+      "zonal_10pct": 0.9968992248062015
+    }
+  },
+  "fig04_noise_sensitivity": {
+    "width_mm": 180,
+    "height_mm": 83,
+    "nominal_floor_pct": [
+      0,
+      1,
+      2,
+      5,
+      10
+    ],
+    "replicates_per_nonzero_level": 1,
+    "uncertainty_intervals": "none: no ensemble available"
+  },
+  "figS01_zone_mislocation": {
+    "width_mm": 180,
+    "height_mm": 150,
+    "zone_shift_m": 1,
+    "common_prediction_error_limit_microstrain": 7.8168625471254005,
+    "clean_response_rms_microstrain": {
+      "zonal_10pct": 0.3906280614894117,
+      "shifted_zonal_10pct": 1.359345578807237
+    },
+    "bottom_panels": "error relative to clean truth; NOT the fitted noisy-data residual"
+  }
+}

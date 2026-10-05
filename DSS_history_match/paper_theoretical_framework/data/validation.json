@@ -1,0 +1,42 @@
+{
+  "checks": [
+    {
+      "case": "clean_layerwise",
+      "qc_alpha_max_abs_difference": 4.943991882555565e-10,
+      "objective_relative_difference": 3.1482838139341653e-09,
+      "n_samples": 64500,
+      "all_zero_response": false
+    },
+    {
+      "case": "layerwise_10pct",
+      "qc_alpha_max_abs_difference": 4.936531183830084e-10,
+      "objective_relative_difference": 6.476631155036053e-12,
+      "n_samples": 64500,
+      "all_zero_response": false
+    },
+    {
+      "case": "zonal_10pct",
+      "qc_alpha_max_abs_difference": 3.751008392782751e-10,
+      "objective_relative_difference": 3.682716869064693e-11,
+      "n_samples": 64500,
+      "all_zero_response": false
+    },
+    {
+      "case": "shifted_zonal_10pct",
+      "qc_alpha_max_abs_difference": 3.644373691713554e-10,
+      "objective_relative_difference": 8.672870456495245e-12,
+      "n_samples": 64500,
+      "all_zero_response": false
+    }
+  ],
+  "time_steps": {
+    "minimum_s": 128.0,
+    "maximum_s": 50726.0
+  },
+  "n_free_layers": 100,
+  "objective_mask": "measurement_time > 0",
+  "observation_pair_equality": "verified for all four noise levels and exact/shifted 10pct",
+  "initial_model_equality": "verified for all four paired noise levels",
+  "figure_title_label_canvas_bounds": "passed at final figure dimensions",
+  "no_simulation_executed": true
+}

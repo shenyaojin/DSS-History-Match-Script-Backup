@@ -1,0 +1,15 @@
+Provenance: transcribed from the completed tool output in this conversation,
+before the user required use of existing results only. The command was:
+/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/python scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v2strain/adjoint/adjoint_verification.py
+The command completed with exit code 0. No solver was rerun for these figures.
+This is a transcription of printed, rounded results, not a full-precision archive.
+
+TEST 1: worst relative dot-product error over five trials = 5.40e-14
+TEST 2: adjoint directional derivative = -3.7021708460e-05
+epsilon central_FD relative_error
+1e-01 -3.7457431692e-05 1.18e-02
+1e-02 -3.7026067557e-05 1.18e-04
+1e-03 -3.7021752051e-05 1.18e-06
+1e-04 -3.7021708895e-05 1.18e-08
+1e-05 -3.7021708524e-05 1.74e-09
+1e-06 -3.7021709015e-05 1.50e-08
