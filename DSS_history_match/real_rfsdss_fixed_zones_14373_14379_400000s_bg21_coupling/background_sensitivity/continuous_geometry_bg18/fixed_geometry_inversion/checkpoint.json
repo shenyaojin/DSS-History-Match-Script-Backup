@@ -1,0 +1,10 @@
+{
+  "iteration": 4,
+  "alpha_xx": -14.932308432944781,
+  "alpha_yy": -20.864269750603658,
+  "coupling_C": 0.033776509752086195,
+  "scaled_objective": 0.011917617566537492,
+  "weighted_rms_microstrain": 0.15177171246185636,
+  "core_rms_microstrain": 0.13879734657229778,
+  "forward_folder": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/continuous_geometry_bg18/permeability_evaluations/k_024a5f80458d6667"
+}

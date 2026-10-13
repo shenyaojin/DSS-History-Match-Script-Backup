@@ -1,0 +1,30 @@
+[
+  {
+    "direction": [
+      1.0,
+      0.0
+    ],
+    "h": 0.02,
+    "h_half": 0.01,
+    "derivative_h": -0.0008921871307964091,
+    "derivative_half_h": -0.0008920358652809827,
+    "absolute_difference": 1.5126551542636937e-07,
+    "tolerance": 4.460935653982046e-05,
+    "passed": true,
+    "note": "FD step consistency, not an adjoint-vs-FD validation"
+  },
+  {
+    "direction": [
+      0.0,
+      1.0
+    ],
+    "h": 0.02,
+    "h_half": 0.01,
+    "derivative_h": -0.002733523929685858,
+    "derivative_half_h": -0.002730399082077038,
+    "absolute_difference": 3.1248476088201194e-06,
+    "tolerance": 0.0001366761964842929,
+    "passed": true,
+    "note": "FD step consistency, not an adjoint-vs-FD validation"
+  }
+]
