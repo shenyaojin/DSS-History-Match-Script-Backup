@@ -1,0 +1,9 @@
+[
+  {
+    "coarse": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/continuous_geometry_bg18/mesh_h050",
+    "fine": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/continuous_geometry_bg18/mesh_h025",
+    "prediction_relative_difference": 0.019337448467344476,
+    "weighted_objective_relative_difference": 0.02286125638866409,
+    "passed": true
+  }
+]

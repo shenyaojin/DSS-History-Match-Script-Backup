@@ -1,0 +1,29 @@
+{
+  "variables": [
+    "center_depth_ft",
+    "zone_depth_width_ft"
+  ],
+  "scope": "Local continuous-depth geometry search; all permeability components fixed during this stage",
+  "search_steps_ft": [
+    [
+      0.08,
+      0.16
+    ],
+    [
+      0.04,
+      0.08
+    ]
+  ],
+  "core_channel_depths_ft": [
+    14375.609375,
+    14375.943359375,
+    14376.2763671875,
+    14376.61328125
+  ],
+  "core_sse_weight": 3,
+  "coupling": "Exact unbounded scalar least squares at each forward",
+  "mesh_gate": "<=5% change in coupled predictions AND weighted objective on halving local dy",
+  "auto_inversion_gate": ">=2% lower weighted objective than same-mesh initial geometry; core RMS must improve; final mesh check must pass",
+  "inversion": "Freeze best geometry; L-BFGS-B xx/yy only, C analytically profiled, up to 60 accepted iterations after two directional FD step checks",
+  "note": "Local search, not a claim of global geometric optimality; existing pressure overshoot recorded separately"
+}
