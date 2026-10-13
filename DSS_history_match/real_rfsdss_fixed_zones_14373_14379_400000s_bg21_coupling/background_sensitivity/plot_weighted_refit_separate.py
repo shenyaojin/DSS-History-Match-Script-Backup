@@ -12,11 +12,11 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / 'coupling_refit_weighted3_unbounded'
 
 
-def main():
-    summary = json.loads((OUT / 'summary.json').read_text())
+def main(out=OUT, alphas=(-19, -18), geometry_note=None):
+    summary = json.loads((out / 'summary.json').read_text())
     native = np.load(HERE.parent / 'data/half_wave_positive_native.npz')
-    frames = {a: pd.read_csv(OUT / f'bg_{abs(a)}_strain.csv') for a in [-19, -18]}
-    base = frames[-19]
+    frames = {a: pd.read_csv(out / f'bg_{abs(a)}_strain.csv') for a in alphas}
+    base = frames[alphas[0]]
     times = np.sort(base.measurement_time.unique())
     ys = np.sort(base.measurement_ycoord.unique())
     depths = 14376 + (ys - 50) / .3048
@@ -64,9 +64,12 @@ def main():
         legend = fig.add_subplot(grid[6,2])
         legend.axis('off')
         legend.legend(handles, labels, ncol=2, loc='center', frameon=False)
-        fig.suptitle(f'Background alpha = {alpha} | C = {coefficient:.5f} (unbounded)\nCentral four channels: 3x squared-error weight', fontsize=14)
+        title = f'Background alpha = {alpha} | C = {coefficient:.5f} (unbounded)\nCentral four channels: 3x squared-error weight'
+        if geometry_note:
+            title += '\n' + geometry_note
+        fig.suptitle(title, fontsize=14)
         for ext in ['png', 'pdf']:
-            path = OUT / f'qc_bg_{abs(alpha)}_only.{ext}'
+            path = out / f'qc_bg_{abs(alpha)}_only.{ext}'
             fig.savefig(path, dpi=170)
             print(path)
         plt.close(fig)

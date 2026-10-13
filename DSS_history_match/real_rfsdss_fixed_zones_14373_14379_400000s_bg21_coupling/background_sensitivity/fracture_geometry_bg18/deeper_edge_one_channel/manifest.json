@@ -1,0 +1,58 @@
+{
+  "scope": "Extend only the deep edge by one existing DSS-scale mesh cell",
+  "background_alpha": -18,
+  "fixed_parameters": {
+    "background_alpha": -18,
+    "background_k_m2": [
+      1e-18,
+      1e-18,
+      1e-18
+    ],
+    "zone_alpha_xx": -14.938868403094903,
+    "zone_alpha_yy": -21.0,
+    "zone_kzz_m2": 1e-21,
+    "fixed_zone_blocks": "layer_100 layer_101"
+  },
+  "old_zone_depth_ft": [
+    14375.4423828125,
+    14376.7802734375
+  ],
+  "new_zone_depth_ft": [
+    14375.4423828125,
+    14377.11328125
+  ],
+  "old_center_depth_ft": 14376.111328125,
+  "new_center_depth_ft": 14376.27783203125,
+  "center_shift_ft": 0.166503906250005,
+  "old_width_ft": 1.3378906250000029,
+  "new_width_ft": 1.6708984375000129,
+  "mesh": [
+    200,
+    216
+  ],
+  "old_zone_y_cells": 4,
+  "new_zone_y_cells": 5,
+  "n_forward_steps": 129,
+  "max_steps": 240,
+  "mpi_ranks": 20,
+  "weights": "Same original four observation channels retain SSE weight=3; all others=1",
+  "coupling": "Refit unconstrained global C after the physical forward",
+  "changed_lines": [
+    [
+      "    top_right = '100 50.23782734375 0'",
+      "    top_right = '100 50.339328125 0'"
+    ],
+    [
+      "    bottom_left = '0 50.23782734375 0'",
+      "    bottom_left = '0 50.339328125 0'"
+    ]
+  ],
+  "input_sha256": "02f292094a07a15224078b2378dedb87ba9a5c35f61e04741673179f74aaf9c2",
+  "source_sha256": {
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_18/forward.i": "00f8b85af04a094206a3aaa2c8051d7dcf14be0c56c43221a51da8c030f0ad1c",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_18/measurement_data.csv": "6e82902d7f81c0fa4e5bf544e9af3032d8917c1b624552e62b50f56f622a571c",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_18/solver_times.csv": "69e31bf43d5e93fd3150bf62f8b1aa6afae7276ec8657d8b7af2c1dae7db9885",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling/background_sensitivity/bg_18/strain_prediction.csv": "75cb38738094d3362be4180650006fc9a9d42127dff598a24cffc311d9964fcb"
+  },
+  "source_forward_reference_C": 0.03047460428008047
+}
