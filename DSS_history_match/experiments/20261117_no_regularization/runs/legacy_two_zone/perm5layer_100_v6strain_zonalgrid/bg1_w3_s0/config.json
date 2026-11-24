@@ -1,0 +1,29 @@
+{
+  "name": "bg1_w3_s0",
+  "kind": "legacy_two_zone",
+  "source": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/optimizer_input_file_test/perm5layer_100_v6strain_zonalgrid/inv/bg1_w3_s0",
+  "beta": 0.0,
+  "shift_layers": 0,
+  "initial": [
+    -16.0,
+    -16.0
+  ],
+  "bounds": [
+    [
+      -25.0,
+      -10.0
+    ],
+    [
+      -25.0,
+      -10.0
+    ]
+  ],
+  "scale": 1000000.0,
+  "ftol": 1e-07,
+  "gtol": 1e-10,
+  "maxiter": 60,
+  "fd_step": 0.02,
+  "delta": 0.05,
+  "reference": -18.0,
+  "comparison_limit": "Same physical forward/data/initial/bounds; finite-difference derivatives replace unavailable historical custom adjoint. Method change is disclosed."
+}
