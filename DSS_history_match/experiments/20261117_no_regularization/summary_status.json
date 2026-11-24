@@ -1,0 +1,13 @@
+{
+  "as_of_utc": "2026-11-23T23:11:02.685102+00:00",
+  "counts": {
+    "forward": 1,
+    "complete": 5,
+    "prepared": 39
+  },
+  "completed": 5,
+  "staged_cases": 45,
+  "not_all_staged_cases_are_scheduled": true,
+  "scheduled_legacy": "Only the six proposal-source v5 cases; the v6 factorial grid is staged, not silently rerun",
+  "scientific_scope": "Three Kxx core experiments, fixed transverse permeability, same synthetic truth across geometry perturbations; no layerwise inversion"
+}

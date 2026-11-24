@@ -1,0 +1,450 @@
+{
+  "as_of_local": "2026-11-23T16:13:41.528013-07:00",
+  "as_of_utc": "2026-11-23T23:13:41.528013+00:00",
+  "counts": {
+    "planned_inversions": 17,
+    "completed": 5,
+    "running": 1,
+    "not_started": 11,
+    "failed": 0,
+    "new_completed_full_forwards_including_truth": 423,
+    "running_full_forwards": 2,
+    "reused_archived_field_forwards": 28,
+    "staged_but_not_scheduled_configurations": 28
+  },
+  "records": [
+    {
+      "case": "three_layer/clean_L1",
+      "stage": "complete",
+      "complete": true,
+      "result": {
+        "success": true,
+        "termination": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+        "iterations": 12,
+        "n_function_evaluations": 14,
+        "theta_log10_Kxx": [
+          -18.00013639961317,
+          -14.523354017191043,
+          -18.00012867931379
+        ],
+        "Kxx_m2": [
+          9.99685977599386e-19,
+          2.9967187337108196e-15,
+          9.99703748821341e-19
+        ],
+        "data_objective": 1.5151819692414965e-14,
+        "regularization": 6.854011715558633e-11,
+        "scaled_objective": 6.855526897527875e-05,
+        "rms_microstrain": 0.0006854369893954307,
+        "gradient_scaled": [
+          1.6557131990122876e-05,
+          -4.03341720914613e-06,
+          2.0686848833055326e-05
+        ],
+        "final_forward": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/clean_L1/evaluations/f906089eb3bf67d0cc15",
+        "beta": 2e-11,
+        "n_optimized": 3,
+        "bound_hits": [
+          false,
+          false,
+          false
+        ]
+      },
+      "new_completed_forwards": 104,
+      "median_forward_wall_minutes": 36.261240357168326,
+      "last_update": "2026-11-23T21:21:16.519727+00:00"
+    },
+    {
+      "case": "three_layer/clean_no_reg",
+      "stage": "complete",
+      "complete": true,
+      "result": {
+        "success": true,
+        "termination": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+        "iterations": 12,
+        "n_function_evaluations": 14,
+        "theta_log10_Kxx": [
+          -18.000180687488513,
+          -14.522434116795496,
+          -18.0001728329994
+        ],
+        "Kxx_m2": [
+          9.9958403821856e-19,
+          3.0030729575340934e-15,
+          9.996021164886507e-19
+        ],
+        "data_objective": 1.470314695858441e-14,
+        "regularization": 0.0,
+        "scaled_objective": 1.470314695858441e-08,
+        "rms_microstrain": 0.0006752122137517334,
+        "gradient_scaled": [
+          1.7030439253949716e-05,
+          -4.0992905460353595e-06,
+          2.1232264502568705e-05
+        ],
+        "final_forward": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/clean_no_reg/evaluations/cf8e1fa55d49f959d99b",
+        "beta": 0.0,
+        "n_optimized": 3,
+        "bound_hits": [
+          false,
+          false,
+          false
+        ]
+      },
+      "new_completed_forwards": 104,
+      "median_forward_wall_minutes": 35.021422314075366,
+      "last_update": "2026-11-18T23:17:45.127853+00:00"
+    },
+    {
+      "case": "three_layer/rfsdss_10pct_no_reg",
+      "stage": "forward",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 7,
+      "median_forward_wall_minutes": 29.26319943686637,
+      "last_update": "2026-11-23T22:53:31.285295+00:00"
+    },
+    {
+      "case": "three_layer/rfsdss_1pct_no_reg",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "three_layer/rfsdss_2pct_no_reg",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "three_layer/rfsdss_5pct_no_reg",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "three_layer/shift_1m_L1",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "three_layer/shift_1m_no_reg",
+      "stage": "complete",
+      "complete": true,
+      "result": {
+        "success": true,
+        "termination": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+        "iterations": 11,
+        "n_function_evaluations": 12,
+        "theta_log10_Kxx": [
+          -17.897360167031657,
+          -14.601332232412442,
+          -18.101252273098723
+        ],
+        "Kxx_m2": [
+          1.2666010186509365e-18,
+          2.5041928291124006e-15,
+          7.920411157662751e-19
+        ],
+        "data_objective": 2.7664025872026117e-08,
+        "regularization": 0.0,
+        "scaled_objective": 0.027664025872026116,
+        "rms_microstrain": 0.926174525586712,
+        "gradient_scaled": [
+          -2.8634221182152262e-05,
+          7.240564350787299e-06,
+          -5.025759552034699e-05
+        ],
+        "final_forward": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/shift_1m_no_reg/evaluations/b57e174b737d72bbe39f",
+        "beta": 0.0,
+        "n_optimized": 3,
+        "bound_hits": [
+          false,
+          false,
+          false
+        ]
+      },
+      "new_completed_forwards": 90,
+      "median_forward_wall_minutes": 37.54322984909329,
+      "last_update": "2026-11-20T00:17:05.668839+00:00"
+    },
+    {
+      "case": "three_layer/shift_2m_L1",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "three_layer/shift_2m_no_reg",
+      "stage": "complete",
+      "complete": true,
+      "result": {
+        "success": true,
+        "termination": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+        "iterations": 12,
+        "n_function_evaluations": 13,
+        "theta_log10_Kxx": [
+          -17.791424856547934,
+          -14.811175441824167,
+          -18.202206072238827
+        ],
+        "Kxx_m2": [
+          1.6164978951542488e-18,
+          1.5446303295904656e-15,
+          6.277604165270086e-19
+        ],
+        "data_objective": 1.0474117184545397e-07,
+        "regularization": 0.0,
+        "scaled_objective": 0.10474117184545396,
+        "rms_microstrain": 1.802162110987145,
+        "gradient_scaled": [
+          -5.478612009937299e-06,
+          6.742923204501105e-08,
+          2.5999594513234472e-06
+        ],
+        "final_forward": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/shift_2m_no_reg/evaluations/ff68adab5b17a85dd840",
+        "beta": 0.0,
+        "n_optimized": 3,
+        "bound_hits": [
+          false,
+          false,
+          false
+        ]
+      },
+      "new_completed_forwards": 97,
+      "median_forward_wall_minutes": 38.38045223091419,
+      "last_update": "2026-11-21T04:11:01.789928+00:00"
+    },
+    {
+      "case": "field_phase7_no_reg/fixed_geometry_inversion",
+      "stage": "complete",
+      "complete": true,
+      "result": {
+        "success": true,
+        "status": 0,
+        "message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+        "iterations": 4,
+        "optimizer_evaluations": 5,
+        "unique_physical_evaluations": 48,
+        "theta": [
+          -14.932245081718916,
+          -20.864221149144516,
+          0.03377635555283697
+        ],
+        "scaled_objective": 0.011908103315183655,
+        "gradient_scaled": [
+          1.375669875993494e-05,
+          -1.041809061922196e-05
+        ],
+        "final_forward_folder": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/field_phase7_no_reg/permeability_evaluations/k_0363a97adc2e8e2a",
+        "results": {
+          "background_alpha": -18,
+          "fitted_C": 0.03377635555283697,
+          "weighted_objective_after": 3.86291131109195e-11,
+          "weighted_rms_after_microstrain": 0.15177171349708443,
+          "unweighted_rms_after_microstrain": 0.15719548288075721,
+          "core_rms_after_microstrain": 0.13879545263525767
+        },
+        "termination": "converged"
+      },
+      "new_completed_forwards": 20,
+      "median_forward_wall_minutes": null,
+      "last_update": "2026-11-22T17:04:19.882314+00:00"
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/exact_clean",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/exact_rfsdss_1pct",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/exact_rfsdss_2pct",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/exact_rfsdss_5pct",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/exact_rfsdss_10pct",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    },
+    {
+      "case": "legacy_two_zone/perm5layer_100_v5strain_zonal2p/pert_rfsdss_10pct",
+      "stage": "prepared",
+      "complete": false,
+      "result": null,
+      "new_completed_forwards": 0,
+      "median_forward_wall_minutes": null,
+      "last_update": null
+    }
+  ],
+  "controller": {
+    "stage": "running",
+    "utc": "2026-11-22T17:04:23.547297+00:00",
+    "pid": 676809,
+    "current": "three_Kxx_noise_and_L1_pairs",
+    "command": [
+      "/rcp/rcp42/home/shenyaojin/miniforge/bin/python",
+      "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/suite.py",
+      "run-core"
+    ]
+  },
+  "current_resource": {
+    "utc": "2026-11-23T23:13:40.064270+00:00",
+    "guard_pid": 686425,
+    "controller_pid": 676809,
+    "controller_alive": true,
+    "total_cpu_percent": 76.0,
+    "cpu_limit_basis": "physical-core CPU time equivalents",
+    "logical_cpu_percent": 38.0,
+    "experiment_cpu_percent": 74.69,
+    "external_cpu_percent": 1.31,
+    "available_memory_gib": 74.84,
+    "memory_used_percent": 19.1,
+    "swap_used_gib": 1.48,
+    "disk_free_gib": 13092.5,
+    "load_average": [
+      20.29,
+      20.31,
+      20.28
+    ],
+    "controlled_process_count": 26,
+    "paused_process_count": 0,
+    "selected_cpu_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13
+    ],
+    "physical_core_ceiling": 15,
+    "shared": false,
+    "target_percent": 75,
+    "hard_limit_percent": 80,
+    "cores": 14,
+    "pause": false,
+    "reason": "normal",
+    "memory_hold": false
+  },
+  "history": {
+    "sampled_own_cpu_max": 75.51,
+    "sampled_own_cpu_mean": 68.83448680011604,
+    "last_hour_mean_total_logical_cpu": 37.075630252100844,
+    "last_hour_mean_total_physical_equivalent_cpu": 74.15126050420169,
+    "minimum_available_memory_gib": 48.54,
+    "pause_episodes": 845,
+    "pause_episodes_last_hour": 2,
+    "total_pause_minutes": 82.29961515000005,
+    "pause_minutes_by_reason": {
+      "total_cpu_over_limit": 27.641597533333368,
+      "external_load_leaves_no_cpu_budget": 54.65801761666668
+    },
+    "peak_event": {
+      "utc": "2026-11-21T20:00:28.464501+00:00",
+      "event": "allocation_changed",
+      "guard_pid": 686425,
+      "controller_pid": 676809,
+      "controller_alive": true,
+      "total_cpu_percent": 200.0,
+      "cpu_limit_basis": "physical-core CPU time equivalents",
+      "logical_cpu_percent": 100.0,
+      "experiment_cpu_percent": 43.92,
+      "external_cpu_percent": 156.08,
+      "available_memory_gib": 65.36,
+      "memory_used_percent": 29.4,
+      "swap_used_gib": 2.14,
+      "disk_free_gib": 13961.2,
+      "load_average": [
+        30.11,
+        22.76,
+        21.13
+      ],
+      "controlled_process_count": 24,
+      "paused_process_count": 24,
+      "selected_cpu_ids": [
+        0
+      ],
+      "physical_core_ceiling": 15,
+      "shared": true,
+      "target_percent": 88,
+      "hard_limit_percent": 90,
+      "cores": 1,
+      "pause": true,
+      "reason": "external_load_leaves_no_cpu_budget",
+      "memory_hold": false
+    },
+    "monitor_errors": []
+  },
+  "current_full_forwards": [
+    {
+      "folder": "runs/three_layer/rfsdss_10pct_no_reg/evaluations/3403ec84b971afa9873e",
+      "step": 85,
+      "total_steps": 129,
+      "simulation_time_s": 315033.0,
+      "log_updated_utc": "2026-11-23T23:13:41.005955+00:00"
+    },
+    {
+      "folder": "runs/three_layer/rfsdss_10pct_no_reg/evaluations/ee502cf44cb519c2662d",
+      "step": 77,
+      "total_steps": 129,
+      "simulation_time_s": 121001.0,
+      "log_updated_utc": "2026-11-23T23:13:35.885881+00:00"
+    }
+  ],
+  "live_solver_processes": 20,
+  "threads_exceeding_core_ceiling": [],
+  "eta_caution": "Completed three-layer cases took roughly 25–28 hours each under the present resource budget. Six unfinished new cases plus six old two-zone controls remain; exact completion depends on noise-case iterations. A week or more is plausible; no guaranteed completion time."
+}
