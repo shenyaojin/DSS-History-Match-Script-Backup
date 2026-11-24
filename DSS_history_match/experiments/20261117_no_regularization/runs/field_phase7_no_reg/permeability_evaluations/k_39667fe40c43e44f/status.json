@@ -1,0 +1,10 @@
+{
+  "stage": "complete",
+  "utc": "2026-11-21T20:48:21.874315+00:00",
+  "background_alpha": -18,
+  "fitted_C": 0.03371152872880782,
+  "weighted_objective_after": 3.863501978256684e-11,
+  "weighted_rms_after_microstrain": 0.15178331655159932,
+  "unweighted_rms_after_microstrain": 0.15720880398961953,
+  "core_rms_after_microstrain": 0.13880274215376617
+}
