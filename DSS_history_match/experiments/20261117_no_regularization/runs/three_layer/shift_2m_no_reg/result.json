@@ -1,0 +1,33 @@
+{
+  "success": true,
+  "termination": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+  "iterations": 12,
+  "n_function_evaluations": 13,
+  "theta_log10_Kxx": [
+    -17.791424856547934,
+    -14.811175441824167,
+    -18.202206072238827
+  ],
+  "Kxx_m2": [
+    1.6164978951542488e-18,
+    1.5446303295904656e-15,
+    6.277604165270086e-19
+  ],
+  "data_objective": 1.0474117184545397e-07,
+  "regularization": 0.0,
+  "scaled_objective": 0.10474117184545396,
+  "rms_microstrain": 1.802162110987145,
+  "gradient_scaled": [
+    -5.478612009937299e-06,
+    6.742923204501105e-08,
+    2.5999594513234472e-06
+  ],
+  "final_forward": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/shift_2m_no_reg/evaluations/ff68adab5b17a85dd840",
+  "beta": 0.0,
+  "n_optimized": 3,
+  "bound_hits": [
+    false,
+    false,
+    false
+  ]
+}
