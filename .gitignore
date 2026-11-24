@@ -23,3 +23,27 @@ output
 
 *.pyc
 __pycache__/
+.tmp/
+
+# Local handoff data and independent checkouts.
+/tensile_fault/data_transfer/Shenyao_MOOSE_Tensile_2026-10-05.zip
+/tensile_fault/data_transfer/from_pc/DDMpy_0930/
+/tensile_fault/data_transfer/from_pc/dascore/
+
+# This index entry points to a local-only experiment.
+/DSS_history_match/experiment_index/02_three_layer_prototypes/perm3layerv3
+
+# Live controller state and host resource telemetry.
+/DSS_history_match/experiments/20261117_no_regularization/CONTROLLER_RUNNING
+/DSS_history_match/experiments/20261117_no_regularization/batch_status.json
+/DSS_history_match/experiments/20261117_no_regularization/controller_status.json
+/DSS_history_match/experiments/20261117_no_regularization/launch.json
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard.lock
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard_events.jsonl
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard_launch.json
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard_metrics.jsonl
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard_status.json
+/DSS_history_match/experiments/20261117_no_regularization/resource_guard_stopped.json
+/DSS_history_match/experiments/20261117_no_regularization/runs/**/RUNNING
+/DSS_history_match/experiments/20261117_no_regularization/runs/**/STARTED
+/DSS_history_match/experiments/20261117_no_regularization/runs/**/INPUT_CHECK_PASSED
