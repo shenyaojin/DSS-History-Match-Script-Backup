@@ -1,0 +1,57 @@
+{
+  "zone": "srv_outer",
+  "direction": "+y (cross-strike model coordinate)",
+  "translation_m": 1.524,
+  "before_m": {
+    "bottom_left": [
+      299.6184,
+      -14.407896,
+      0
+    ],
+    "top_right": [
+      1894.9416,
+      14.407896,
+      0
+    ],
+    "center": [
+      1097.28,
+      0,
+      0
+    ]
+  },
+  "after_m": {
+    "bottom_left": [
+      299.6184,
+      -12.883896,
+      0
+    ],
+    "top_right": [
+      1894.9416,
+      15.931896,
+      0
+    ],
+    "center": [
+      1097.28,
+      1.524,
+      0
+    ]
+  },
+  "mesh": {
+    "nx": 88,
+    "ny_per_panel": 80,
+    "elements": 28160,
+    "old_elements": 387200
+  },
+  "end_time_s": 61200,
+  "pressure_bc_x_m": {
+    "original": 755.626909,
+    "both_tests": 755.626909
+  },
+  "bias_x": 0.9996557788798266,
+  "note": "Common slightly graded x mesh retains exact loading location; monitoring sampler stays at x=756.8184. Pressure curve and all physical parameters unchanged.",
+  "source_sha256": {
+    "original_v11.i": "50123c9af0b38192f05fdb99ea4829c51444f376580f9b01d4b92bdf5a50c1bf",
+    "fault_geometry.py": "8f7fe7b8f9465ca54010f4b74fc5c7f46082152f3a13353ef9755f5b410a2d2c",
+    "run_v11_srv_extended.py": "b0647d572e11dbf98841e82b7ee55214eef3766b7bc1907f9e695495737bc0bf"
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "case": "baseline",
+    "exit_code": 0,
+    "wall_seconds": 23.873161866911687,
+    "single_process": true,
+    "command": [
+      "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
+      "-i",
+      "model.i",
+      "--n-threads=1"
+    ]
+  },
+  {
+    "case": "shifted",
+    "exit_code": 0,
+    "wall_seconds": 20.967543075908907,
+    "single_process": true,
+    "command": [
+      "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/porous_flow/porous_flow-opt",
+      "-i",
+      "model.i",
+      "--n-threads=1"
+    ]
+  }
+]

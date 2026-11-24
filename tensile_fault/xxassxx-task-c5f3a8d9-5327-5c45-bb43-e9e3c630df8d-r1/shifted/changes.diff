@@ -1,0 +1,79 @@
+--- original_v11.i
++++ shifted/model.i
+@@ -4,8 +4,9 @@
+   [layer0_panel_a]
+     type = GeneratedMeshGenerator
+     dim = 2
+-    nx = 880
+-    ny = 110
++    nx = 88
++    bias_x = 0.9996557788798266
++    ny = 80
+     bias_y = 0.9090909090909091
+     xmin = 0
+     xmax = 2194.56
+@@ -15,8 +16,9 @@
+   [layer0_panel_b]
+     type = GeneratedMeshGenerator
+     dim = 2
+-    nx = 880
+-    ny = 110
++    nx = 88
++    bias_x = 0.9996557788798266
++    ny = 80
+     bias_y = 1.1
+     xmin = 0
+     xmax = 2194.56
+@@ -31,8 +33,9 @@
+   [layer1_panel_a]
+     type = GeneratedMeshGenerator
+     dim = 2
+-    nx = 880
+-    ny = 110
++    nx = 88
++    bias_x = 0.9996557788798266
++    ny = 80
+     bias_y = 0.9090909090909091
+     xmin = 0
+     xmax = 2194.56
+@@ -42,8 +45,9 @@
+   [layer1_panel_b]
+     type = GeneratedMeshGenerator
+     dim = 2
+-    nx = 880
+-    ny = 110
++    nx = 88
++    bias_x = 0.9996557788798266
++    ny = 80
+     bias_y = 1.1
+     xmin = 0
+     xmax = 2194.56
+@@ -65,8 +69,8 @@
+     type = SubdomainBoundingBoxGenerator
+     input = 'final_stitch_0'
+     block_id = 1
+-    bottom_left = '299.61839999999995 -14.407896000000134 0'
+-    top_right = '1894.9416 14.407896000000134 0'
++    bottom_left = '299.61839999999995 -12.883896000000134 0'
++    top_right = '1894.9416 15.931896000000134 0'
+   []
+   [srv_wide_bbox]
+     type = SubdomainBoundingBoxGenerator
+@@ -486,7 +490,7 @@
+ [Executioner]
+   type = 'Transient'
+   solve_type = 'Newton'
+-  end_time = 635400.0
++  end_time = 61200.0
+   verbose = true
+   l_tol = 0.001
+   l_max_its = 2000
+@@ -495,7 +499,7 @@
+   nl_rel_tol = 0.001
+   [TimeStepper]
+     type = TimeSequenceStepper
+-    time_sequence = '0.0 18000.0 32400.0 46800.0 61200.0 75600.0 90000.0 104400.0 118800.0 133200.0 147600.0 162000.0 176400.0 190800.0 205200.0 219600.0 234000.0 248400.0 262800.0 277200.0 291600.0 306000.0 320400.0 334800.0 349200.0 363600.0 378000.0 392400.0 406800.0 421200.0 435600.0 450000.0 464400.0 478800.0 493200.0 507600.0 522000.0 536400.0 550800.0 565200.0 579600.0 594000.0 608400.0 622800.0 635400.0'
++    time_sequence = '0.0 18000.0 32400.0 46800.0 61200.0'
+   []
+ []
+ 
