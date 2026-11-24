@@ -1,0 +1,102 @@
+{
+  "created_utc": "2026-11-17T21:29:54.316537+00:00",
+  "originals_modified": false,
+  "classification": "symlink index; no source files moved",
+  "original_run_count": 57,
+  "group_counts": {
+    "historical_two_zone": 34,
+    "field": 9,
+    "historical_layerwise": 14
+  },
+  "regularization_caution": "Low parameter count does not prove regularization is negligible. Compare archived penalty and data terms separately; clean data can be penalty-dominated.",
+  "clarified_parameterization": "Exactly three independent Kxx values: lower host, central hydraulic-fracture band, upper host. Kyy and Kzz fixed. No C in new synthetic inversion.",
+  "figure_sources": {
+    "second_comp_figures/README.md": "842ac2eb4c77e72e36dd3b0f5c5b95272cba62f698e7c208380a2f3b7dc9bd84",
+    "second_comp_figures/figure_records.json": "1c4edef73cadbc83ba901358b5774133eb34cc529cb528e8805078d6c25cd388"
+  },
+  "groups": {
+    "01_forward_and_gradient_verification": [
+      "validation",
+      "paper_theoretical_framework"
+    ],
+    "02_three_layer_prototypes": [
+      "optimizer_input_file_test/perm_3layer",
+      "optimizer_input_file_test/perm3layer_fiberis",
+      "optimizer_input_file_test/perm3layer_v2",
+      "optimizer_input_file_test/perm3layerv3"
+    ],
+    "03_legacy_layerwise_recovery": [
+      "optimizer_input_file_test/perm5layer_100layer",
+      "optimizer_input_file_test/perm5layer_100_v2strain"
+    ],
+    "04_legacy_layerwise_noise": [
+      "optimizer_input_file_test/perm5layer_100_v3strain_noise",
+      "optimizer_input_file_test/perm5layer_100_v4strain_rfsdss"
+    ],
+    "05_legacy_two_zone_noise_and_geometry": [
+      "optimizer_input_file_test/perm5layer_100_v5strain_zonal2p",
+      "optimizer_input_file_test/perm5layer_100_v6strain_zonalgrid"
+    ],
+    "06_field_inversions": [
+      "real_rfsdss_fixed_zones_14700_14750",
+      "real_rfsdss_fixed_zones_14710_14725_400000s_bg21",
+      "real_rfsdss_fixed_zones_14373_14379_400000s_bg21_coupling",
+      "real_rfsdss_fixed_zones_14700_14750_400000s",
+      "real_rfsdss_fixed_zones_14710_14725_400000s",
+      "real_rfsdss_fixed_zones_14373_14379_400000s_bg21"
+    ],
+    "07_field_screening": [
+      "swell_pressure_channel_scan"
+    ],
+    "08_exploratory_scripts_and_visualization": [
+      "viz",
+      "workshop2025",
+      "104_const_dt.py",
+      "111r_degradation_full_workflow.py",
+      "106p_r2visualizer.py",
+      "113r2_generate_qc_plots.py",
+      "111_degrade_test.py",
+      "107_3xFrac_revised.py",
+      "111r2_parameter_scanner.py",
+      "scan_swell_pressure_similarity.py",
+      "104r_time_sequence.py",
+      "103_timestep_bug_investigation.py",
+      "109v0_optimization_viz.py",
+      "108p2_postprocessor_viz.py",
+      "102_dedicated_timesteps.py",
+      "105r_broader_param_scanner.py",
+      "104r_const_dt_bad_perm.py",
+      "105s_DSSfrac_picker.py",
+      "104r4_const_dt_sl.py",
+      "109r0_injection_profile_check.py",
+      "109r4_optimization.py",
+      "109r2_test_builder_function_v2.py",
+      "109r3_test_misfit_function.py",
+      "110_qc_full.py",
+      "104r5_print_and_editor.py",
+      "plot_candidate_channel_qc.py",
+      "105_single_fracture_full_test.py",
+      "112_optimizer_degradation.py",
+      "105p_single_print_gauge_loc.py",
+      "106_DSS_3xSingleFrac_match.py",
+      "112_casing_model_example.py",
+      "104r2_const_dt_good_mesh.py",
+      "105p_time_sequence_converge.py",
+      "propose_14376_initial_model.py",
+      "108p_DSS_area_select.py",
+      "113r1_optimizer_config.py",
+      "104_const_dt_better_MW.py",
+      "109r2_test_builder_function_v3.py",
+      "104r3_const_dt_good_mesh_r.py",
+      "113_optimized_range_frac.py",
+      "106r_DSS_3xSingleFrac_parameter_scanner.py",
+      "108_misfit_func.py",
+      "102s_adaptive_downsampling_test.py",
+      "101_prototype_match.py",
+      "109v1_optimization_viz.py",
+      "109_revised_misfit_func.py",
+      "109r1_test_builder_function.py",
+      "106r2_SingleFracScanner_test_func.py"
+    ]
+  }
+}
