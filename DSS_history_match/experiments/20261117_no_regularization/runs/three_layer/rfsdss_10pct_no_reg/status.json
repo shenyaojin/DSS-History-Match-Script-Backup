@@ -1,0 +1,11 @@
+{
+  "stage": "forward",
+  "utc": "2026-11-24T01:50:39.939897+00:00",
+  "theta": [
+    -17.87890658694832,
+    -15.727675195022151,
+    -17.863467265458127
+  ],
+  "accepted": 0,
+  "evaluation": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/rfsdss_10pct_no_reg/evaluations/14b908cadaf714f3afa3"
+}

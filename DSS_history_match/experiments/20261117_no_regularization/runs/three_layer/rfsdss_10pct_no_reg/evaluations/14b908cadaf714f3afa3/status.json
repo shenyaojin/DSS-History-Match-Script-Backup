@@ -1,0 +1,14 @@
+{
+  "stage": "running",
+  "utc": "2026-11-24T01:50:51.019188+00:00",
+  "command": [
+    "/rcp/rcp42/home/shenyaojin/miniforge/envs/moose/bin/mpiexec",
+    "-n",
+    "10",
+    "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/moose_env/moose/modules/combined/combined-opt",
+    "-i",
+    "forward.i",
+    "--n-threads=1"
+  ],
+  "input_sha256": "d1f8bc3049c6b5cde2913694a1cbf60059a89c78db83124c5a797eb7b3c18e86"
+}
