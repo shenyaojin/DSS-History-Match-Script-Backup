@@ -1,0 +1,28 @@
+{
+  "success": true,
+  "status": 0,
+  "message": "CONVERGENCE: REL_REDUCTION_OF_F_<=_FACTR*EPSMCH",
+  "iterations": 4,
+  "optimizer_evaluations": 5,
+  "unique_physical_evaluations": 48,
+  "theta": [
+    -14.932245081718916,
+    -20.864221149144516,
+    0.03377635555283697
+  ],
+  "scaled_objective": 0.011908103315183655,
+  "gradient_scaled": [
+    1.375669875993494e-05,
+    -1.041809061922196e-05
+  ],
+  "final_forward_folder": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/field_phase7_no_reg/permeability_evaluations/k_0363a97adc2e8e2a",
+  "results": {
+    "background_alpha": -18,
+    "fitted_C": 0.03377635555283697,
+    "weighted_objective_after": 3.86291131109195e-11,
+    "weighted_rms_after_microstrain": 0.15177171349708443,
+    "unweighted_rms_after_microstrain": 0.15719548288075721,
+    "core_rms_after_microstrain": 0.13879545263525767
+  },
+  "termination": "converged"
+}

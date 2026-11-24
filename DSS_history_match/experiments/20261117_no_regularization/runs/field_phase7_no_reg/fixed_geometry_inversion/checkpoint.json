@@ -1,0 +1,10 @@
+{
+  "iteration": 4,
+  "alpha_xx": -14.932245081718916,
+  "alpha_yy": -20.864221149144516,
+  "coupling_C": 0.03377635555283697,
+  "scaled_objective": 0.011908103315183655,
+  "weighted_rms_microstrain": 0.15177171349708443,
+  "core_rms_microstrain": 0.13879545263525767,
+  "forward_folder": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/field_phase7_no_reg/permeability_evaluations/k_0363a97adc2e8e2a"
+}
