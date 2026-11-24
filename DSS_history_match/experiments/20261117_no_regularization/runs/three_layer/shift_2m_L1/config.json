@@ -1,0 +1,60 @@
+{
+  "name": "shift_2m_L1",
+  "kind": "three_layer",
+  "shift_m": 2.0,
+  "beta": 2e-11,
+  "initial": [
+    -17.0,
+    -16.0,
+    -17.0
+  ],
+  "truth": [
+    -18.0,
+    -14.522878745280337,
+    -18.0
+  ],
+  "bounds": [
+    [
+      -21.0,
+      -12.0
+    ],
+    [
+      -21.0,
+      -12.0
+    ],
+    [
+      -21.0,
+      -12.0
+    ]
+  ],
+  "parameter_names": [
+    "log10_Kxx_lower",
+    "log10_Kxx_fracture",
+    "log10_Kxx_upper"
+  ],
+  "Kyy_m2": 1e-18,
+  "Kzz_m2": 1e-18,
+  "truth_band_m": [
+    -3,
+    3
+  ],
+  "assumed_band_m": [
+    -1.0,
+    5.0
+  ],
+  "mesh": [
+    200,
+    200
+  ],
+  "n_times": 130,
+  "n_receivers": 500,
+  "scale": 1000000.0,
+  "ftol": 1e-07,
+  "gtol": 1e-08,
+  "maxiter": 60,
+  "fd_step": 0.02,
+  "delta": 0.05,
+  "reference": -18.0,
+  "regularization_definition": "beta sum over exactly three parameters sqrt((theta-reference)^2+delta^2)-delta",
+  "observation": "same clean MOOSE truth for all shifted-geometry cases; no C, no rectification, no free layers"
+}
