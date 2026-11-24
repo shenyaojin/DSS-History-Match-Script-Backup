@@ -1,0 +1,12 @@
+{
+  "data": 2.9089179250699377e-12,
+  "reg": 6.8266402891831e-11,
+  "value": 7.117532081690094e-05,
+  "reg_gradient": [
+    -3.143533103173276e-07,
+    1.9997915610332475e-05,
+    3.4275859186713608e-09
+  ],
+  "rms_microstrain": 0.009497315695949313,
+  "folder": "/rcp/rcp42/home/shenyaojin/Documents/bakken_mariner/scripts/DSS_history_match/experiments/20261117_no_regularization/runs/three_layer/clean_L1/evaluations/1825cba83e3cdbb58c2a"
+}
