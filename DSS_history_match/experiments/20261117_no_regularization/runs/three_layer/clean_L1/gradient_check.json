@@ -1,0 +1,26 @@
+[
+  {
+    "parameter": 0,
+    "h": 0.02,
+    "half_h": 0.01,
+    "derivative_h": 0.9319100150177702,
+    "derivative_half_h": 0.9318389250887185,
+    "passed": true
+  },
+  {
+    "parameter": 1,
+    "h": 0.02,
+    "half_h": 0.01,
+    "derivative_h": -0.24191557952827872,
+    "derivative_half_h": -0.24190547369951795,
+    "passed": true
+  },
+  {
+    "parameter": 2,
+    "h": 0.02,
+    "half_h": 0.01,
+    "derivative_h": 0.9319024701875903,
+    "derivative_half_h": 0.9318313791027992,
+    "passed": true
+  }
+]
